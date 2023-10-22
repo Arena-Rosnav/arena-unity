@@ -1,0 +1,28 @@
+{
+    "name": "de.bearo.restserver.Tests.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "de.bearo.restserver.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualscripting",
+            "expression": "1.7",
+            "define": "RESTSERVER_VISUALSCRIPTING"
+        }
+    ],
+    "noEngineReferences": false
+}

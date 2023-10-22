@@ -1,0 +1,30 @@
+{
+    "name": "de.bearo.restserver.Editor",
+    "rootNamespace": "",
+    "references": [
+        "de.bearo.restserver.Runtime",
+        "Unity.VisualScripting.Core",
+        "Unity.VisualScripting.Flow",
+        "Unity.VisualScripting.State",
+        "Unity.VisualScripting.Core.Editor",
+        "Unity.VisualScripting.Flow.Editor",
+        "Unity.VisualScripting.State.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualscripting",
+            "expression": "1.7",
+            "define": "RESTSERVER_VISUALSCRIPTING"
+        }
+    ],
+    "noEngineReferences": false
+}

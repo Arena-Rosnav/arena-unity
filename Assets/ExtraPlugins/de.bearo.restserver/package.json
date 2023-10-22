@@ -1,0 +1,29 @@
+{
+  "name": "de.bearo.restserver",
+  "version": "1.8.1",
+  "displayName": "REST Server",
+  "description": "Allows unity to handle http/rest requests (web server). See homepage for documentation https://markus-seidl.de/unity-restserver/ and examples.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://markus-seidl.de/unity-restserver/",
+  "changelogUrl": "https://markus-seidl.de/unity-restserver/changelog/",
+  "licensesUrl": "https://markus-seidl.de/unity-restserver/licenses/",
+  "keywords": [
+    "web server",
+    "rest",
+    "api", 
+    "json"
+  ],
+  "author": {
+    "name": "Markus Seidl",
+    "email": "support@markus-seidl.de",
+    "url": "https://markus-seidl.de"
+  },
+  "samples": [
+    {
+      "displayName": "Default example",
+      "description": "Default example showing simple rest server usage.",
+      "path": "Samples/DefaultExample"
+    }
+  ]
+}

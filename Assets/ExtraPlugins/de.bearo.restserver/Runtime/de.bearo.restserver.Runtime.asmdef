@@ -1,0 +1,33 @@
+{
+    "name": "de.bearo.restserver.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.VisualScripting.Core",
+        "Unity.VisualScripting.Flow",
+        "Unity.VisualScripting.State",
+        "Unity.Profiling.Core",
+        "UnityEditor.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [
+        "WebGL"
+    ],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualscripting",
+            "expression": "1.7",
+            "define": "RESTSERVER_VISUALSCRIPTING"
+        },
+        {
+            "name": "com.unity.profiling.core",
+            "expression": "1.0.2",
+            "define": "RESTSERVER_PROFILING_CORE"
+        }
+    ],
+    "noEngineReferences": false
+}

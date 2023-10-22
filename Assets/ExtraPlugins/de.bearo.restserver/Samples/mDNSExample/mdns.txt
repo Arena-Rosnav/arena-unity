@@ -1,0 +1,7 @@
+The mdns library is an optional dependency, which is included for this example only. The mdns library has been modified
+slightly to work with unity (mostly logging adjustments).
+
+The newest version of the library can be acquired here: https://github.com/richardschneider/net-mdns
+The license is MIT.
+
+If you don't want to include the dead zip in your project, just remove the example directory from the project.
