@@ -7,3 +7,9 @@ It could be necessary to run
 git config http.postBuffer 524288000
 ```
 to use git in this project
+
+## Controls
+
+**WASD**: Just like in any other application
+**Q**: Move Down
+**E**: Move Up

@@ -6,9 +6,9 @@ namespace StarterAssets
 	public class StarterAssetsInputs : MonoBehaviour
 	{
 		[Header("Character Input Values")]
-		public Vector2 move;
+		public Vector3 move;
 		public Vector2 look;
-		public bool jump;
+
 		public bool sprint;
 
 		[Header("Movement Settings")]
@@ -20,7 +20,7 @@ namespace StarterAssets
 
 		public void OnMove(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+			MoveInput(value.Get<Vector3>());
 		}
 
 		public void OnLook(InputValue value)
@@ -31,18 +31,13 @@ namespace StarterAssets
 			}
 		}
 
-		public void OnJump(InputValue value)
-		{
-			JumpInput(value.isPressed);
-		}
-
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
 		}
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+		public void MoveInput(Vector3 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -50,11 +45,6 @@ namespace StarterAssets
 		public void LookInput(Vector2 newLookDirection)
 		{
 			look = newLookDirection;
-		}
-
-		public void JumpInput(bool newJumpState)
-		{
-			jump = newJumpState;
 		}
 
 		public void SprintInput(bool newSprintState)
