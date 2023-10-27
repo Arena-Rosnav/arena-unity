@@ -1,5 +1,6 @@
 # Arena Unity
-Unity Simulator for [Arena Rosnav](https://github.com/Arena-Rosnav/arena-rosnav). The executable will be implemented there as a simulator.
+Unity Simulator for [Arena Rosnav](https://github.com/Arena-Rosnav/arena-rosnav). The executable will be implemented there as a simulator.  
+This is run in Unity 2022.3.11f1.
 
 ## Note
 It could be necessary to run 
