@@ -10,6 +10,6 @@ to use git in this project
 
 ## Controls
 
-**WASD**: Just like in any other application
-**Q**: Move Down
+**WASD**: Just like in any other application  
+**Q**: Move Down  
 **E**: Move Up

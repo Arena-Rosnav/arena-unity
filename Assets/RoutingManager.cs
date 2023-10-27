@@ -14,20 +14,10 @@ public class RoutingManager : MonoBehaviour
     void Start()
     {
         // Register the endpoint
-        server.EndpointCollection.RegisterEndpoint(HttpMethod.GET, "/ping", (request) =>
+        server.EndpointCollection.RegisterEndpoint(HttpMethod.GET, "/init", (request) =>
         {
             // Handle Request
-            Debug.Log("Pong!");
-
-            var fileName = "Debug.txt";
-            if (File.Exists(fileName))
-            {
-                Debug.Log(fileName + " already exists.");
-                return;
-            }
-            var sr = File.CreateText(fileName);
-            sr.WriteLine("Pong!");
-            sr.Close();
+            request.CreateResponse().Body("Connected").SendAsync();
         });
     }
 }
