@@ -1,5 +1,0 @@
-<html>
-<body>
-<b>Hello from the text asset</b>
-</body>
-</html>
