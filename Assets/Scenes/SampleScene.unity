@@ -1479,6 +1479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 143939166}
+  - component: {fileID: 143939167}
   m_Layer: 0
   m_Name: ROS Controller
   m_TagString: Untagged
@@ -1501,6 +1502,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 880644581}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &143939167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143939165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855f4df6ca3dbd4138bc5ef7b6a75e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ServiceName: unity/spawn_model
 --- !u!1 &173520781
 GameObject:
   m_ObjectHideFlags: 0
