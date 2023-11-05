@@ -1018,3 +1018,6 @@ Assets/Samples/ZeroSim/0.1.18/ZeroSim samples/StreamingAssets/zerosimrobots
 Assets/Samples/ZeroSim/0.1.18/ZeroSim samples/StreamingAssets/zerosimrobots.manifest
 Assets/Samples/ZeroSim/0.1.18/ZeroSim samples/StreamingAssets/zerosimrobots.manifest.meta
 Assets/Samples/ZeroSim/0.1.18/ZeroSim samples/StreamingAssets/zerosimrobots.meta
+.vscode/extensions.json
+.vscode/launch.json
+.vscode/settings.json
