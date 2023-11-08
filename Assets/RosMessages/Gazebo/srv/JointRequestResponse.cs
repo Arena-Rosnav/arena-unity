@@ -5,21 +5,21 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 
-namespace RosMessageTypes.Ford
+namespace RosMessageTypes.Gazebo
 {
     [Serializable]
-    public class GetSafeActionsResponse : Message
+    public class JointRequestResponse : Message
     {
-        public const string k_RosMessageName = "ford_msgs/GetSafeActions";
+        public const string k_RosMessageName = "gazebo_msgs/JointRequest";
         public override string RosMessageName => k_RosMessageName;
 
 
-        public GetSafeActionsResponse()
+        public JointRequestResponse()
         {
         }
-        public static GetSafeActionsResponse Deserialize(MessageDeserializer deserializer) => new GetSafeActionsResponse(deserializer);
+        public static JointRequestResponse Deserialize(MessageDeserializer deserializer) => new JointRequestResponse(deserializer);
 
-        private GetSafeActionsResponse(MessageDeserializer deserializer)
+        private JointRequestResponse(MessageDeserializer deserializer)
         {
         }
 
@@ -29,7 +29,7 @@ namespace RosMessageTypes.Ford
 
         public override string ToString()
         {
-            return "GetSafeActionsResponse: ";
+            return "JointRequestResponse: ";
         }
 
 #if UNITY_EDITOR

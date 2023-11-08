@@ -3,6 +3,7 @@ using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 using RosMessageTypes.Std;
+using RosMessageTypes.Gazebo;
 
 /// <summary>
 /// Example demonstration of implementing a UnityService that receives a Request message from another ROS node and sends a Response back
@@ -21,7 +22,7 @@ public class ServiceController : MonoBehaviour
     void Start()
     {
         // register the services with ROS
-        ROSConnection.GetOrCreateInstance().ImplementService<EmptyRequest, EmptyResponse>(SpawnServiceName, HandleSpawn);
+        ROSConnection.GetOrCreateInstance().ImplementService<SpawnModelRequest, SpawnModelResponse>(SpawnServiceName, HandleSpawn);
         ROSConnection.GetOrCreateInstance().ImplementService<EmptyRequest, EmptyResponse>(DeleteServiceName, Example);
         ROSConnection.GetOrCreateInstance().ImplementService<EmptyRequest, EmptyResponse>(MoveServiceName, Example);
         ROSConnection.GetOrCreateInstance().ImplementService<EmptyRequest, EmptyResponse>(GoalServiceName, Example);
@@ -46,7 +47,7 @@ public class ServiceController : MonoBehaviour
         return objectPoseResponse;
     }
 
-    private EmptyResponse HandleSpawn(EmptyRequest request)
+    private SpawnModelResponse HandleSpawn(SpawnModelRequest request)
     {
         // process the service request
         Debug.Log("SPAWN REQUEST of:" + request.ToString());
@@ -54,6 +55,6 @@ public class ServiceController : MonoBehaviour
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube.transform.position = new Vector3(Random.Range(-10.0f, 10.0f), 5, Random.Range(-10.0f, 10.0f));
 
-        return new EmptyResponse();
+        return new SpawnModelResponse(true, "Received Spawn Request");
     }
 }
