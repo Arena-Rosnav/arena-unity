@@ -55,6 +55,7 @@ public class ServiceController : MonoBehaviour
 
     private SetModelStateResponse HandleState(SetModelStateRequest request)
     {
+        Debug.Log(request);
         string name = request.model_name;
 
         // check if the model really exists
@@ -66,14 +67,14 @@ public class ServiceController : MonoBehaviour
         GameObject objectToMove = activeModels[name];
 
         objectToMove.transform.position = new Vector3(
-            (float)-pose.position.z,
-            (float)pose.position.y,
-            (float)pose.position.x
+            (float)pose.position.x,
+            (float)pose.position.z,
+            (float)pose.position.y
         );
         objectToMove.transform.rotation = new Quaternion(
             (float)pose.orientation.x,
-            (float)pose.orientation.y,
             (float)pose.orientation.z,
+            (float)pose.orientation.y,
             (float)pose.orientation.w
         );
 
