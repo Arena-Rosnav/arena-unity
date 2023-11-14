@@ -13,34 +13,57 @@ namespace RosMessageTypes.Gazebo
         public const string k_RosMessageName = "gazebo_msgs/SetModelState";
         public override string RosMessageName => k_RosMessageName;
 
-        public ModelStateMsg model_state;
+        //  Set Gazebo Model pose and twist
+        public string model_name;
+        //  model to set state (pose and twist)
+        public Geometry.PoseMsg pose;
+        //  desired pose in reference frame
+        public Geometry.TwistMsg twist;
+        //  desired twist in reference frame
+        public string reference_frame;
+        //  set pose/twist relative to the frame of this entity (Body/Model)
 
         public SetModelStateRequest()
         {
-            this.model_state = new ModelStateMsg();
+            this.model_name = "";
+            this.pose = new Geometry.PoseMsg();
+            this.twist = new Geometry.TwistMsg();
+            this.reference_frame = "";
         }
 
-        public SetModelStateRequest(ModelStateMsg model_state)
+        public SetModelStateRequest(string model_name, Geometry.PoseMsg pose, Geometry.TwistMsg twist, string reference_frame)
         {
-            this.model_state = model_state;
+            this.model_name = model_name;
+            this.pose = pose;
+            this.twist = twist;
+            this.reference_frame = reference_frame;
         }
 
         public static SetModelStateRequest Deserialize(MessageDeserializer deserializer) => new SetModelStateRequest(deserializer);
 
         private SetModelStateRequest(MessageDeserializer deserializer)
         {
-            this.model_state = ModelStateMsg.Deserialize(deserializer);
+            deserializer.Read(out this.model_name);
+            this.pose = Geometry.PoseMsg.Deserialize(deserializer);
+            this.twist = Geometry.TwistMsg.Deserialize(deserializer);
+            deserializer.Read(out this.reference_frame);
         }
 
         public override void SerializeTo(MessageSerializer serializer)
         {
-            serializer.Write(this.model_state);
+            serializer.Write(this.model_name);
+            serializer.Write(this.pose);
+            serializer.Write(this.twist);
+            serializer.Write(this.reference_frame);
         }
 
         public override string ToString()
         {
             return "SetModelStateRequest: " +
-            "\nmodel_state: " + model_state.ToString();
+            "\nmodel_name: " + model_name.ToString() +
+            "\npose: " + pose.ToString() +
+            "\ntwist: " + twist.ToString() +
+            "\nreference_frame: " + reference_frame.ToString();
         }
 
 #if UNITY_EDITOR
