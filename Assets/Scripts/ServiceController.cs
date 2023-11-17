@@ -5,8 +5,6 @@ using Unity.Robotics.ROSTCPConnector;
 // Message Types
 using RosMessageTypes.Gazebo;
 using RosMessageTypes.Geometry;
-using Unity.Robotics.UrdfImporter;
-using System;
 
 /// <summary>
 /// Example demonstration of implementing a UnityService that receives a Request message from another ROS node and sends a Response back
@@ -66,6 +64,14 @@ public class ServiceController : MonoBehaviour
         PoseMsg pose = request.pose;
         GameObject objectToMove = activeModels[name];
 
+        if (objectToMove.name == "burger")
+        {
+            // TODO: currently not setting properlt for robots
+            //       Needs to be debugged! 
+            objectToMove = objectToMove.transform.GetChild(1).gameObject;
+            return new SetModelStateResponse(true, "Model moved");
+        }
+
         objectToMove.transform.position = new Vector3(
             (float)pose.position.x,
             (float)pose.position.z,
@@ -86,48 +92,56 @@ public class ServiceController : MonoBehaviour
         // process the service request
         GameObject entity;
 
+        PoseMsg initialPose = request.initial_pose;
+
         if (request.model_name == "burger")
         {
+            // TOOD: Load robots dynamically from urdf string
             // entity = Utils.CreateGameObjectFromUrdfFile(
             //     "Assets/turtlebot3/turtlebot3_burger.urdf", // replace by urdf path
             //     request.model_name + "_manually_loaded"
             // );
-            entity = Instantiate(robotModel);
-            // Set up Odom
-            Odom odom = entity.AddComponent(typeof(Odom)) as Odom;
-            odom.topicNamespace = request.robot_namespace;
-            odom.frameId = request.model_name + "/odom";
-            odom.childFrameId = request.model_name + "/base_footprint";
+            entity = Instantiate(robotModel,
+                new Vector3(
+                // (float)request.initial_pose.position.x,
+                -20.0f,
+                (float)request.initial_pose.position.y,
+                // (float)request.initial_pose.position.z
+                24.0f
+            ), new Quaternion(
+                (float)request.initial_pose.orientation.x,
+                (float)request.initial_pose.orientation.y,
+                (float)request.initial_pose.orientation.z,
+                (float)request.initial_pose.orientation.w
+            ));
+            entity.name = "burger";
+
+            // Set up TF
+            entity.transform.GetChild(1).gameObject.AddComponent(typeof(ROSTransformTreePublisher));
 
             // Set up Drive
             Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
             drive.topicNamespace = request.robot_namespace;
+            // temp manually only for burger
+            drive.wA1 = FindSubChild(entity, "burger/wheel_right_link").GetComponent<ArticulationBody>();
+            drive.wA2 = FindSubChild(entity, "burger/wheel_left_link").GetComponent<ArticulationBody>();
 
             // Set up Scan
-            var scanComponentName = "base_scan";
+            var scanComponentName = "burger/base_scan";
             GameObject laserLink = FindSubChild(entity, scanComponentName);
-            Scan laserScan = laserLink.AddComponent(typeof(Scan)) as Scan;
-            laserScan.topicNamespace = request.robot_namespace;
-            laserScan.frameId = request.model_name + "/" + scanComponentName;
-            // temporarily set manually
-            laserScan.minAngle = 0f;
-            laserScan.maxAngle = 6.5f;
-            laserScan.range = 3.5f;
-            laserScan.numBeams = 100;
-            laserScan.updateRate = 10;
-
-            // Set up Tf for each UrdfLink
-            AddTfToChildren(entity, request.model_name);
+            LaserScanSensor laserScan = laserLink.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
+            laserScan.topic = "/burger/scan";
+            laserScan.frameId = scanComponentName;
         }
         else
         {
             // Standard Object
             entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
             entity.name = request.model_name;
+            // TODO: Currently not working properly for robots, so moved here
+            SetInitialPose(entity, initialPose);   
         }
 
-        PoseMsg initialPose = request.initial_pose;
-        SetInitialPose(entity, initialPose);
 
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rb.useGravity = false;
@@ -146,6 +160,7 @@ public class ServiceController : MonoBehaviour
     /// <summary> Sets the position and rotation according to initPos </summary>
     private void SetInitialPose(GameObject obj, PoseMsg initPos)
     {
+        Debug.Log(initPos);
         obj.transform.position = new Vector3(
             (float)initPos.position.x,
             (float)initPos.position.y,
@@ -174,20 +189,5 @@ public class ServiceController : MonoBehaviour
         }
         // nothing found
         return null;
-    }
-
-    private void AddTfToChildren(GameObject gameObject, String ns)
-    {
-        foreach (UrdfLink link in gameObject.GetComponentsInChildren<UrdfLink>())
-        {
-            Tf tf = link.gameObject.AddComponent(typeof(Tf)) as Tf;
-            tf.childFrameId = ns + "/" + link.gameObject.name;
-            var parentName = link.transform.parent.gameObject.name;
-            tf.frameId = ns + "/" + parentName;
-            if (parentName == gameObject.name)
-            {
-                tf.frameId = ns + "/odom";
-            }
-        }
     }
 }

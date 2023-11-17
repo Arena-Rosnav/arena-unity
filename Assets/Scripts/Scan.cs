@@ -11,7 +11,7 @@ public class Scan : MonoBehaviour {
     public float minAngle;
     public float maxAngle;
 
-    public int numBeams = 50;
+    public int numBeams = 20;
     public float range;
     public int updateRate;
 
@@ -88,7 +88,7 @@ public class Scan : MonoBehaviour {
         LaserScanMsg laserScanMsg = new LaserScanMsg(
             new HeaderMsg(
                 seq,
-                Clock.GetTimeMsg(),
+                Clock2.GetTimeMsg(),
                 frameId
             ),
             minAngle,
