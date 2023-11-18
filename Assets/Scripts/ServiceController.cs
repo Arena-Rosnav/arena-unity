@@ -98,7 +98,7 @@ public class ServiceController : MonoBehaviour
         {
             // TOOD: Load robots dynamically from urdf string
             // entity = Utils.CreateGameObjectFromUrdfFile(
-            //     "Assets/turtlebot3/turtlebot3_burger.urdf", // replace by urdf path
+            //     "Assets/arena-simulation-setup/robot/burger/urdf/burger.urdf", // replace by urdf path
             //     request.model_name + "_manually_loaded"
             // );
             entity = Instantiate(robotModel,
