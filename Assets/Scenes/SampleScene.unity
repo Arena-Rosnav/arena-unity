@@ -1519,6 +1519,8 @@ MonoBehaviour:
   MoveServiceName: unity/set_model_state
   GoalServiceName: unity/set_goal
   robotModel: {fileID: 3748665836559886456, guid: bca4cd8cc6706689781152ca116cc08e, type: 3}
+  obstacles:
+  - {fileID: 3102264533064308003, guid: 446b6c14db9b54c838b288a158f02da3, type: 3}
 --- !u!1 &173520781
 GameObject:
   m_ObjectHideFlags: 0

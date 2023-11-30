@@ -21,6 +21,8 @@ public class ServiceController : MonoBehaviour
     string GoalServiceName = "unity/set_goal";
 
     public GameObject robotModel;
+    [SerializeField]
+    private GameObject[] obstacles;
 
     Dictionary<string, GameObject> activeModels;
 
@@ -89,6 +91,7 @@ public class ServiceController : MonoBehaviour
 
     private SpawnModelResponse HandleSpawn(SpawnModelRequest request)
     {
+        Debug.Log(request);
         // process the service request
         GameObject entity;
 
@@ -136,7 +139,9 @@ public class ServiceController : MonoBehaviour
         else
         {
             // Standard Object
-            entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            // entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            UnityEngine.Object entityPrefab = Resources.Load("Assets/shelf-moveLater/shelf");
+            entity = (GameObject)Instantiate(obstacles[0]);
             entity.name = request.model_name;
             // TODO: Currently not working properly for robots, so moved here
             SetInitialPose(entity, initialPose);   
