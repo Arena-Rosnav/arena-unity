@@ -20,8 +20,6 @@ public class ServiceController : MonoBehaviour
     [SerializeField]
     string GoalServiceName = "unity/set_goal";
 
-    public GameObject robotModel;
-
     Dictionary<string, GameObject> activeModels;
 
     void Start()
@@ -93,45 +91,46 @@ public class ServiceController : MonoBehaviour
         GameObject entity;
 
         PoseMsg initialPose = request.initial_pose;
+        entity = Utils.CreateGameObjectFromUrdfFile(
+            request.model_xml,
+            request.model_name
+        );
+        
 
         if (request.model_name == "burger")
         {
             // TOOD: Load robots dynamically from urdf string
-            // entity = Utils.CreateGameObjectFromUrdfFile(
-            //     "Assets/arena-simulation-setup/robot/burger/urdf/burger.urdf", // replace by urdf path
-            //     request.model_name + "_manually_loaded"
-            // );
-            entity = Instantiate(robotModel,
-                new Vector3(
-                // (float)request.initial_pose.position.x,
-                -20.0f,
-                (float)request.initial_pose.position.y,
-                // (float)request.initial_pose.position.z
-                24.0f
-            ), new Quaternion(
-                (float)request.initial_pose.orientation.x,
-                (float)request.initial_pose.orientation.y,
-                (float)request.initial_pose.orientation.z,
-                (float)request.initial_pose.orientation.w
-            ));
-            entity.name = "burger";
+            // entity = Instantiate(robotModel,
+            //     new Vector3(
+            //     // (float)request.initial_pose.position.x,
+            //     -20.0f,
+            //     (float)request.initial_pose.position.y,
+            //     // (float)request.initial_pose.position.z
+            //     24.0f
+            // ), new Quaternion(
+            //     (float)request.initial_pose.orientation.x,
+            //     (float)request.initial_pose.orientation.y,
+            //     (float)request.initial_pose.orientation.z,
+            //     (float)request.initial_pose.orientation.w
+            // ));
+            // entity.name = "burger";
 
-            // Set up TF
-            entity.transform.GetChild(1).gameObject.AddComponent(typeof(ROSTransformTreePublisher));
+            // // Set up TF
+            // entity.transform.GetChild(1).gameObject.AddComponent(typeof(ROSTransformTreePublisher));
 
-            // Set up Drive
-            Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
-            drive.topicNamespace = request.robot_namespace;
-            // temp manually only for burger
-            drive.wA1 = FindSubChild(entity, "burger/wheel_right_link").GetComponent<ArticulationBody>();
-            drive.wA2 = FindSubChild(entity, "burger/wheel_left_link").GetComponent<ArticulationBody>();
+            // // Set up Drive
+            // Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
+            // drive.topicNamespace = request.robot_namespace;
+            // // temp manually only for burger
+            // drive.wA1 = FindSubChild(entity, "burger/wheel_right_link").GetComponent<ArticulationBody>();
+            // drive.wA2 = FindSubChild(entity, "burger/wheel_left_link").GetComponent<ArticulationBody>();
 
-            // Set up Scan
-            var scanComponentName = "burger/base_scan";
-            GameObject laserLink = FindSubChild(entity, scanComponentName);
-            LaserScanSensor laserScan = laserLink.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
-            laserScan.topic = "/burger/scan";
-            laserScan.frameId = scanComponentName;
+            // // Set up Scan
+            // var scanComponentName = "burger/base_scan";
+            // GameObject laserLink = FindSubChild(entity, scanComponentName);
+            // LaserScanSensor laserScan = laserLink.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
+            // laserScan.topic = "/burger/scan";
+            // laserScan.frameId = scanComponentName;
         }
         else
         {

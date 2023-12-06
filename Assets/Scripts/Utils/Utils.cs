@@ -1,12 +1,14 @@
 using UnityEngine;
 using Unity.Robotics.UrdfImporter;
+using System.IO;
 
 
 public class Utils : MonoBehaviour
 {
-    public static GameObject CreateGameObjectFromUrdfFile(string urdfFilePath, string modelName, bool disableScripts = true, bool disableJoints = true, GameObject parent = null)
+    public static GameObject CreateGameObjectFromUrdfFile(string urdfXml, string modelName, bool disableScripts = true, bool disableJoints = true, GameObject parent = null)
     {
-        GameObject newGameObject = UrdfRobotExtensions.CreateRuntime(urdfFilePath, new ImportSettings());
+        TextReader tr = new StringReader(urdfXml);
+        GameObject newGameObject = UrdfRobotExtensions.CreateRuntime(tr,modelName+".urdf", new ImportSettings());
 
         newGameObject.name = modelName;
         newGameObject.transform.parent = null;
