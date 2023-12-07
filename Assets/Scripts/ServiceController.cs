@@ -95,11 +95,7 @@ public class ServiceController : MonoBehaviour
             request.model_xml,
             request.model_name
         );
-        
 
-        if (request.model_name == "burger")
-        {
-            // TOOD: Load robots dynamically from urdf string
             // entity = Instantiate(robotModel,
             //     new Vector3(
             //     // (float)request.initial_pose.position.x,
@@ -113,7 +109,6 @@ public class ServiceController : MonoBehaviour
             //     (float)request.initial_pose.orientation.z,
             //     (float)request.initial_pose.orientation.w
             // ));
-            // entity.name = "burger";
 
             // // Set up TF
             // entity.transform.GetChild(1).gameObject.AddComponent(typeof(ROSTransformTreePublisher));
@@ -131,16 +126,9 @@ public class ServiceController : MonoBehaviour
             // LaserScanSensor laserScan = laserLink.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
             // laserScan.topic = "/burger/scan";
             // laserScan.frameId = scanComponentName;
-        }
-        else
-        {
-            // Standard Object
-            entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            entity.name = request.model_name;
-            // TODO: Currently not working properly for robots, so moved here
-            SetInitialPose(entity, initialPose);   
-        }
 
+
+        SetInitialPose(entity, initialPose);   
 
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rb.useGravity = false;
