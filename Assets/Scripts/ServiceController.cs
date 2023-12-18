@@ -93,7 +93,10 @@ public class ServiceController : MonoBehaviour
         PoseMsg initialPose = request.initial_pose;
         entity = Utils.CreateGameObjectFromUrdfFile(
             request.model_xml,
-            request.model_name
+            request.model_name,
+            disableJoints:false,
+            disableScripts:false,
+            parent:null
         );
 
             // entity = Instantiate(robotModel,
