@@ -70,7 +70,26 @@ public class ServiceController : MonoBehaviour
 
     private SpawnModelResponse HandleSpawn(SpawnModelRequest request)
     {
-        // process the service request
+        GameObject entity;
+        
+        // decide between robots and obstacles (dynamic or static)
+        if (request.model_xml.Contains("<robot>") || request.model_xml.Contains("<robot "))
+        {
+            entity = SpawnRobot(request);
+        } else 
+        {
+            entity = SpawnObstacleOrPed(request);
+        }
+
+        // add to active models to delete later
+        activeModels.Add(request.model_name, entity);
+
+        return new SpawnModelResponse(true, "Received Spawn Request");
+    }
+
+    private GameObject SpawnRobot(SpawnModelRequest request)
+    {
+        // process spawn request for robot
         GameObject entity = Utils.CreateGameObjectFromUrdfFile(
             request.model_xml,
             request.model_name,
@@ -79,47 +98,41 @@ public class ServiceController : MonoBehaviour
             parent:null
         );
 
-            // entity = Instantiate(robotModel,
-            //     new Vector3(
-            //     // (float)request.initial_pose.position.x,
-            //     -20.0f,
-            //     (float)request.initial_pose.position.y,
-            //     // (float)request.initial_pose.position.z
-            //     24.0f
-            // ), new Quaternion(
-            //     (float)request.initial_pose.orientation.x,
-            //     (float)request.initial_pose.orientation.y,
-            //     (float)request.initial_pose.orientation.z,
-            //     (float)request.initial_pose.orientation.w
-            // ));
+        // Set up TF by adding TF publisher to the base_footprint game object
+        entity.transform.GetChild(1).gameObject.AddComponent(typeof(ROSTransformTreePublisher));
 
-            // // Set up TF
-            // entity.transform.GetChild(1).gameObject.AddComponent(typeof(ROSTransformTreePublisher));
+        // // Set up Drive
+        // Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
+        // drive.topicNamespace = request.robot_namespace;
+        // // temp manually only for burger
+        // drive.wA1 = FindSubChild(entity, "burger/wheel_right_link").GetComponent<ArticulationBody>();
+        // drive.wA2 = FindSubChild(entity, "burger/wheel_left_link").GetComponent<ArticulationBody>();
 
-            // // Set up Drive
-            // Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
-            // drive.topicNamespace = request.robot_namespace;
-            // // temp manually only for burger
-            // drive.wA1 = FindSubChild(entity, "burger/wheel_right_link").GetComponent<ArticulationBody>();
-            // drive.wA2 = FindSubChild(entity, "burger/wheel_left_link").GetComponent<ArticulationBody>();
+        // // Set up Scan
+        // var scanComponentName = "burger/base_scan";
+        // GameObject laserLink = FindSubChild(entity, scanComponentName);
+        // LaserScanSensor laserScan = laserLink.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
+        // laserScan.topic = "/burger/scan";
+        // laserScan.frameId = scanComponentName;
+        Utils.SetPose(entity, request.initial_pose);
 
-            // // Set up Scan
-            // var scanComponentName = "burger/base_scan";
-            // GameObject laserLink = FindSubChild(entity, scanComponentName);
-            // LaserScanSensor laserScan = laserLink.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
-            // laserScan.topic = "/burger/scan";
-            // laserScan.frameId = scanComponentName;
+        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+        rb.useGravity = true;
 
+        return entity;
+    }
+
+    private GameObject SpawnObstacleOrPed(SpawnModelRequest request) 
+    {
+        GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        entity.name = request.model_name;
 
         Utils.SetPose(entity, request.initial_pose);
 
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rb.useGravity = true;
 
-        // add to active models to delete later
-        activeModels.Add(request.model_name, entity);
-
-        return new SpawnModelResponse(true, "Received Spawn Request");
+        return entity;   
     }
 
     private void HandleGoal(PoseStampedMsg msg)
