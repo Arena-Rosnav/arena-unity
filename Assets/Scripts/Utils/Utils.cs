@@ -50,20 +50,11 @@ public class Utils : MonoBehaviour
     }
 
     public static Vector3 RosToUnity(PointMsg msg) {
-        return new Vector3(
-            (float)(-msg.y),
-            (float)(msg.z),
-            (float)(msg.x)
-        );
+        return msg.From<FLU>();
     }
 
     public static Quaternion RosToUnity(QuaternionMsg msg) {
-        return new Quaternion(
-            (float)(-msg.y),
-            (float)(msg.z),
-            (float)(msg.x),
-            (float)(msg.w)
-        );
+        return msg.From<FLU>();
     }
 
     public static PointMsg UnityToRos(Vector3 vec) {
