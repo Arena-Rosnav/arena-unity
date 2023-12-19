@@ -49,22 +49,44 @@ public class Utils : MonoBehaviour
         return newGameObject;
     }
 
-    public static Vector3 RosToUnity(PointMsg msg) {
+    /// <summary>
+    /// Converts ROS vector to Unity vector
+    /// </summary>
+    public static Vector3 RosToUnity(PointMsg msg) 
+    {
         return msg.From<FLU>();
     }
 
-    public static Quaternion RosToUnity(QuaternionMsg msg) {
+    /// <summary>
+    /// Converts ROS vector to Unity vector
+    /// </summary>
+    public static Quaternion RosToUnity(QuaternionMsg msg) 
+    {
         return msg.From<FLU>();
     }
 
-    public static PointMsg UnityToRos(Vector3 vec) {
+    /// <summary>
+    /// Converts Unity vector to ROS vector
+    /// </summary>
+    public static PointMsg UnityToRos(Vector3 vec) 
+    {
         return vec.To<FLU>();
     }
 
-    public static QuaternionMsg UnityToRos(Quaternion qua) {
+    /// <summary>
+    /// Converts Unity vector to ROS vector
+    /// </summary>
+    public static QuaternionMsg UnityToRos(Quaternion qua) 
+    {
         return qua.To<FLU>();
     }
 
+    /// <summary>
+    /// Sets the pose in the transform component for a game object.
+    /// It converts the ROS vector convention (FLU) to Unity convention.
+    /// </summary>
+    /// <param name="obj">Game object to be moved</param>
+    /// <param name="pose">Pose message for target pose</param>
     public static void SetPose(GameObject obj, PoseMsg pose) 
     {
         Debug.Log("Setting pose:" + pose.ToString());
