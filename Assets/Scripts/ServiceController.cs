@@ -113,8 +113,8 @@ public class ServiceController : MonoBehaviour
 
         Utils.SetPose(entity, request.initial_pose);
 
-        // Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        // rb.useGravity = false;
+        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+        rb.useGravity = true;
 
         // add to active models to delete later
         activeModels.Add(request.model_name, entity);
