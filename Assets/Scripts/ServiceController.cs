@@ -28,10 +28,11 @@ public class ServiceController : MonoBehaviour
         activeModels = new Dictionary<string, GameObject>();
 
         // register the services with ROS
-        ROSConnection.GetOrCreateInstance().ImplementService<SpawnModelRequest, SpawnModelResponse>(SpawnServiceName, HandleSpawn);
-        ROSConnection.GetOrCreateInstance().ImplementService<DeleteModelRequest, DeleteModelResponse>(DeleteServiceName, HandleDelete);
-        ROSConnection.GetOrCreateInstance().ImplementService<SetModelStateRequest, SetModelStateResponse>(MoveServiceName, HandleState);
-        ROSConnection.GetOrCreateInstance().Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
+        ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
+        ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>(SpawnServiceName, HandleSpawn);
+        ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>(DeleteServiceName, HandleDelete);
+        ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>(MoveServiceName, HandleState);
+        ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
     }
 
     /// HANDLER SECTION
@@ -62,25 +63,7 @@ public class ServiceController : MonoBehaviour
         PoseMsg pose = request.pose;
         GameObject objectToMove = activeModels[name];
 
-        if (objectToMove.name == "burger")
-        {
-            // TODO: currently not setting properlt for robots
-            //       Needs to be debugged! 
-            objectToMove = objectToMove.transform.GetChild(1).gameObject;
-            return new SetModelStateResponse(true, "Model moved");
-        }
-
-        objectToMove.transform.position = new Vector3(
-            (float)pose.position.x,
-            (float)pose.position.z,
-            (float)pose.position.y
-        );
-        objectToMove.transform.rotation = new Quaternion(
-            (float)pose.orientation.x,
-            (float)pose.orientation.z,
-            (float)pose.orientation.y,
-            (float)pose.orientation.w
-        );
+        Utils.SetPose(objectToMove, pose);
 
         return new SetModelStateResponse(true, "Model moved");
     }
@@ -88,14 +71,11 @@ public class ServiceController : MonoBehaviour
     private SpawnModelResponse HandleSpawn(SpawnModelRequest request)
     {
         // process the service request
-        GameObject entity;
-
-        PoseMsg initialPose = request.initial_pose;
-        entity = Utils.CreateGameObjectFromUrdfFile(
+        GameObject entity = Utils.CreateGameObjectFromUrdfFile(
             request.model_xml,
             request.model_name,
-            disableJoints:false,
-            disableScripts:false,
+            disableJoints:true,
+            disableScripts:true,
             parent:null
         );
 
@@ -131,10 +111,10 @@ public class ServiceController : MonoBehaviour
             // laserScan.frameId = scanComponentName;
 
 
-        SetInitialPose(entity, initialPose);   
+        Utils.SetPose(entity, request.initial_pose);
 
-        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        rb.useGravity = false;
+        // Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+        // rb.useGravity = false;
 
         // add to active models to delete later
         activeModels.Add(request.model_name, entity);
@@ -145,23 +125,6 @@ public class ServiceController : MonoBehaviour
     private void HandleGoal(PoseStampedMsg msg)
     {
         Debug.Log(msg.ToString());
-    }
-
-    /// <summary> Sets the position and rotation according to initPos </summary>
-    private void SetInitialPose(GameObject obj, PoseMsg initPos)
-    {
-        Debug.Log(initPos);
-        obj.transform.position = new Vector3(
-            (float)initPos.position.x,
-            (float)initPos.position.y,
-            (float)initPos.position.z
-        );
-        obj.transform.rotation = new Quaternion(
-            (float)initPos.orientation.x,
-            (float)initPos.orientation.y,
-            (float)initPos.orientation.z,
-            (float)initPos.orientation.w
-        );
     }
 
     private GameObject FindSubChild(GameObject gameObject, string objName)
