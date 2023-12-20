@@ -2,8 +2,10 @@ using UnityEngine;
 using Unity.Robotics.UrdfImporter;
 using System.IO;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
+using Unity.Robotics.TF;
 
 using RosMessageTypes.Geometry;
+using System;
 
 
 public class Utils : MonoBehaviour
@@ -47,6 +49,15 @@ public class Utils : MonoBehaviour
         }
 
         return newGameObject;
+    }
+
+    public static void PropagateRobotName(Transform transform, String robotName) {
+        transform.name = robotName + "/" + transform.name;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            PropagateRobotName(transform.GetChild(i), robotName);
+        }
     }
 
     /// <summary>

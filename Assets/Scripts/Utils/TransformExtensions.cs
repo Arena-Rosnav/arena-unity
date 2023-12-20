@@ -22,4 +22,12 @@ public static class TransformExtensions
             tfUnity.gameObject.name,
             tfUnity.ToROSTransform());
     }
+
+    public static TransformStampedMsg ToROSTransformStamped(this Transform tfUnity, double timeStamp, string topicId)
+    {
+        return new TransformStampedMsg(
+            new HeaderMsg(0, new TimeStamp(timeStamp), topicId + "/" + tfUnity.parent.gameObject.name),
+            topicId + "/" + tfUnity.gameObject.name,
+            tfUnity.ToROSTransform());
+    }
 }

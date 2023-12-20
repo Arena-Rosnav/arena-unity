@@ -98,8 +98,14 @@ public class ServiceController : MonoBehaviour
             parent:null
         );
 
+        // get base link which is the second child after Plugins
+        Transform baseLinkTf = entity.transform.GetChild(1);
+
+        // adjust link names for proper TF publishing
+        //Utils.PropagateRobotName(baseLinkTf, request.model_name);
+
         // Set up TF by adding TF publisher to the base_footprint game object
-        entity.transform.GetChild(1).gameObject.AddComponent(typeof(ROSTransformTreePublisher));
+        baseLinkTf.gameObject.AddComponent(typeof(ROSTransformTreePublisher));
 
         // // Set up Drive
         // Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
