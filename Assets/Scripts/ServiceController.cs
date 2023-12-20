@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
+using YamlDotNet.Serialization;
+using System.IO;
+using DataObjects;
 
 // Message Types
 using RosMessageTypes.Gazebo;
@@ -87,6 +90,30 @@ public class ServiceController : MonoBehaviour
         return new SpawnModelResponse(true, "Received Spawn Request");
     }
 
+    private static RobotConfig LoadRobotModelYaml(string robotName)
+    {
+        // Construct the full path from the relative path
+        string yamlPath = Path.Combine(Application.dataPath, "../../arena-simulation-setup/robot", robotName, robotName + ".model.yaml");
+
+        // Check if the file exists
+        if (!File.Exists(yamlPath))
+        {
+            Debug.LogError("Robot Model YAML file for " + robotName + " not found at: " + yamlPath);
+            return null;
+        }
+
+        // Read the YAML file
+        string yamlContent = File.ReadAllText(yamlPath);
+
+        // Initialize the deserializer
+        var deserializer = new DeserializerBuilder().Build();
+
+        // Deserialize the YAML content into a dynamic object
+        RobotConfig config = deserializer.Deserialize<RobotConfig>(yamlContent);
+
+        return config;
+    }
+
     private GameObject SpawnRobot(SpawnModelRequest request)
     {
         // process spawn request for robot
@@ -121,6 +148,8 @@ public class ServiceController : MonoBehaviour
 
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rb.useGravity = true;
+
+        RobotConfig config = LoadRobotModelYaml(request.model_name);
 
         return entity;
     }
