@@ -101,9 +101,6 @@ public class ServiceController : MonoBehaviour
         // get base link which is the second child after Plugins
         Transform baseLinkTf = entity.transform.GetChild(1);
 
-        // adjust link names for proper TF publishing
-        //Utils.PropagateRobotName(baseLinkTf, request.model_name);
-
         // Set up TF by adding TF publisher to the base_footprint game object
         baseLinkTf.gameObject.AddComponent(typeof(ROSTransformTreePublisher));
 
