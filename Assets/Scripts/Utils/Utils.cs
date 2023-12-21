@@ -6,6 +6,7 @@ using Unity.Robotics.TF;
 
 using RosMessageTypes.Geometry;
 using System;
+using Unity.VisualScripting;
 
 
 public class Utils : MonoBehaviour
@@ -93,5 +94,28 @@ public class Utils : MonoBehaviour
     {
         Debug.Log("Setting pose:" + pose.ToString());
         obj.transform.SetPositionAndRotation(pose.position.From<FLU>(), pose.orientation.From<FLU>());
+    }
+
+    /// <summary>
+    /// Searches recursively through the children of given transform for 
+    /// a GameObject with the given name.
+    /// </summary>
+    /// <param name="parent">Transform of root GameObject for search</param>
+    /// <param name="childName">Name of child GameObject to be found</param>
+    /// <returns>Transform of child GameObject or null if not found</returns>
+    public static Transform FindChildGameObject(Transform parent, string childName) 
+    {
+        foreach (Transform child in parent) 
+        {
+            if (child.name == childName)
+                return child;
+
+            Transform found = FindChildGameObject(child, childName);
+            if (found != null) 
+                return found;
+        }
+
+        // no GameObject found on all paths
+        return null;
     }
 }
