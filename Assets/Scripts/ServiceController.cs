@@ -5,6 +5,8 @@ using Unity.Robotics.ROSTCPConnector;
 // Message Types
 using RosMessageTypes.Gazebo;
 using RosMessageTypes.Geometry;
+using RosMessageTypes.Unity;
+using System;
 
 /// <summary>
 /// Example demonstration of implementing a UnityService that receives a Request message from another ROS node and sends a Response back
@@ -31,6 +33,7 @@ public class ServiceController : MonoBehaviour
 
         // register the services with ROS
         ROSConnection.GetOrCreateInstance().ImplementService<SpawnModelRequest, SpawnModelResponse>(SpawnServiceName, HandleSpawn);
+        ROSConnection.GetOrCreateInstance().ImplementService<SpawnWallsRequest, SpawnWallsResponse>("unity/spawn_walls", HandleWalls);
         ROSConnection.GetOrCreateInstance().ImplementService<DeleteModelRequest, DeleteModelResponse>(DeleteServiceName, HandleDelete);
         ROSConnection.GetOrCreateInstance().ImplementService<SetModelStateRequest, SetModelStateResponse>(MoveServiceName, HandleState);
         ROSConnection.GetOrCreateInstance().Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
@@ -104,10 +107,10 @@ public class ServiceController : MonoBehaviour
             entity = Instantiate(robotModel,
                 new Vector3(
                 // (float)request.initial_pose.position.x,
-                -20.0f,
+                -5.0f,
                 (float)request.initial_pose.position.y,
                 // (float)request.initial_pose.position.z
-                24.0f
+                1.0f
             ), new Quaternion(
                 (float)request.initial_pose.orientation.x,
                 (float)request.initial_pose.orientation.y,
@@ -139,7 +142,7 @@ public class ServiceController : MonoBehaviour
             entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
             entity.name = request.model_name;
             // TODO: Currently not working properly for robots, so moved here
-            SetInitialPose(entity, initialPose);   
+            SetInitialPose(entity, initialPose);
         }
 
 
@@ -155,6 +158,50 @@ public class ServiceController : MonoBehaviour
     private void HandleGoal(PoseStampedMsg msg)
     {
         Debug.Log(msg.ToString());
+    }
+
+    private SpawnWallsResponse HandleWalls(SpawnWallsRequest request)
+    {
+        // Constants (move later)
+        const float WALL_HEIGHT = 4f;
+        const int WALL_LAYER = 3;
+        const String WALL_TAG = "Wall";
+
+        // remove previous walls
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.tag == WALL_TAG)
+            {
+                Destroy(obj);
+            }
+        }
+
+        // Add new walls 
+        String[] walls = request.walls_string.Split("/");
+        int counter = 0;
+
+        foreach (string wall in walls)
+        {
+            counter += 1;
+            string[] corners = wall.Split(";");
+            Vector3 corner1 = new Vector3(float.Parse(corners[0].Split(",")[0]), 0, float.Parse(corners[0].Split(",")[1]));
+            Vector3 corner2 = new Vector3(float.Parse(corners[1].Split(",")[0]), WALL_HEIGHT, float.Parse(corners[1].Split(",")[1]));
+
+            // Standard Cube
+            GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            entity.name = "__WALL" + counter;
+            entity.layer = WALL_LAYER;
+            entity.tag = WALL_TAG;
+
+            entity.transform.position = corner1;
+            entity.transform.localScale = corner2 - corner1;
+            AdjustPivotToBottomLeft(entity.transform);  
+        }
+
+
+        return new SpawnWallsResponse(true, "Received Spawn Wall Request");
     }
 
     /// <summary> Sets the position and rotation according to initPos </summary>
@@ -189,5 +236,24 @@ public class ServiceController : MonoBehaviour
         }
         // nothing found
         return null;
+    }
+
+    void AdjustPivotToBottomLeft(Transform targetTransform)
+    {
+        // Get the bounds of the mesh
+        Bounds bounds = targetTransform.GetComponent<MeshRenderer>().bounds;
+
+        // Calculate the offset needed to move the pivot to the bottom-left corner
+        Vector3 pivotOffset = new Vector3(bounds.extents.x, -bounds.extents.y, bounds.extents.z);
+
+        // Apply the offset to the position of the targetTransform
+        targetTransform.position += pivotOffset;
+
+        // Create an empty GameObject to serve as the parent and reset the targetTransform's position
+        GameObject pivotContainer = new GameObject("PivotContainer");
+        pivotContainer.transform.position = targetTransform.position;
+
+        // Make the targetTransform a child of the pivotContainer
+        targetTransform.parent = pivotContainer.transform;
     }
 }

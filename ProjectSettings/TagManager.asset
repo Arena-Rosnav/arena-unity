@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - robot
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - WALLS
   - Water
   - UI
   - 
