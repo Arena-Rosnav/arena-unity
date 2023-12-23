@@ -26,6 +26,11 @@ namespace Unity.Robotics.TF
             return node.Transform.ToROSTransformStamped(Clock.time);
         }
 
+        public static TransformStampedMsg ToTransformStamped(TransformTreeNode node, string topicId)
+        {
+            return node.Transform.ToROSTransformStamped(Clock.time, topicId);
+        }
+
         static void PopulateChildNodes(TransformTreeNode tfNode)
         {
             var parentTransform = tfNode.Transform;
