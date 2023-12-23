@@ -22,8 +22,8 @@ public class ServiceController : MonoBehaviour
     string MoveServiceName = "unity/set_model_state";
     [SerializeField]
     string GoalServiceName = "unity/set_goal";
-
     Dictionary<string, GameObject> activeModels;
+    GameObject obstaclesParent;
 
     void Start()
     {
@@ -36,6 +36,9 @@ public class ServiceController : MonoBehaviour
         ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>(DeleteServiceName, HandleDelete);
         ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>(MoveServiceName, HandleState);
         ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
+
+        // initialize empty parent game object of obstacles (dynamic and static)
+        obstaclesParent = new GameObject("Obstacles");
     }
 
     /// HANDLER SECTION
@@ -237,12 +240,15 @@ public class ServiceController : MonoBehaviour
         GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
         entity.name = request.model_name;
 
+        // sort under obstacles parent
+        entity.transform.SetParent(obstaclesParent.transform);
+
         Utils.SetPose(entity, request.initial_pose);
 
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rb.useGravity = true;
 
-        return entity;   
+        return entity;
     }
 
     private void HandleGoal(PoseStampedMsg msg)
