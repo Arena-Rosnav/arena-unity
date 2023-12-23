@@ -4,6 +4,7 @@ using Unity.Robotics.ROSTCPConnector;
 using YamlDotNet.Serialization;
 using System.IO;
 using DataObjects;
+using RobotComponent;
 
 // Message Types
 using RosMessageTypes.Gazebo;
@@ -204,9 +205,9 @@ public class ServiceController : MonoBehaviour
         // Set up TF by adding TF publisher to the base_footprint game object
         baseLinkTf.gameObject.AddComponent(typeof(ROSTransformTreePublisher));
 
-        // // Set up Drive
-        // Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
-        // drive.topicNamespace = request.robot_namespace;
+        // Set up Drive
+        Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
+        drive.topicNamespace = request.model_name;
         // // temp manually only for burger
         // drive.wA1 = FindSubChild(entity, "burger/wheel_right_link").GetComponent<ArticulationBody>();
         // drive.wA2 = FindSubChild(entity, "burger/wheel_left_link").GetComponent<ArticulationBody>();

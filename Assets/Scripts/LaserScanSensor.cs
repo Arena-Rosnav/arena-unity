@@ -13,6 +13,7 @@ public class LaserScanSensor : MonoBehaviour
     [FormerlySerializedAs("TimeBetweenScansSeconds")]
     public double PublishPeriodSeconds = 0.1;
     public float RangeMetersMin = 0;
+    // public float RangeMetersMax = 3.5f;
     public float RangeMetersMax = 3.5f;
     public float ScanAngleStartDegrees = -45;
     public float ScanAngleEndDegrees = 45;
