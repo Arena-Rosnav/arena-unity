@@ -28,8 +28,10 @@ namespace RobotComponent
             );
 
             transform.rotation *= rotation;
+            // transform.rotation = rotation; 
 
             transform.position += transform.rotation * linearVelocity * Time.deltaTime;
+            // transform.position += linearVelocity * Time.deltaTime;
         }
 
         void CmdVel(TwistMsg message) {

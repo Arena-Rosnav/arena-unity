@@ -15,11 +15,11 @@ public class LaserScanSensor : MonoBehaviour
     public float RangeMetersMin = 0;
     // public float RangeMetersMax = 3.5f;
     public float RangeMetersMax = 3.5f;
-    public float ScanAngleStartDegrees = -45;
-    public float ScanAngleEndDegrees = 45;
+    public float ScanAngleStartDegrees = 0;
+    public float ScanAngleEndDegrees = 360;
     // Change the scan start and end by this amount after every publish
     public float ScanOffsetAfterPublish = 0f;
-    public int NumMeasurementsPerScan = 10;
+    public int NumMeasurementsPerScan = 360;
     public float TimeBetweenMeasurementsSeconds = 0.01f;
     public string frameId = "base_scan";
 
