@@ -4,7 +4,6 @@ using Unity.Robotics.ROSTCPConnector;
 using YamlDotNet.Serialization;
 using System.IO;
 using DataObjects;
-using RobotComponent;
 
 // Message Types
 using RosMessageTypes.Gazebo;
