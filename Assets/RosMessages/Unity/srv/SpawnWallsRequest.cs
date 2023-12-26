@@ -13,34 +13,35 @@ namespace RosMessageTypes.Unity
         public const string k_RosMessageName = "unity_msgs/SpawnWalls";
         public override string RosMessageName => k_RosMessageName;
 
-        public string walls_string;
+        public WallMsg[] walls;
 
         public SpawnWallsRequest()
         {
-            this.walls_string = "";
+            this.walls = new WallMsg[0];
         }
 
-        public SpawnWallsRequest(string walls_string)
+        public SpawnWallsRequest(WallMsg[] walls)
         {
-            this.walls_string = walls_string;
+            this.walls = walls;
         }
 
         public static SpawnWallsRequest Deserialize(MessageDeserializer deserializer) => new SpawnWallsRequest(deserializer);
 
         private SpawnWallsRequest(MessageDeserializer deserializer)
         {
-            deserializer.Read(out this.walls_string);
+            deserializer.Read(out this.walls, WallMsg.Deserialize, deserializer.ReadLength());
         }
 
         public override void SerializeTo(MessageSerializer serializer)
         {
-            serializer.Write(this.walls_string);
+            serializer.WriteLength(this.walls);
+            serializer.Write(this.walls);
         }
 
         public override string ToString()
         {
             return "SpawnWallsRequest: " +
-            "\nwalls_string: " + walls_string.ToString();
+            "\nwalls: " + System.String.Join(", ", walls.ToList());
         }
 
 #if UNITY_EDITOR

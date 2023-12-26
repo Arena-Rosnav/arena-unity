@@ -10,6 +10,7 @@ using RosMessageTypes.Gazebo;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Unity;
 using System;
+using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 /// <summary>
 /// Example demonstration of implementing a UnityService that receives a Request message from another ROS node and sends a Response back
@@ -263,10 +264,8 @@ public class ServiceController : MonoBehaviour
 
     private SpawnWallsResponse HandleWalls(SpawnWallsRequest request)
     {
-                // Constants (move later)
-        const float WALL_HEIGHT = 4f;
-        const int WALL_LAYER = 3;
-        const String WALL_TAG = "Wall";
+        // Constants (move later)
+        const string WALL_TAG = "Wall";
 
         // remove previous walls
         GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
@@ -280,29 +279,27 @@ public class ServiceController : MonoBehaviour
         }
 
         // Add new walls 
-        String[] walls = request.walls_string.Split("/");
+        WallMsg[] walls = request.walls;
         int counter = 0;
 
-        foreach (string wall in walls)
+        foreach (WallMsg wall in walls)
         {
             counter += 1;
-            string[] corners = wall.Split(";");
-            Vector3 corner1 = new Vector3(float.Parse(corners[0].Split(",")[0]), 0, float.Parse(corners[0].Split(",")[1]));
-            Vector3 corner2 = new Vector3(float.Parse(corners[1].Split(",")[0]), WALL_HEIGHT, float.Parse(corners[1].Split(",")[1]));
+            Vector3 corner_start = wall.start.From<FLU>();
+            Vector3 corner_end = wall.end.From<FLU>();
 
             // Standard Cube
             GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
             entity.name = "__WALL" + counter;
-            entity.layer = WALL_LAYER;
             entity.tag = WALL_TAG;
 
-            entity.transform.position = corner1;
-            entity.transform.localScale = corner2 - corner1;
-            AdjustPivotToBottomLeft(entity.transform);  
+            entity.transform.position = corner_start;
+            entity.transform.localScale = corner_end - corner_start;
+            AdjustPivot(entity.transform);  
         }
 
 
-        return new SpawnWallsResponse(true, "Received Spawn Wall Request");
+        return new SpawnWallsResponse(true, "Walls successfully created");
     }
 
     private GameObject FindSubChild(GameObject gameObject, string objName)
@@ -322,13 +319,13 @@ public class ServiceController : MonoBehaviour
         return null;
     }
 
-    void AdjustPivotToBottomLeft(Transform targetTransform)
+    void AdjustPivot(Transform targetTransform)
     {
         // Get the bounds of the mesh
         Bounds bounds = targetTransform.GetComponent<MeshRenderer>().bounds;
 
         // Calculate the offset needed to move the pivot to the bottom-left corner
-        Vector3 pivotOffset = new Vector3(bounds.extents.x, -bounds.extents.y, bounds.extents.z);
+        Vector3 pivotOffset = new Vector3(-bounds.extents.x, bounds.extents.y, bounds.extents.z);
 
         // Apply the offset to the position of the targetTransform
         targetTransform.position += pivotOffset;
