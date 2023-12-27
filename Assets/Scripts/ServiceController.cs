@@ -8,6 +8,9 @@ using DataObjects;
 // Message Types
 using RosMessageTypes.Gazebo;
 using RosMessageTypes.Geometry;
+using RosMessageTypes.Unity;
+using System;
+using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 /// <summary>
 /// Example demonstration of implementing a UnityService that receives a Request message from another ROS node and sends a Response back
@@ -17,6 +20,8 @@ public class ServiceController : MonoBehaviour
     [SerializeField]
     string SpawnServiceName = "unity/spawn_model";
     [SerializeField]
+    string SpawnWallsServiceName = "unity/spawn_walls";
+    [SerializeField]
     string DeleteServiceName = "unity/delete_model";
     [SerializeField]
     string MoveServiceName = "unity/set_model_state";
@@ -24,6 +29,7 @@ public class ServiceController : MonoBehaviour
     string GoalServiceName = "unity/set_goal";
     Dictionary<string, GameObject> activeModels;
     GameObject obstaclesParent;
+    GameObject wallsParent;
 
     void Start()
     {
@@ -33,12 +39,14 @@ public class ServiceController : MonoBehaviour
         // register the services with ROS
         ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
         ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>(SpawnServiceName, HandleSpawn);
+        ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>(SpawnWallsServiceName, HandleWalls);
         ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>(DeleteServiceName, HandleDelete);
         ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>(MoveServiceName, HandleState);
         ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
 
-        // initialize empty parent game object of obstacles (dynamic and static)
-        obstaclesParent = new GameObject("Obstacles");
+        // initialize empty parent game object of obstacles (dynamic and static) & walls
+        obstaclesParent = new("Obstacles");
+        wallsParent = new("Walls");
     }
 
     /// HANDLER SECTION
@@ -256,6 +264,49 @@ public class ServiceController : MonoBehaviour
         Debug.Log(msg.ToString());
     }
 
+    private SpawnWallsResponse HandleWalls(SpawnWallsRequest request)
+    {
+        // Constants (move later)
+        const string WALL_TAG = "Wall";
+
+        // remove previous walls
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.tag == WALL_TAG)
+            {
+                Destroy(obj);
+            }
+        }
+
+        // Add new walls 
+        WallMsg[] walls = request.walls;
+        int counter = 0;
+
+        foreach (WallMsg wall in walls)
+        {
+            counter += 1;
+            Vector3 corner_start = wall.start.From<FLU>();
+            Vector3 corner_end = wall.end.From<FLU>();
+
+            // Standard Cube
+            GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            entity.name = "__WALL" + counter;
+            entity.tag = WALL_TAG;
+
+            entity.transform.position = corner_start;
+            entity.transform.localScale = corner_end - corner_start;
+            AdjustPivot(entity.transform);  
+            
+            // organize game object in walls parent game object
+            entity.transform.SetParent(wallsParent.transform);
+        }
+
+
+        return new SpawnWallsResponse(true, "Walls successfully created");
+    }
+
     private GameObject FindSubChild(GameObject gameObject, string objName)
     {
         if (gameObject.name == objName)
@@ -271,5 +322,17 @@ public class ServiceController : MonoBehaviour
         }
         // nothing found
         return null;
+    }
+
+    void AdjustPivot(Transform targetTransform)
+    {
+        // Get the bounds of the mesh
+        Bounds bounds = targetTransform.GetComponent<MeshRenderer>().bounds;
+
+        // Calculate the offset needed to move the pivot to the bottom-left corner
+        Vector3 pivotOffset = new Vector3(-bounds.extents.x, bounds.extents.y, bounds.extents.z);
+
+        // Apply the offset to the position of the targetTransform
+        targetTransform.position += pivotOffset;
     }
 }
