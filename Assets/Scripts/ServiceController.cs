@@ -29,6 +29,7 @@ public class ServiceController : MonoBehaviour
     string GoalServiceName = "unity/set_goal";
     Dictionary<string, GameObject> activeModels;
     GameObject obstaclesParent;
+    GameObject wallsParent;
 
     void Start()
     {
@@ -43,8 +44,9 @@ public class ServiceController : MonoBehaviour
         ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>(MoveServiceName, HandleState);
         ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
 
-        // initialize empty parent game object of obstacles (dynamic and static)
-        obstaclesParent = new GameObject("Obstacles");
+        // initialize empty parent game object of obstacles (dynamic and static) & walls
+        obstaclesParent = new("Obstacles");
+        wallsParent = new("Walls");
     }
 
     /// HANDLER SECTION
@@ -296,6 +298,9 @@ public class ServiceController : MonoBehaviour
             entity.transform.position = corner_start;
             entity.transform.localScale = corner_end - corner_start;
             AdjustPivot(entity.transform);  
+            
+            // organize game object in walls parent game object
+            entity.transform.SetParent(wallsParent.transform);
         }
 
 
@@ -329,12 +334,5 @@ public class ServiceController : MonoBehaviour
 
         // Apply the offset to the position of the targetTransform
         targetTransform.position += pivotOffset;
-
-        // Create an empty GameObject to serve as the parent and reset the targetTransform's position
-        GameObject pivotContainer = new GameObject("PivotContainer");
-        pivotContainer.transform.position = targetTransform.position;
-
-        // Make the targetTransform a child of the pivotContainer
-        targetTransform.parent = pivotContainer.transform;
     }
 }
