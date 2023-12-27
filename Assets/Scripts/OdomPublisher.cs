@@ -7,7 +7,6 @@ using Unity.Robotics.Core;
 
 // ROS messages
 using RosMessageTypes.Nav;
-using RosMessageTypes.Gazebo;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Std;
 

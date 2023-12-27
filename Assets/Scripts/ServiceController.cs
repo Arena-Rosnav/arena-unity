@@ -210,6 +210,9 @@ public class ServiceController : MonoBehaviour
         // Set up Drive
         Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
         drive.topicNamespace = request.model_name;
+
+        // Set up Odom publishing (this relies on the Drive -> must be added after Drive)
+        baseLinkTf.gameObject.AddComponent(typeof(OdomPublisher));
         // // temp manually only for burger
         // drive.wA1 = FindSubChild(entity, "burger/wheel_right_link").GetComponent<ArticulationBody>();
         // drive.wA2 = FindSubChild(entity, "burger/wheel_left_link").GetComponent<ArticulationBody>();
