@@ -37,26 +37,7 @@ public class Drive : MonoBehaviour
     }
 
     void CmdVel(TwistMsg message) {
-        // Vector3Msg linear = message.linear;
-        // Vector3Msg angular = message.angular;
-
         linearVelocity = message.linear.From<FLU>();
         angularVelocity = message.angular.From<FLU>();
-
-        /*
-        // CHANGE Y AND Z AXIS
-        linearVelocity = new Vector3(
-            (float) linear.y,
-            (float) linear.z,
-            (float) linear.x
-        );
-
-        angularVelocity = new Vector3(
-            (float) angular.x,
-            (float) angular.z,
-            (float) angular.y
-        );
-        */
     }
-
 }
