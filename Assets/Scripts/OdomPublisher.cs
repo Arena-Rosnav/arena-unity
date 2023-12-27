@@ -9,6 +9,7 @@ using Unity.Robotics.Core;
 using RosMessageTypes.Nav;
 using RosMessageTypes.Gazebo;
 using RosMessageTypes.Geometry;
+using RosMessageTypes.Std;
 
 public class OdomPublisher : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class OdomPublisher : MonoBehaviour
     // Drive for reading velocity
     Drive robotDrive;
 
+    string PublishTopic => "/" + robotName + "/" + odomTopicName;
     double PublishPeriodSeconds => 1.0f / publishRateHz;
 
     bool ShouldPublishMessage => Clock.NowTimeInSeconds > lastPublishTimeSeconds + PublishPeriodSeconds;
@@ -29,7 +31,7 @@ public class OdomPublisher : MonoBehaviour
     {
         robotName = gameObject.transform.parent.name;
         rosConnection = ROSConnection.GetOrCreateInstance();
-        rosConnection.RegisterPublisher<OdometryMsg>("/" + robotName + "/" + odomTopicName);
+        rosConnection.RegisterPublisher<OdometryMsg>(PublishTopic);
         lastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
 
         robotDrive = gameObject.transform.parent.GetComponent<Drive>();
@@ -55,7 +57,14 @@ public class OdomPublisher : MonoBehaviour
             ),
             new double[36]
         );
-        OdometryMsg msg = new(new RosMessageTypes.Std.HeaderMsg())
+        OdometryMsg odomMsg = new(
+            new HeaderMsg(0, new TimeStamp(Clock.time), robotName + "/" + odomTopicName),
+            robotName + "/" + name,
+            pose,
+            twist
+        );
+        rosConnection.Publish(PublishTopic, odomMsg);
+        lastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
     }
 
     // Update is called once per frame
