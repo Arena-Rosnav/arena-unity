@@ -13,8 +13,8 @@ public class Drive : MonoBehaviour
     public string topicNamespace;
     string topic;
 
-    Vector3 linearVelocity = new Vector3(0, 0, 0);
-    Vector3 angularVelocity = new Vector3(0, 0, 0); 
+    public Vector3 linearVelocity = new Vector3(0, 0, 0);
+    public Vector3 angularVelocity = new Vector3(0, 0, 0); 
 
     void Start() {
             topic = "/" + topicNamespace + "/cmd_vel";
