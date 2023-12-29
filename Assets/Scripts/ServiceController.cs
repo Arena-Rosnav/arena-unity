@@ -30,9 +30,10 @@ public class ServiceController : MonoBehaviour
     Dictionary<string, GameObject> activeModels;
     GameObject obstaclesParent;
     GameObject wallsParent;
+    public GameObject PedMale;
 
     void Start()
-    {
+    {           
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
 
@@ -245,16 +246,15 @@ public class ServiceController : MonoBehaviour
 
     private GameObject SpawnObstacleOrPed(SpawnModelRequest request) 
     {
-        GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject entity = Instantiate(PedMale) as GameObject;
         entity.name = request.model_name;
 
         // sort under obstacles parent
         entity.transform.SetParent(obstaclesParent.transform);
-
         Utils.SetPose(entity, request.initial_pose);
 
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        rb.useGravity = true;
+        //rb.useGravity = true;
 
         return entity;
     }
