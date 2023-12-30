@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
  
@@ -15,29 +13,29 @@ public class Drive : MonoBehaviour
 
     public Vector3 linearVelocity = new Vector3(0, 0, 0);
     public Vector3 angularVelocity = new Vector3(0, 0, 0); 
+    private Rigidbody rb;
 
     void Start() {
-            topic = "/" + topicNamespace + "/cmd_vel";
+        topic = "/" + topicNamespace + "/cmd_vel";
+        rb = GetComponent<Rigidbody>();
 
         ROSConnection.GetOrCreateInstance().Subscribe<TwistMsg>(topic, CmdVel);
     }
 
     void Update() {
-        Quaternion rotation = Quaternion.Euler(
-            angularVelocity.x * Time.deltaTime * Mathf.Rad2Deg, 
-            angularVelocity.y * Time.deltaTime * Mathf.Rad2Deg, 
-            angularVelocity.z * Time.deltaTime * Mathf.Rad2Deg
-        );
+        // invert the rotation since the conversion doesn't work correctly
+        Quaternion rotationChange = Quaternion.Euler(Mathf.Rad2Deg * Time.deltaTime * (-1) * angularVelocity);
+        transform.rotation *= rotationChange;
 
-        transform.rotation *= rotation;
-        // transform.rotation = rotation; 
-
-        transform.position += transform.rotation * linearVelocity * Time.deltaTime;
-        // transform.position += linearVelocity * Time.deltaTime;
+        transform.position += linearVelocity * Time.deltaTime;
     }
 
     void CmdVel(TwistMsg message) {
+        // linear velocity given in the local/body reference frame
         linearVelocity = message.linear.From<FLU>();
+        // convert from local fram to global frame
+        linearVelocity = transform.TransformDirection(linearVelocity);
+        
         angularVelocity = message.angular.From<FLU>();
     }
 }
