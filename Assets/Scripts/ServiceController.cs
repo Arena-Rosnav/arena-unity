@@ -192,7 +192,6 @@ public class ServiceController : MonoBehaviour
 
         // attach LaserScanSensor
         LaserScanSensor laserScan = laserLinkJoint.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
-        // LaserScanNew laserScan = laserLinkJoint.AddComponent(typeof(LaserScanNew)) as LaserScanNew;
         laserScan.topic = "/" + robot.name + "/scan";
         laserScan.frameId = robot.name + "/" + laserLinkJoint.name;
 
