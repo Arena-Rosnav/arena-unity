@@ -27,6 +27,12 @@ public class Drive : MonoBehaviour
         Quaternion rotationChange = Quaternion.Euler(Mathf.Rad2Deg * Time.deltaTime * (-1) * angularVelocity);
         transform.rotation *= rotationChange;
 
+        // TODO:
+        // Adjust the linear velocity to be acting from the center of the robot.
+        // The center of mass is specified in a URDF script which is currently
+        // disabled when loading the robot. The center of mass conversion is done
+        // in the diff_drive plugin of flatland. It will improve simulation accuracy.
+
         transform.position += linearVelocity * Time.deltaTime;
     }
 
