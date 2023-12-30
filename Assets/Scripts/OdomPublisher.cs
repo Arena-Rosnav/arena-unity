@@ -13,7 +13,7 @@ using RosMessageTypes.Std;
 public class OdomPublisher : MonoBehaviour
 {
     const string odomTopicName = "odom";
-    double publishRateHz = 20f;
+    double publishRateHz = 30f;
     double lastPublishTimeSeconds;
     ROSConnection rosConnection;
     string robotName;
