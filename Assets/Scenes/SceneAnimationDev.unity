@@ -245,7 +245,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 486994185}
-  - component: {fileID: 486994184}
   - component: {fileID: 486994186}
   m_Layer: 0
   m_Name: ClockController
@@ -254,18 +253,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &486994184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 486994183}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 686ce1a4c85bfab5693000a3887f5f80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &486994185
 Transform:
   m_ObjectHideFlags: 0
@@ -646,6 +633,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1090771459
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8333962221571898680, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711086276371097474, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+      propertyPath: m_Name
+      value: Leonard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
 --- !u!1 &1199152804
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,3 +874,4 @@ SceneRoots:
   - {fileID: 880644581}
   - {fileID: 1199152808}
   - {fileID: 880852806}
+  - {fileID: 1090771459}
