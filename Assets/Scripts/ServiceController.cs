@@ -27,7 +27,6 @@ public class ServiceController : MonoBehaviour
     Dictionary<string, GameObject> activeModels;
     GameObject obstaclesParent;
     GameObject wallsParent;
-    public GameObject PedMale;
     GameObject pedsParent;
     public PedController pedController;
 

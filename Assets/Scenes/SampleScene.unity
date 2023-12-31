@@ -172,7 +172,6 @@ MonoBehaviour:
   DeleteServiceName: unity/delete_model
   MoveServiceName: unity/set_model_state
   GoalServiceName: unity/set_goal
-  PedMale: {fileID: 0}
   pedController: {fileID: 658044583}
 --- !u!1 &313761473
 GameObject:
@@ -328,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a02c29a1d8a09fd0969c46abe455fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PedMale: {fileID: 8711086276371097474, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
 --- !u!1 &880644580
 GameObject:
   m_ObjectHideFlags: 0

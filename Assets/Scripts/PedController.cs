@@ -14,6 +14,7 @@ public class PedController : MonoBehaviour
 
     Dictionary<string, GameObject> peds;
     string pedFeedbackTopic = "/pedsim_simulator/simulated_agents";
+    public GameObject PedMale;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class PedController : MonoBehaviour
 
     public GameObject SpawnPed(SpawnModelRequest request)
     {
-        GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject entity = Instantiate(PedMale);
         entity.name = request.model_name;
 
         // set initial pose
@@ -78,6 +79,8 @@ public class PedController : MonoBehaviour
             );
             // only the linear velocitypart since our pedsim agents don't have angular velocity
             rb.velocity = agentState.twist.linear.From<FLU>();
+            // set velocity in the animator component for animations
+            agent.GetComponent<Animator>().SetFloat("velocity", rb.velocity.magnitude);
         }
     }
 }
