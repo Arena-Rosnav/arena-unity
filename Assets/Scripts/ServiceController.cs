@@ -28,6 +28,8 @@ public class ServiceController : MonoBehaviour
     GameObject obstaclesParent;
     GameObject wallsParent;
     public GameObject PedMale;
+    GameObject pedsParent;
+    public PedController pedController;
 
     void Start()
     {           
@@ -45,35 +47,41 @@ public class ServiceController : MonoBehaviour
         // initialize empty parent game object of obstacles (dynamic and static) & walls
         obstaclesParent = new("Obstacles");
         wallsParent = new("Walls");
+        pedsParent = new("Peds");
     }
 
     /// HANDLER SECTION
     private DeleteModelResponse HandleDelete(DeleteModelRequest request)
     {
         // Delete object from active Models if exists
-        string name = request.model_name;
+        string entityName = request.model_name;
 
-        if (!activeModels.ContainsKey(name))
-            return new DeleteModelResponse(false, "Model with name " + name + " does not exist.");
+        if (!activeModels.ContainsKey(entityName))
+            return new DeleteModelResponse(false, "Model with name " + entityName + " does not exist.");
 
-        Destroy(activeModels[name]);
-        activeModels.Remove(name);
+        Destroy(activeModels[entityName]);
+        activeModels.Remove(entityName);
 
-        return new DeleteModelResponse(true, "Model with name " + name + " deleted.");
+        if (int.TryParse(entityName, out _))
+        {
+            pedController.DeletePed(entityName);
+        }
+
+        return new DeleteModelResponse(true, "Model with name " + entityName + " deleted.");
     }
 
     private SetModelStateResponse HandleState(SetModelStateRequest request)
     {
         Debug.Log(request);
-        string name = request.model_name;
+        string entityName = request.model_name;
 
         // check if the model really exists
-        if (!activeModels.ContainsKey(name))
-            return new SetModelStateResponse(false, "Model with name " + name + " does not exist.");
+        if (!activeModels.ContainsKey(entityName))
+            return new SetModelStateResponse(false, "Model with name " + entityName + " does not exist.");
 
         // Move the object
         PoseMsg pose = request.pose;
-        GameObject objectToMove = activeModels[name];
+        GameObject objectToMove = activeModels[entityName];
 
         Utils.SetPose(objectToMove, pose);
 
@@ -235,17 +243,33 @@ public class ServiceController : MonoBehaviour
     }
 
     private GameObject SpawnObstacleOrPed(SpawnModelRequest request) 
-    {           
-        GameObject entity = Instantiate(PedMale) as GameObject;
-        entity.name = request.model_name;
+    {
+        GameObject entity;
 
-        // sort under obstacles parent
-        entity.transform.SetParent(obstaclesParent.transform);
-        Utils.SetPose(entity, request.initial_pose);
+        // check if model name is an ID
+        if (int.TryParse(request.model_name, out _))
+        {
+            // model is a ped
+            // TODO: create a more elegant way to examine the type of model
+            entity = pedController.SpawnPed(request);
 
-        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        //rb.useGravity = true;
+            // sort under peds parent
+            entity.transform.SetParent(pedsParent.transform);
+        } else 
+        {
+            entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            entity.name = request.model_name;
 
+            // sort under obstacles parent
+            entity.transform.SetParent(obstaclesParent.transform);
+
+            Utils.SetPose(entity, request.initial_pose);
+
+            Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+            rb.useGravity = true;
+
+        }
+        
         return entity;
     }
 
