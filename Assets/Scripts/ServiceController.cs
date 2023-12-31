@@ -12,9 +12,6 @@ using RosMessageTypes.Unity;
 using System;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
-/// <summary>
-/// Example demonstration of implementing a UnityService that receives a Request message from another ROS node and sends a Response back
-/// </summary>
 public class ServiceController : MonoBehaviour
 {
     [SerializeField]
@@ -216,19 +213,12 @@ public class ServiceController : MonoBehaviour
         // Set up TF by adding TF publisher to the base_footprint game object
         baseLinkTf.gameObject.AddComponent(typeof(ROSTransformTreePublisher));
 
-        // // Set up Drive
-        // Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
-        // drive.topicNamespace = request.robot_namespace;
-        // // temp manually only for burger
-        // drive.wA1 = FindSubChild(entity, "burger/wheel_right_link").GetComponent<ArticulationBody>();
-        // drive.wA2 = FindSubChild(entity, "burger/wheel_left_link").GetComponent<ArticulationBody>();
+        // Set up Drive
+        Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
+        drive.topicNamespace = request.model_name;
 
-        // // Set up Scan
-        // var scanComponentName = "burger/base_scan";
-        // GameObject laserLink = FindSubChild(entity, scanComponentName);
-        // LaserScanSensor laserScan = laserLink.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
-        // laserScan.topic = "/burger/scan";
-        // laserScan.frameId = scanComponentName;
+        // Set up Odom publishing (this relies on the Drive -> must be added after Drive)
+        baseLinkTf.gameObject.AddComponent(typeof(OdomPublisher));
 
         // transport to starting pose
         Utils.SetPose(entity, request.initial_pose);
