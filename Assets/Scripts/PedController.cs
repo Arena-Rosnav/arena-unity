@@ -45,6 +45,14 @@ public class PedController : MonoBehaviour
         return entity;
     }
 
+    public void DeletePed(string pedID)
+    {
+        if (!peds.ContainsKey(pedID)) 
+            Debug.LogWarning("Tried to delete ped with ID " + pedID + " but ped with such ID doesn't exist!");
+        else
+            peds.Remove(pedID);
+    }
+
     void AgentCallback(AgentStatesMsg agentStates)
     {
         
