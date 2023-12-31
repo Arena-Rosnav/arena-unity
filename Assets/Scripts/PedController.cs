@@ -7,6 +7,7 @@ using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Pedsim;
 using RosMessageTypes.Gazebo;
+using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 public class PedController : MonoBehaviour
 {
@@ -55,6 +56,22 @@ public class PedController : MonoBehaviour
 
     void AgentCallback(AgentStatesMsg agentStates)
     {
-        
+        foreach (AgentStateMsg agentState in agentStates.agent_states)
+        {
+            if (!peds.ContainsKey(agentState.id))
+            {
+                Debug.LogWarning("Got Agent State for Agent with ID " + agentState.id + " which doesn't exist!");
+                continue;
+            }
+
+            GameObject agent = peds[agentState.id];
+            Rigidbody rb = agent.GetComponent<Rigidbody>();
+
+            // update agent properties
+            Utils.SetPose(agent, agentState.pose);
+            // set velocity
+            // only the linear part since our pedsim agents don't have angular velocity
+            rb.velocity = agentState.twist.linear.From<FLU>();
+        }
     }
 }
