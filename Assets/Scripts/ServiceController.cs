@@ -27,6 +27,7 @@ public class ServiceController : MonoBehaviour
     Dictionary<string, GameObject> activeModels;
     GameObject obstaclesParent;
     GameObject wallsParent;
+    GameObject pedsParent;
     public PedController pedController;
 
     void Start()
@@ -45,6 +46,7 @@ public class ServiceController : MonoBehaviour
         // initialize empty parent game object of obstacles (dynamic and static) & walls
         obstaclesParent = new("Obstacles");
         wallsParent = new("Walls");
+        pedsParent = new("Peds");
     }
 
     /// HANDLER SECTION
@@ -249,6 +251,9 @@ public class ServiceController : MonoBehaviour
             // model is a ped
             // TODO: create a more elegant way to examine the type of model
             entity = pedController.SpawnPed(request);
+
+            // sort under peds parent
+            entity.transform.SetParent(pedsParent.transform);
         } else 
         {
             entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
