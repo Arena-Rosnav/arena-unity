@@ -67,10 +67,16 @@ public class PedController : MonoBehaviour
             GameObject agent = peds[agentState.id];
             Rigidbody rb = agent.GetComponent<Rigidbody>();
 
+
             // update agent properties
-            Utils.SetPose(agent, agentState.pose);
-            // set velocity
-            // only the linear part since our pedsim agents don't have angular velocity
+            Vector3 position = agentState.pose.position.From<FLU>();
+            // set y position (only required for cubes)
+            position.y = 0.5f;
+            agent.transform.SetPositionAndRotation(
+                position,
+                agentState.pose.orientation.From<FLU>()
+            );
+            // only the linear velocitypart since our pedsim agents don't have angular velocity
             rb.velocity = agentState.twist.linear.From<FLU>();
         }
     }
