@@ -20,10 +20,10 @@ namespace RosMessageTypes.Pedsim
         public string track1_id;
         public string track2_id;
         //  Constants for type (just examples at the moment)
-        public const string TYPE_SPATIAL = ""spatial"";
-        public const string TYPE_ROMANTIC = ""romantic"";
-        public const string TYPE_PARENT_CHILD = ""parent_child"";
-        public const string TYPE_FRIENDSHIP = ""friendship"";
+        public const string TYPE_SPATIAL = "spatial";
+        public const string TYPE_ROMANTIC = "romantic";
+        public const string TYPE_PARENT_CHILD = "parent_child";
+        public const string TYPE_FRIENDSHIP = "friendship";
 
         public SocialRelationMsg()
         {
