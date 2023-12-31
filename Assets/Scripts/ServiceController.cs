@@ -51,34 +51,34 @@ public class ServiceController : MonoBehaviour
     private DeleteModelResponse HandleDelete(DeleteModelRequest request)
     {
         // Delete object from active Models if exists
-        string name = request.model_name;
+        string entityName = request.model_name;
 
-        if (!activeModels.ContainsKey(name))
-            return new DeleteModelResponse(false, "Model with name " + name + " does not exist.");
+        if (!activeModels.ContainsKey(entityName))
+            return new DeleteModelResponse(false, "Model with name " + entityName + " does not exist.");
 
-        Destroy(activeModels[name]);
-        activeModels.Remove(name);
+        Destroy(activeModels[entityName]);
+        activeModels.Remove(entityName);
 
-        if (int.TryParse(request.model_name, out _))
+        if (int.TryParse(entityName, out _))
         {
-            pedController.DeletePed(request.model_name);
+            pedController.DeletePed(entityName);
         }
 
-        return new DeleteModelResponse(true, "Model with name " + name + " deleted.");
+        return new DeleteModelResponse(true, "Model with name " + entityName + " deleted.");
     }
 
     private SetModelStateResponse HandleState(SetModelStateRequest request)
     {
         Debug.Log(request);
-        string name = request.model_name;
+        string entityName = request.model_name;
 
         // check if the model really exists
-        if (!activeModels.ContainsKey(name))
-            return new SetModelStateResponse(false, "Model with name " + name + " does not exist.");
+        if (!activeModels.ContainsKey(entityName))
+            return new SetModelStateResponse(false, "Model with name " + entityName + " does not exist.");
 
         // Move the object
         PoseMsg pose = request.pose;
-        GameObject objectToMove = activeModels[name];
+        GameObject objectToMove = activeModels[entityName];
 
         Utils.SetPose(objectToMove, pose);
 
