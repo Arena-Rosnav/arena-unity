@@ -172,6 +172,7 @@ MonoBehaviour:
   DeleteServiceName: unity/delete_model
   MoveServiceName: unity/set_model_state
   GoalServiceName: unity/set_goal
+  PedMale: {fileID: 0}
 --- !u!1 &313761473
 GameObject:
   m_ObjectHideFlags: 1

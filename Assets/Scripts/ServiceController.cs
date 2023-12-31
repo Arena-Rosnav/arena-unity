@@ -245,7 +245,7 @@ public class ServiceController : MonoBehaviour
     }
 
     private GameObject SpawnObstacleOrPed(SpawnModelRequest request) 
-    {
+    {           
         GameObject entity = Instantiate(PedMale) as GameObject;
         entity.name = request.model_name;
 
