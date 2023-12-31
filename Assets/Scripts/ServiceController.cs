@@ -59,6 +59,11 @@ public class ServiceController : MonoBehaviour
         Destroy(activeModels[name]);
         activeModels.Remove(name);
 
+        if (int.TryParse(request.model_name, out _))
+        {
+            pedController.DeletePed(request.model_name);
+        }
+
         return new DeleteModelResponse(true, "Model with name " + name + " deleted.");
     }
 
@@ -236,17 +241,29 @@ public class ServiceController : MonoBehaviour
 
     private GameObject SpawnObstacleOrPed(SpawnModelRequest request) 
     {
-        GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        entity.name = request.model_name;
+        GameObject entity;
 
-        // sort under obstacles parent
-        entity.transform.SetParent(obstaclesParent.transform);
+        // check if model name is an ID
+        if (int.TryParse(request.model_name, out _))
+        {
+            // model is a ped
+            // TODO: create a more elegant way to examine the type of model
+            entity = pedController.SpawnPed(request);
+        } else 
+        {
+            entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            entity.name = request.model_name;
 
-        Utils.SetPose(entity, request.initial_pose);
+            // sort under obstacles parent
+            entity.transform.SetParent(obstaclesParent.transform);
 
-        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        rb.useGravity = true;
+            Utils.SetPose(entity, request.initial_pose);
 
+            Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+            rb.useGravity = true;
+
+        }
+        
         return entity;
     }
 

@@ -28,7 +28,7 @@ public class PedController : MonoBehaviour
         
     }
 
-    GameObject SpawnPed(SpawnModelRequest request)
+    public GameObject SpawnPed(SpawnModelRequest request)
     {
         GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
         entity.name = request.model_name;
@@ -47,6 +47,6 @@ public class PedController : MonoBehaviour
 
     void AgentCallback(AgentStatesMsg agentStates)
     {
-
+        
     }
 }
