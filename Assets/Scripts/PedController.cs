@@ -14,7 +14,9 @@ public class PedController : MonoBehaviour
 
     Dictionary<string, GameObject> peds;
     string pedFeedbackTopic = "/pedsim_simulator/simulated_agents";
-    public GameObject PedMale;
+
+    // Array for the different ped types; specific ped types are added in the PedController Object in the Unity Editor
+    public GameObject[] PedTypes;
 
     // Start is called before the first frame update
     void Start()
@@ -32,17 +34,21 @@ public class PedController : MonoBehaviour
 
     public GameObject SpawnPed(SpawnModelRequest request)
     {
-        GameObject entity = Instantiate(PedMale);
+        // spawn every ped with a random character model
+        System.Random r = new();
+        int pedType = r.Next(PedTypes.Length);
+        GameObject entity = Instantiate(PedTypes[pedType]);
         entity.name = request.model_name;
+
+        // add rigidbody to this ped to use unity physics (e.g. physics)
+        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+        rb.useGravity = true;
 
         // set initial pose
         Utils.SetPose(entity, request.initial_pose);
 
         // register in peds dict
         peds.Add(request.model_name, entity);
-
-        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        rb.useGravity = true;
 
         return entity;
     }
