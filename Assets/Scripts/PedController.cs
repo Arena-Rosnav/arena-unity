@@ -91,9 +91,7 @@ public class PedController : MonoBehaviour
 
             // set social state in the animator component
             string social_state = agentState.social_state;
-            if(social_state=="Running" && animator.GetBool("isRunning")){ // if published social state is the same as the current animation state, skip setting of parameters (performance reasons)
-                continue;
-            }else if(social_state=="Walking" && animator.GetBool("isWalking")){
+            if((social_state=="Talking") && animator.GetBool("isTalking")){ // if published social state is the same as the current animation state, skip setting of parameters (performance reasons)
                 continue;
             }else{
                 SetSocialState(animator, social_state);
@@ -104,20 +102,11 @@ public class PedController : MonoBehaviour
 
     void SetSocialState(Animator animator, string social_state){
         switch(social_state){
-                case "Walking":
-                    animator.SetBool("isIdle", false);
-                    animator.SetBool("isRunning", false);
-                    animator.SetBool("isWalking", true);
-                    break;
-                case "Running":
-                    animator.SetBool("isIdle", false);
-                    animator.SetBool("isWalking", false);
-                    animator.SetBool("isRunning", true);
+                case "Talking":
+                    animator.SetBool("isTalking", true);
                     break;
                 default:
-                    animator.SetBool("isWalking", false);
-                    animator.SetBool("isRunning", false);
-                    animator.SetBool("isIdle", true);
+                    animator.SetBool("isTalking", false);
                     break;
             }
         return;
