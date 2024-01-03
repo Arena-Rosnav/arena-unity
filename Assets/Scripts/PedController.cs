@@ -74,7 +74,6 @@ public class PedController : MonoBehaviour
             GameObject agent = peds[agentState.id];
             Rigidbody rb = agent.GetComponent<Rigidbody>();
 
-
             // update agent properties
             Vector3 position = agentState.pose.position.From<FLU>();
             // set y position (only required for cubes)
@@ -85,8 +84,42 @@ public class PedController : MonoBehaviour
             );
             // only the linear velocitypart since our pedsim agents don't have angular velocity
             rb.velocity = agentState.twist.linear.From<FLU>();
+
             // set velocity in the animator component for animations
-            agent.GetComponent<Animator>().SetFloat("velocity", rb.velocity.magnitude);
+            Animator animator = agent.GetComponent<Animator>();
+            animator.SetFloat("velocity", rb.velocity.magnitude);
+
+            // set social state in the animator component
+            string social_state = agentState.social_state;
+            if(social_state=="Running" && animator.GetBool("isRunning")){ // if published social state is the same as the current animation state, skip setting of parameters (performance reasons)
+                continue;
+            }else if(social_state=="Walking" && animator.GetBool("isWalking")){
+                continue;
+            }else{
+                SetSocialState(animator, social_state);
+            }
+            
         }
+    }
+
+    void SetSocialState(Animator animator, string social_state){
+        switch(social_state){
+                case "Walking":
+                    animator.SetBool("isIdle", false);
+                    animator.SetBool("isRunning", false);
+                    animator.SetBool("isWalking", true);
+                    break;
+                case "Running":
+                    animator.SetBool("isIdle", false);
+                    animator.SetBool("isWalking", false);
+                    animator.SetBool("isRunning", true);
+                    break;
+                default:
+                    animator.SetBool("isWalking", false);
+                    animator.SetBool("isRunning", false);
+                    animator.SetBool("isIdle", true);
+                    break;
+            }
+        return;
     }
 }
