@@ -16,7 +16,7 @@ public class LaserScanSensor : MonoBehaviour
     public float RangeMetersMin = 0;
 
     // jackal
-    public double PublishPeriodSeconds = 0.01;
+    public double PublishPeriodSeconds = 0.1;
     public float RangeMetersMax = 30f;
     public float ScanAngleStartDegrees = 135;
     public float ScanAngleEndDegrees = -135;
