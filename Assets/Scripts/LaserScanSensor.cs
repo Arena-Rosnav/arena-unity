@@ -46,7 +46,7 @@ public class LaserScanSensor : MonoBehaviour
     /// Configures the laser scan. The scan rate, range, number of scans per scan
     /// and start and end angle degrees of the scan are configured.
     /// </summary>
-    /// <param name="laserConfig">Dictionary which should be extracted from ROBOT_NAME.robot.yaml.</param>
+    /// <param name="laserConfig">Dictionary which should be extracted from ROBOT_NAME.model.yaml.</param>
     /// <returns>True if all values have been successfully configued, false otherwise.</returns>
     public bool ConfigureScan(Dictionary<string, object> laserConfig)
     {
