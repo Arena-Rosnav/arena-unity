@@ -6,26 +6,27 @@ using Unity.Robotics.Core;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine.Serialization;
+using System;
 
 
 public class LaserScanSensor : MonoBehaviour
 {
     public string topic;
     [FormerlySerializedAs("TimeBetweenScansSeconds")]
-    public double PublishPeriodSeconds = 0.1;
+    public double PublishPeriodSeconds = 0.01;
     public float RangeMetersMin = 0;
 
     // burger
-    // public float RangeMetersMax = 3.5f;
-    // public float ScanAngleStartDegrees = 0;
-    // public float ScanAngleEndDegrees = 360;
-    // public int NumMeasurementsPerScan = 360;
+    public float RangeMetersMax = 3.5f;
+    public float ScanAngleStartDegrees = 0;
+    public float ScanAngleEndDegrees = 360;
+    public int NumMeasurementsPerScan = 360;
 
     // jackal
-    public float RangeMetersMax = 30f;
-    public float ScanAngleStartDegrees = 135;
-    public float ScanAngleEndDegrees = -135;
-    public int NumMeasurementsPerScan = 720;
+    // public float RangeMetersMax = 30f;
+    // public float ScanAngleStartDegrees = 135;
+    // public float ScanAngleEndDegrees = -135;
+    // public int NumMeasurementsPerScan = 720;
 
     // Change the scan start and end by this amount after every publish
     public float ScanOffsetAfterPublish = 0f;
@@ -51,34 +52,63 @@ public class LaserScanSensor : MonoBehaviour
     {
         bool success = true;
 
+        Debug.Log(laserConfig.GetType().GenericTypeArguments[0]);
+        Debug.Log(laserConfig.GetType().GenericTypeArguments[1]);
+
         // configure range
-        if (laserConfig.TryGetValue("range", out object range) && range is float rangeVal)
+        if (laserConfig.TryGetValue("range", out object range) && float.TryParse((string)range, out float rangeVal))
             RangeMetersMax = rangeVal;
         else
         {
-            Debug.LogError("Laser config dictionary doesn't contain 'range' or value not of type float.\nUsing default jackal values.");
+            Debug.LogError("Laser config dictionary doesn't contain 'range' or value not a valid float.\nUsing default jackal values.");
             success = false;
         }
 
         // configure update rate
-        if (laserConfig.TryGetValue("update_rate", out object updateRate) && updateRate is int updateRateValHz)
+        if (laserConfig.TryGetValue("update_rate", out object updateRate) && float.TryParse((string)updateRate, out float updateRateValHz))
             PublishPeriodSeconds = 1f / updateRateValHz;
         else
         {
-            Debug.LogError("Laser config dictionary doesn't contain 'update_rate' or value not of type float.\nUsing default jackal values.");
+            Debug.LogError("Laser config dictionary doesn't contain 'update_rate' or value is not valid float.\nUsing default jackal values.");
+            Debug.Log(laserConfig["update_rate"].GetType());
             success = false;
         }
         
         // configure angles
-        if (laserConfig.TryGetValue("angle", out object angleConfig) && angleConfig is Dictionary<string, object> angleConfigDict)
+        if (laserConfig.TryGetValue("angle", out object angleConfig) && angleConfig is Dictionary<object, object> angleConfigDict)
         {
-            
+            // configure scan start and end angles
+            if (angleConfigDict.TryGetValue("min", out object minRad) && float.TryParse((string)minRad, out float minRadVal))
+                ScanAngleStartDegrees = minRadVal * Mathf.Rad2Deg;
+            else
+            {
+                Debug.LogError("Angle config in laser config dictionary doesn't contain 'min' or value not a valid float.\nUsing default jackal values.");
+                // return directly -> NumMeasurements not messed up
+                return false;
+            }
+            if (angleConfigDict.TryGetValue("max", out object maxRad) && float.TryParse((string)maxRad, out float maxRadVal))
+                ScanAngleEndDegrees = maxRadVal * Mathf.Rad2Deg;
+            else
+            {
+                Debug.LogError("Angle config in laser config dictionary doesn't contain 'max' or value not a valid float.\nUsing default jackal values.");
+                // return directly -> NumMeasurements not messed up
+                return false;
+            }
+
+            // configure number of measurements per scan
+            if (angleConfigDict.TryGetValue("increment", out object incrementRad) && double.TryParse((string)incrementRad, out double incrementRadVal))
+                NumMeasurementsPerScan = (int)Math.Round((maxRadVal - minRadVal) / incrementRadVal);
+            else
+            {
+                Debug.LogError("Angle config in laser config dictionary doesn't contain 'increment' or value not a valid double.\nUsing default jackal values.");
+                success = false;
+            }
         } else
         {
             Debug.LogError("Laser config dictionary doesn't contain 'angle' key or value not a dictionary.\nUsing default jackal values.");
-            success = false;
+            return false;
         }
-        
+
         return success;
     }
 
