@@ -77,7 +77,7 @@ public class PedController : MonoBehaviour
             // update agent properties
             Vector3 position = agentState.pose.position.From<FLU>();
             // set y position (only required for cubes)
-            position.y = 0.5f;
+            position.y = 0f;
             agent.transform.SetPositionAndRotation(
                 position,
                 agentState.pose.orientation.From<FLU>()
