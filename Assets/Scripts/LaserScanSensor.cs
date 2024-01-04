@@ -39,7 +39,7 @@ public class LaserScanSensor : MonoBehaviour
     bool isScanning = false;
     double m_TimeLastScanBeganSeconds = -1;
 
-    protected virtual void Start()
+    void Start()
     {
         m_Ros = ROSConnection.GetOrCreateInstance();
         m_Ros.RegisterPublisher<LaserScanMsg>(topic);
@@ -147,7 +147,7 @@ public class LaserScanSensor : MonoBehaviour
         }
     }
 
-    public void Update()
+    void Update()
     {
         if (!isScanning)
         {
