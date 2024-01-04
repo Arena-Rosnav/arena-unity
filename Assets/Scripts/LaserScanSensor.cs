@@ -47,6 +47,41 @@ public class LaserScanSensor : MonoBehaviour
         m_TimeNextScanSeconds = Clock.Now + PublishPeriodSeconds;
     }
 
+    public bool ConfigureScan(Dictionary<string, object> laserConfig)
+    {
+        bool success = true;
+
+        // configure range
+        if (laserConfig.TryGetValue("range", out object range) && range is float rangeVal)
+            RangeMetersMax = rangeVal;
+        else
+        {
+            Debug.LogError("Laser config dictionary doesn't contain 'range' or value not of type float.\nUsing default jackal values.");
+            success = false;
+        }
+
+        // configure update rate
+        if (laserConfig.TryGetValue("update_rate", out object updateRate) && updateRate is int updateRateValHz)
+            PublishPeriodSeconds = 1f / updateRateValHz;
+        else
+        {
+            Debug.LogError("Laser config dictionary doesn't contain 'update_rate' or value not of type float.\nUsing default jackal values.");
+            success = false;
+        }
+        
+        // configure angles
+        if (laserConfig.TryGetValue("angle", out object angleConfig) && angleConfig is Dictionary<string, object> angleConfigDict)
+        {
+            
+        } else
+        {
+            Debug.LogError("Laser config dictionary doesn't contain 'angle' key or value not a dictionary.\nUsing default jackal values.");
+            success = false;
+        }
+        
+        return success;
+    }
+
     private void BeginScan()
     {
         isScanning = true;
