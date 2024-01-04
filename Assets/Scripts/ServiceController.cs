@@ -137,7 +137,7 @@ public class ServiceController : MonoBehaviour
         // Find Laser Scan configuration in list of plugins
         foreach (Dictionary<string, object> dict in config.plugins) {
             // check if type is actually laser scan
-            if (dict.TryGetValue("type", out object value)) 
+            if (dict.TryGetValue("type", out object value))
             {
                 if (value is string strValue && strValue.Equals(pluginTypeName))
                 {
@@ -201,6 +201,7 @@ public class ServiceController : MonoBehaviour
         laserScan.frameId = robot.name + "/" + laserLinkJoint.name;
 
         // TODO: this is missing the necessary configuration of all parameters according to the laser scan config
+        laserScan.ConfigureScan(laserDict);
     }
 
     private GameObject SpawnRobot(SpawnModelRequest request)
