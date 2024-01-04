@@ -13,20 +13,14 @@ public class LaserScanSensor : MonoBehaviour
 {
     public string topic;
     [FormerlySerializedAs("TimeBetweenScansSeconds")]
-    public double PublishPeriodSeconds = 0.01;
     public float RangeMetersMin = 0;
 
-    // burger
-    public float RangeMetersMax = 3.5f;
-    public float ScanAngleStartDegrees = 0;
-    public float ScanAngleEndDegrees = 360;
-    public int NumMeasurementsPerScan = 360;
-
     // jackal
-    // public float RangeMetersMax = 30f;
-    // public float ScanAngleStartDegrees = 135;
-    // public float ScanAngleEndDegrees = -135;
-    // public int NumMeasurementsPerScan = 720;
+    public double PublishPeriodSeconds = 0.01;
+    public float RangeMetersMax = 30f;
+    public float ScanAngleStartDegrees = 135;
+    public float ScanAngleEndDegrees = -135;
+    public int NumMeasurementsPerScan = 720;
 
     // Change the scan start and end by this amount after every publish
     public float ScanOffsetAfterPublish = 0f;
@@ -52,9 +46,6 @@ public class LaserScanSensor : MonoBehaviour
     {
         bool success = true;
 
-        Debug.Log(laserConfig.GetType().GenericTypeArguments[0]);
-        Debug.Log(laserConfig.GetType().GenericTypeArguments[1]);
-
         // configure range
         if (laserConfig.TryGetValue("range", out object range) && float.TryParse((string)range, out float rangeVal))
             RangeMetersMax = rangeVal;
@@ -70,7 +61,6 @@ public class LaserScanSensor : MonoBehaviour
         else
         {
             Debug.LogError("Laser config dictionary doesn't contain 'update_rate' or value is not valid float.\nUsing default jackal values.");
-            Debug.Log(laserConfig["update_rate"].GetType());
             success = false;
         }
         
@@ -136,8 +126,6 @@ public class LaserScanSensor : MonoBehaviour
         // Invert the angle ranges when going from Unity to ROS
         var angleStartRos = -ScanAngleStartDegrees * Mathf.Deg2Rad;
         var angleEndRos = -ScanAngleEndDegrees * Mathf.Deg2Rad;
-        // var angleStartRos = -ScanAngleStartDegrees * Mathf.Deg2Rad;
-        // var angleEndRos = -ScanAngleEndDegrees * Mathf.Deg2Rad;
         if (angleStartRos > angleEndRos)
         {
             Debug.LogWarning("LaserScan was performed in a clockwise direction but ROS expects a counter-clockwise scan, flipping the ranges...");
