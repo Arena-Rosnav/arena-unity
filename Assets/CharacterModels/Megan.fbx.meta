@@ -8,45 +8,45 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch22_body
-    second: {fileID: 2100000, guid: 4be24d9e9c26cc0af9704de1f1e67cc7, type: 2}
+    second: {fileID: 2100000, guid: bc7d70d9e5f2318fcb35c80a36078491, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch22_hair
-    second: {fileID: 2100000, guid: 37f50a432b5f93721957794a5d9d858b, type: 2}
+    second: {fileID: 2100000, guid: 8a036f8173581a71d9156d02ac3943a1, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch22_1001_Diffuse
-    second: {fileID: 2800000, guid: e1272b5e166cbe55c9565571979a6074, type: 3}
+    second: {fileID: 2800000, guid: 18247786316415e759df447ffef8b627, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch22_1001_Glossiness
-    second: {fileID: 2800000, guid: 50102513081118a398ee0468992df74f, type: 3}
+    second: {fileID: 2800000, guid: 968aad0afb30f4456b0f33488e3090aa, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch22_1001_Normal
-    second: {fileID: 2800000, guid: a3fb4855b19abb763813806e14cd9ece, type: 3}
+    second: {fileID: 2800000, guid: 02f65efd89ddb93fd933038e07b74ca0, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch22_1001_Specular
-    second: {fileID: 2800000, guid: 983d4ec9f724da6208fea81842023232, type: 3}
+    second: {fileID: 2800000, guid: 7698caef73cf6f3df83913ab28067039, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch22_1002_Diffuse
-    second: {fileID: 2800000, guid: 257c1e99ba0d315d6a3d3330421fb293, type: 3}
+    second: {fileID: 2800000, guid: 4342a790866790d6dab349b5de34f33f, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch22_1002_Normal
-    second: {fileID: 2800000, guid: 40a776eabe17ab5e9962f887d3a5b4e1, type: 3}
+    second: {fileID: 2800000, guid: a328cbb231b002d09861597fdb30cbef, type: 3}
   materials:
     materialImportMode: 2
-    materialName: 0
+    materialName: 2
     materialSearch: 1
     materialLocation: 1
   animations:
@@ -117,10 +117,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 64384791dff37390886b7171f0fdd9fe
-  - 90f1e425a6a0632e2914d384dba89594
-  - 8c26dcb61805af93db3bd6b9fcec4ee1
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3

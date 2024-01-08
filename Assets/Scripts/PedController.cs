@@ -91,24 +91,27 @@ public class PedController : MonoBehaviour
 
             // set social state in the animator component
             string social_state = agentState.social_state;
-            if((social_state=="Talking") && animator.GetBool("isTalking")){ // if published social state is the same as the current animation state, skip setting of parameters (performance reasons)
-                continue;
-            }else{
-                SetSocialState(animator, social_state);
-            }
-            
+            TriggerAnimation(animator, social_state);            
         }
     }
 
-    void SetSocialState(Animator animator, string social_state){
+    void TriggerAnimation(Animator animator, string social_state){
         switch(social_state){
-                case "Talking":
-                    animator.SetBool("isTalking", true);
-                    break;
-                default:
-                    animator.SetBool("isTalking", false);
-                    break;
-            }
-        return;
+            case "Walking":
+                animator.SetInteger("socialState", 0);
+                break;
+            case "Talking":
+                animator.SetInteger("socialState", 1);
+                break;
+            case "Curious":
+                animator.SetInteger("socialState", 2);
+                break;
+            case "TalkingOnPhone":
+                animator.SetInteger("socialState", 3);
+                break;    
+            default:
+                animator.SetInteger("socialState", -1);
+                break;
+        }
     }
 }
