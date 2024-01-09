@@ -16154,7 +16154,7 @@ GameObject:
   - component: {fileID: 1188366862}
   - component: {fileID: 1188366863}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Ped Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
