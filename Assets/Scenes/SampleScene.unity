@@ -1515,10 +1515,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnServiceName: unity/spawn_model
+  SpawnWallsServiceName: unity/spawn_walls
   DeleteServiceName: unity/delete_model
   MoveServiceName: unity/set_model_state
   GoalServiceName: unity/set_goal
-  robotModel: {fileID: 3748665836559886456, guid: bca4cd8cc6706689781152ca116cc08e, type: 3}
+  pedController: {fileID: 0}
+  Cube: {fileID: 1046918776658512126, guid: bb897bc912ddeef668b7fd3c1b6ceaf0, type: 3}
 --- !u!1 &173520781
 GameObject:
   m_ObjectHideFlags: 0

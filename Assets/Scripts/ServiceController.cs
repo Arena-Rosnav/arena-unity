@@ -30,6 +30,7 @@ public class ServiceController : MonoBehaviour
     GameObject pedsParent;
     public PedController pedController;
     CommandLineParser commandLineArgs;
+    public GameObject Cube;
 
     void Start()
     {
@@ -263,7 +264,8 @@ public class ServiceController : MonoBehaviour
             entity.transform.SetParent(pedsParent.transform);
         } else 
         {
-            entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            // entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            entity = Instantiate(Cube);
             entity.name = request.model_name;
 
             // sort under obstacles parent
@@ -271,9 +273,16 @@ public class ServiceController : MonoBehaviour
 
             Utils.SetPose(entity, request.initial_pose);
 
-            Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-            rb.useGravity = true;
+            // Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+            // rb.useGravity = true;
 
+            // DEBUGGING
+            var meshRenderer = entity.GetComponent<MeshRenderer>();
+            Material mat = meshRenderer.material;
+            Debug.LogError(mat.shader);
+            Debug.LogError(mat.color);
+            Debug.LogError(mat.renderQueue);
+            Debug.LogError(mat.mainTexture);
         }
         
         return entity;
