@@ -14,6 +14,7 @@ public class PedController : MonoBehaviour
 
     Dictionary<string, GameObject> peds;
     string pedFeedbackTopic = "/pedsim_simulator/simulated_agents";
+    public GameObject Cube;
 
     // Start is called before the first frame update
     void Start()
@@ -23,15 +24,9 @@ public class PedController : MonoBehaviour
         ROSConnection.GetOrCreateInstance().Subscribe<AgentStatesMsg>(pedFeedbackTopic, AgentCallback);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public GameObject SpawnPed(SpawnModelRequest request)
     {
-        GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject entity = Instantiate(Cube);
         entity.name = request.model_name;
 
         // set initial pose
@@ -66,7 +61,6 @@ public class PedController : MonoBehaviour
 
             GameObject agent = peds[agentState.id];
             Rigidbody rb = agent.GetComponent<Rigidbody>();
-
 
             // update agent properties
             Vector3 position = agentState.pose.position.From<FLU>();
