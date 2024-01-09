@@ -12,7 +12,7 @@ extracted_folder="Editor"
 # Check if download file already exists
 if [ -f "$download_file_name" ]; then
     echo "The compressed Unity Editor file already exists. Skipping download."
-    echo "If you wish to download the file again, delete '$download_file_name' in $unity_location."
+    echo "If you wish to download the file again, delete \"$download_file_name\" in \"$unity_location\"."
 else
     echo "Downloading Unity Editor."
     wget $url -O $download_file_name
@@ -28,10 +28,11 @@ fi
 
 if [ -d "$extracted_folder" ]; then
     echo "The to be extracted Unity Editor directory already exists. Skipping extraction."
-    echo "If you wish to extract it again. Delete the 'Editor' directory in $unity_location."
+    echo "If you wish to extract it again. Delete the \"Editor\" directory in \"$unity_location\"."
 else
+    echo "Extracting Unity Editor. May take a few minutes."
     # Extract file
-    tar -xf $file_name
+    tar -xf $download_file_name
     echo "Successfully extracted the Unity Editor."
 
     # Check if tar was successful
@@ -41,4 +42,6 @@ else
     fi
 fi
 
-echo "You can now build arena-unity by running the 'build-arena-unity.sh' script."
+echo "Deleting downloaded tar file"
+
+rm -rf "$download_file_name"
