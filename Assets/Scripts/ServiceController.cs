@@ -29,11 +29,13 @@ public class ServiceController : MonoBehaviour
     GameObject wallsParent;
     GameObject pedsParent;
     public PedController pedController;
+    CommandLineParser commandLineArgs;
 
     void Start()
     {
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
+        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
 
         // register the services with ROS
         ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
@@ -106,10 +108,14 @@ public class ServiceController : MonoBehaviour
         return new SpawnModelResponse(true, "Received Spawn Request");
     }
 
-    private static RobotConfig LoadRobotModelYaml(string robotName)
+    private RobotConfig LoadRobotModelYaml(string robotName)
     {
-        // Construct the full path from the relative path
-        string yamlPath = Path.Combine(Application.dataPath, "../../arena-simulation-setup/robot", robotName, robotName + ".model.yaml");
+        // Construct the full path robot yaml path
+        // Take command line arg if executable build is running
+        string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
+        // Use relative path if running in Editor
+        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../arena-simulation-setup");
+        string yamlPath = Path.Combine(arenaSimSetupPath, "robot", robotName, robotName + ".model.yaml");
 
         // Check if the file exists
         if (!File.Exists(yamlPath))
