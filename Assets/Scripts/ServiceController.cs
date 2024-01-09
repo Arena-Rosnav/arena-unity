@@ -264,7 +264,6 @@ public class ServiceController : MonoBehaviour
             entity.transform.SetParent(pedsParent.transform);
         } else 
         {
-            // entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
             entity = Instantiate(Cube);
             entity.name = request.model_name;
 
@@ -273,8 +272,8 @@ public class ServiceController : MonoBehaviour
 
             Utils.SetPose(entity, request.initial_pose);
 
-            // Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-            // rb.useGravity = true;
+            Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+            rb.useGravity = true;
 
             // DEBUGGING
             var meshRenderer = entity.GetComponent<MeshRenderer>();
@@ -300,7 +299,6 @@ public class ServiceController : MonoBehaviour
 
         // remove previous walls
         GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
-
         foreach (GameObject obj in allObjects)
         {
             if (obj.tag == WALL_TAG)
@@ -320,13 +318,13 @@ public class ServiceController : MonoBehaviour
             Vector3 corner_end = wall.end.From<FLU>();
 
             // Standard Cube
-            GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject entity = Instantiate(Cube);
             entity.name = "__WALL" + counter;
             entity.tag = WALL_TAG;
 
             entity.transform.position = corner_start;
             entity.transform.localScale = corner_end - corner_start;
-            AdjustPivot(entity.transform);  
+            AdjustPivot(entity.transform);
             
             // organize game object in walls parent game object
             entity.transform.SetParent(wallsParent.transform);
