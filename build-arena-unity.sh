@@ -1,12 +1,25 @@
 #!/bin/bash -i
 
-unity_location="${HOME}/Unity/Hub/Editor/2022.3.11f1/Editor/Unity"
+unity_location="${HOME}/Unity/Arena-Unity/Editor/Unity"
 
 project_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 build_path="${project_path}/Build/arena-unity"
 
 build_log="${project_path}/Build/build_log.txt"
+
+if [ -f "$unity_location" ]; then
+    echo "Found Unity Editor at correct location"
+else 
+    echo "Couldn't find Unity Editor at \"$unity_location\"."
+    echo "Installing correct Unity Editor"
+    ./install-unity.sh
+
+    if [ $? -ne 0 ]; then
+        echo "Failed to install Unity Editor"
+        exit 1
+    fi
+fi
 
 echo "Building ..."
 
