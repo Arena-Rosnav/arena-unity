@@ -175,7 +175,7 @@ public class ServiceController : MonoBehaviour
     {
         if (config == null) 
         {
-            Debug.LogError("Given robot config was null!");
+            Debug.LogError("Given robot config was null (probably incorrect config path). Robot will be spawned without scan");
             return;
         }
 
