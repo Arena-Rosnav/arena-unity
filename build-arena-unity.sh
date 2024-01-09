@@ -13,5 +13,9 @@ ARENA_SIM_SETUP="$(cd "$project_path"/../arena-simulation-setup && pwd)"
 # Export arena_simulation_setup location for arena-unity to find files
 export ARENA_SIM_SETUP
 
+echo "Building"
+
+echo "Please wait for build to finish"
+
 # Build Unity
 "$unity_location" -quit -batchmode -projectpath "$project_path" -buildLinux64Player "$build_path" -logFile "$build_log"
