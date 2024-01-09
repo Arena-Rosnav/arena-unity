@@ -23,8 +23,6 @@ fi
 
 echo "Building ..."
 
-echo "Please wait for build to finish"
-
 # Create build dir
 mkdir -p "$project_path/Build"
 
