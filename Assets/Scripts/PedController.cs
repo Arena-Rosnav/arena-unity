@@ -108,7 +108,10 @@ public class PedController : MonoBehaviour
                 break;
             case "TalkingOnPhone":
                 animator.SetInteger("socialState", 3);
-                break;    
+                break;
+            case "Texting":
+                animator.SetInteger("socialState", 4);
+                break;      
             default:
                 animator.SetInteger("socialState", -1);
                 break;
