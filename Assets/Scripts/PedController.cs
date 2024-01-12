@@ -97,21 +97,24 @@ public class PedController : MonoBehaviour
 
     void TriggerAnimation(Animator animator, string social_state){
         switch(social_state){
-            case "Walking":
+            case "Idle":
                 animator.SetInteger("socialState", 0);
                 break;
-            case "Talking":
+            case "Walking":
                 animator.SetInteger("socialState", 1);
                 break;
-            case "Curious":
+            case "Talking":
                 animator.SetInteger("socialState", 2);
                 break;
-            case "TalkingOnPhone":
-                animator.SetInteger("socialState", 3);
-                break;
             case "Texting":
+                animator.SetInteger("socialState", 3);
+                break; 
+            case "Curious":
                 animator.SetInteger("socialState", 4);
-                break;      
+                break;
+            case "TalkingOnPhone":
+                animator.SetInteger("socialState", 5);
+                break;
             default:
                 animator.SetInteger("socialState", -1);
                 break;
