@@ -15,6 +15,9 @@ public class PedController : MonoBehaviour
     Dictionary<string, GameObject> peds;
     string pedFeedbackTopic = "/pedsim_simulator/simulated_agents";
 
+    // Array for the different ped types; specific ped types are added in the PedController Object in the Unity Editor
+    public GameObject[] PedTypes;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,17 +34,21 @@ public class PedController : MonoBehaviour
 
     public GameObject SpawnPed(SpawnModelRequest request)
     {
-        GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        // spawn every ped with a random character model
+        System.Random r = new();
+        int pedType = r.Next(PedTypes.Length);
+        GameObject entity = Instantiate(PedTypes[pedType]);
         entity.name = request.model_name;
+
+        // add rigidbody to this ped to use unity physics (e.g. physics)
+        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+        rb.useGravity = true;
 
         // set initial pose
         Utils.SetPose(entity, request.initial_pose);
 
         // register in peds dict
         peds.Add(request.model_name, entity);
-
-        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        rb.useGravity = true;
 
         return entity;
     }
@@ -67,17 +74,51 @@ public class PedController : MonoBehaviour
             GameObject agent = peds[agentState.id];
             Rigidbody rb = agent.GetComponent<Rigidbody>();
 
-
             // update agent properties
             Vector3 position = agentState.pose.position.From<FLU>();
             // set y position (only required for cubes)
-            position.y = 0.5f;
+            position.y = 0f;
             agent.transform.SetPositionAndRotation(
                 position,
                 agentState.pose.orientation.From<FLU>()
             );
             // only the linear velocitypart since our pedsim agents don't have angular velocity
             rb.velocity = agentState.twist.linear.From<FLU>();
+
+            // set velocity in the animator component for animations
+            Animator animator = agent.GetComponent<Animator>();
+            animator.SetFloat("velocity", rb.velocity.magnitude);
+
+            // set social state in the animator component
+            string social_state = agentState.social_state;
+            TriggerAnimation(animator, social_state);            
+        }
+    }
+
+    void TriggerAnimation(Animator animator, string social_state){
+        switch(social_state){
+            case "Idle":
+                animator.SetInteger("socialState", 0);
+                break;
+            case "Walking":
+                animator.SetInteger("socialState", 1);
+                break;
+            case "Talking":
+                animator.SetInteger("socialState", 2);
+                animator.SetTrigger("startTalking");
+                break;
+            case "Texting":
+                animator.SetInteger("socialState", 3);
+                break; 
+            case "Curious":
+                animator.SetInteger("socialState", 4);
+                break;
+            case "TalkingOnPhone":
+                animator.SetInteger("socialState", 5);
+                break;
+            default:
+                animator.SetInteger("socialState", -1);
+                break;
         }
     }
 }

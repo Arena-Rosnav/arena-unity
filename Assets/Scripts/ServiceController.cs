@@ -31,7 +31,7 @@ public class ServiceController : MonoBehaviour
     public PedController pedController;
 
     void Start()
-    {
+    {           
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
 
