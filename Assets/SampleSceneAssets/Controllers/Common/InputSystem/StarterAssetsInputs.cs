@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,17 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
+
+		void Update() {
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				Cursor.lockState = CursorLockMode.None;
+			}
+			else if (Input.GetMouseButtonDown(0))
+			{
+				Cursor.lockState = CursorLockMode.Locked;
+			}
+		}
 
 		public void OnMove(InputValue value)
 		{
