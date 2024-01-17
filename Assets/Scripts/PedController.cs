@@ -17,11 +17,14 @@ public class PedController : MonoBehaviour
 
     // Array for the different ped types; specific ped types are added in the PedController Object in the Unity Editor
     public GameObject[] PedTypes;
+    string[] SOCIALSTATES = {"Texting", "TalkingOnPhone", "Idle", "Interested"};
+    string[] socialStates;
 
     // Start is called before the first frame update
     void Start()
     {
         peds = new Dictionary<string, GameObject>();
+        socialStates = new string[] {"Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking"};
 
         ROSConnection.GetOrCreateInstance().Subscribe<AgentStatesMsg>(pedFeedbackTopic, AgentCallback);
     }
@@ -90,8 +93,24 @@ public class PedController : MonoBehaviour
             animator.SetFloat("velocity", rb.velocity.magnitude);
 
             // set social state in the animator component
-            string social_state = agentState.social_state;
-            TriggerAnimation(animator, social_state);            
+            // string social_state = agentState.social_state;
+            string socialStateIn = agentState.social_state; // get pedsim social state
+            string animationOverwrite = socialStateIn; // var that shows which fake animation is played
+            int id = int.Parse(agentState.id);
+            System.Random rnd = new System.Random();
+            int proc = rnd.Next(0,2);
+            if (socialStateIn.Equals("Talking") || socialStateIn.Equals("Listening")){
+                // Debug.Log("Animation State for ped: "+id+" is Blend Tree? "+animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree")); DEBUG
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree") || animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree")){
+                    if (proc == 0)    // 50/50 chance that incoming "Talking" social state is overwritten by a random non-moving animation
+                        animationOverwrite = SOCIALSTATES[rnd.Next(0,SOCIALSTATES.Length)];
+                    TriggerAnimation(animator, animationOverwrite);
+                }
+            } else{
+                TriggerAnimation(animator, socialStateIn);
+            }
+            
+            //TriggerAnimation(animator, socialStates[id]);            
         }
     }
 
@@ -117,7 +136,7 @@ public class PedController : MonoBehaviour
                 animator.SetInteger("socialState", 5);
                 break;
             default:
-                animator.SetInteger("socialState", -1);
+                //animator.SetInteger("socialState", -1);
                 break;
         }
     }

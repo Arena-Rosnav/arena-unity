@@ -92,7 +92,7 @@ public class Utils : MonoBehaviour
     /// <param name="pose">Pose message for target pose</param>
     public static void SetPose(GameObject obj, PoseMsg pose) 
     {
-        Debug.Log("Setting pose:" + pose.ToString());
+        //Debug.Log("Setting pose:" + pose.ToString());
         obj.transform.SetPositionAndRotation(pose.position.From<FLU>(), pose.orientation.From<FLU>());
     }
 
