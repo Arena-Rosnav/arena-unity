@@ -12,7 +12,7 @@ if [ -f "$unity_location" ]; then
     echo "*** Found Unity Editor at correct location"
 else 
     echo "*** Couldn't find Unity Editor at \"$unity_location\"."
-    echo "*** Install the correct version of the Unity Editor by running the script install-unity.sh"
+    echo "*** Install the correct version of the Unity Editor by running the script install-unity-version.sh"
     
     exit 1
 fi
@@ -34,7 +34,7 @@ echo "*** Build executed successfully."
 
 echo "*** Compressing build into Arena-Unity-Build.tar.gz for a new release."
 
-tar -czvf Arena-Unity-Build.tar.gz Build/
+tar -czf Arena-Unity-Build.tar.gz Build/
 
 if [ $? -eq 0 ]; then
     echo "*** Successfully compressed into Arena-Unity-Build.tar.gz"

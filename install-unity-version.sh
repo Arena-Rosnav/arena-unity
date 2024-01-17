@@ -2,6 +2,8 @@
 
 unity_location="${HOME}/Unity/Hub/Editor/2022.3.11f1"
 
+ehco "*** Make sure you already installed the Unity Hub manually. Otherwise, follow these instructions: https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux"
+
 mkdir -p "$unity_location"
 cd "$unity_location"
 
@@ -13,7 +15,6 @@ extracted_folder="Editor"
 if [ -d "$extracted_folder" ]; then
     echo "*** The Unity Editor already exists at correct location."
     echo "*** If you wish to extract it again, delete the \"Editor\" directory in \"$unity_location\"."
-    echo "*** If you don't already have it, you need to install the Unity Hub. To install Unity Hub follow these instructions https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux"
     exit 0
 fi
 
@@ -48,5 +49,3 @@ fi
 echo "*** Deleting downloaded tar file"
 
 rm -rf "$download_file_name"
-
-echo "*** If you don't already have it, you need to install the Unity Hub. To install Unity Hub follow these instructions https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux"
