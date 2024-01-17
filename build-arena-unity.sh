@@ -30,8 +30,20 @@ mkdir -p "$project_path/Build"
 "$unity_location" -quit -batchmode -projectpath "$project_path" -buildLinux64Player "$build_path" -logFile "$build_log"
 
 # Check if build was successful
-if [ $? -eq 0 ]; then
-    echo "Build executed successfully."
-else
+if [ $? -ne 0 ]; then
     echo "Build failed."
+    exit 1
+fi
+echo "Build executed successfully."
+
+echo "Compressing build into Arena-Unity-Build.tar.gz for a new release."
+
+tar -czvf Arena-Unity-Build.tar.gz Build/
+
+if [ $? -eq 0 ]; then
+    echo "Successfully compressed into Arena-Unity-Build.tar.gz"
+    exit 0
+else 
+    echo "Compression failed"
+    exit 1
 fi
