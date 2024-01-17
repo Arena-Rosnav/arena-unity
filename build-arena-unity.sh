@@ -9,19 +9,15 @@ build_path="${project_path}/Build/arena-unity"
 build_log="${project_path}/Build/build_log.txt"
 
 if [ -f "$unity_location" ]; then
-    echo "Found Unity Editor at correct location"
+    echo "*** Found Unity Editor at correct location"
 else 
-    echo "Couldn't find Unity Editor at \"$unity_location\"."
-    echo "Installing correct Unity Editor"
-    ./install-unity.sh
-
-    if [ $? -ne 0 ]; then
-        echo "Failed to install Unity Editor"
-        exit 1
-    fi
+    echo "*** Couldn't find Unity Editor at \"$unity_location\"."
+    echo "*** Install the correct version of the Unity Editor by running the script install-unity.sh"
+    
+    exit 1
 fi
 
-echo "Building ..."
+echo "*** Building ..."
 
 # Create build dir
 mkdir -p "$project_path/Build"
@@ -31,19 +27,19 @@ mkdir -p "$project_path/Build"
 
 # Check if build was successful
 if [ $? -ne 0 ]; then
-    echo "Build failed. Look into Buil/build_log.txt for more information."
+    echo "*** Build failed. Look into Buil/build_log.txt for more information."
     exit 1
 fi
-echo "Build executed successfully."
+echo "*** Build executed successfully."
 
-echo "Compressing build into Arena-Unity-Build.tar.gz for a new release."
+echo "*** Compressing build into Arena-Unity-Build.tar.gz for a new release."
 
 tar -czvf Arena-Unity-Build.tar.gz Build/
 
 if [ $? -eq 0 ]; then
-    echo "Successfully compressed into Arena-Unity-Build.tar.gz"
+    echo "*** Successfully compressed into Arena-Unity-Build.tar.gz"
     exit 0
 else 
-    echo "Compression failed"
+    echo "*** Compression failed"
     exit 1
 fi
