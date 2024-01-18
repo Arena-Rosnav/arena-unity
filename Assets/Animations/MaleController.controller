@@ -43,13 +43,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -6959710439262148274}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: velocity
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -85,18 +85,18 @@ AnimatorStateMachine:
     m_StateMachine: {fileID: 1879969676316129448}
     m_Position: {x: 490, y: 150, z: 0}
   m_AnyStateTransitions:
-  - {fileID: 9105876955938845976}
   - {fileID: -6976528506160898385}
   - {fileID: -7253741167167035393}
+  - {fileID: -2253126942499625367}
   - {fileID: -1353497744667027902}
   - {fileID: 4784669930269615240}
   - {fileID: -4941162965635575403}
-  - {fileID: -2253126942499625367}
   - {fileID: -7999771079194855883}
-  - {fileID: 5958421823241070179}
   - {fileID: -4942108518901257410}
-  - {fileID: 4813273242964829670}
   - {fileID: 2102680142223917973}
+  - {fileID: 9105876955938845976}
+  - {fileID: 4813273242964829670}
+  - {fileID: 5958421823241070179}
   m_EntryTransitions: []
   m_StateMachineTransitions:
   - first: {fileID: 1879969676316129448}
@@ -106,7 +106,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: -290, y: 270, z: 0}
   m_ExitPosition: {x: 700, y: 270, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -8469103307204458581}
+  m_DefaultState: {fileID: -4382498827469566013}
 --- !u!1102 &-8059659533141159836
 AnimatorState:
   serializedVersion: 6
@@ -148,7 +148,7 @@ AnimatorStateTransition:
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8469103307204458581}
   m_Solo: 0
-  m_Mute: 0
+  m_Mute: 1
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
@@ -200,7 +200,7 @@ AnimatorStateTransition:
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8469103307204458581}
   m_Solo: 0
-  m_Mute: 0
+  m_Mute: 1
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
@@ -243,11 +243,11 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: velocity
-    m_EventTreshold: 0.01
+    m_EventTreshold: 0.06
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1560877823924629347}
   m_Solo: 0
-  m_Mute: 1
+  m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
@@ -276,7 +276,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: d323e5f3f7c0e9978bd9060a87c75cb4, type: 2}
-    m_Threshold: 0.8
+    m_Threshold: 0.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -285,7 +285,7 @@ BlendTree:
   m_BlendParameter: velocity
   m_BlendParameterY: velocity
   m_MinThreshold: 0
-  m_MaxThreshold: 0.8
+  m_MaxThreshold: 0.5
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -405,7 +405,7 @@ AnimatorStateTransition:
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8469103307204458581}
   m_Solo: 0
-  m_Mute: 0
+  m_Mute: 1
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
@@ -988,7 +988,7 @@ AnimatorStateTransition:
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8469103307204458581}
   m_Solo: 0
-  m_Mute: 0
+  m_Mute: 1
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
@@ -1183,7 +1183,7 @@ AnimatorStateTransition:
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4382498827469566013}
   m_Solo: 0
-  m_Mute: 1
+  m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
@@ -1309,7 +1309,7 @@ AnimatorStateTransition:
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4382498827469566013}
   m_Solo: 0
-  m_Mute: 1
+  m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
@@ -1409,7 +1409,7 @@ AnimatorStateTransition:
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1560877823924629347}
   m_Solo: 0
-  m_Mute: 1
+  m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25

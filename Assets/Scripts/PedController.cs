@@ -101,7 +101,7 @@ public class PedController : MonoBehaviour
             int proc = rnd.Next(0,2);
             if (socialStateIn.Equals("Talking") || socialStateIn.Equals("Listening")){
                 // Debug.Log("Animation State for ped: "+id+" is Blend Tree? "+animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree")); DEBUG
-                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree") || animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree")){
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree") || animator.GetCurrentAnimatorStateInfo(0).IsName("WalkingMale") || animator.GetCurrentAnimatorStateInfo(0).IsName("WalkingFemale")){
                     if (proc == 0)    // 50/50 chance that incoming "Talking" social state is overwritten by a random non-moving animation
                         animationOverwrite = SOCIALSTATES[rnd.Next(0,SOCIALSTATES.Length)];
                     TriggerAnimation(animator, animationOverwrite);
@@ -122,11 +122,18 @@ public class PedController : MonoBehaviour
             case "Walking":
                 animator.SetInteger("socialState", 1);
                 break;
+            case "Running":
+                animator.SetInteger("socialState", 1);
+                break;
             case "Talking":
                 animator.SetInteger("socialState", 2);
-                animator.SetTrigger("startTalking");
+                if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Talking")) // only trigger starting animation if it was not already in the talking animation
+                    animator.SetTrigger("startTalking");
                 break;
             case "Texting":
+                animator.SetInteger("socialState", 3);
+                break;
+            case "Listening":
                 animator.SetInteger("socialState", 3);
                 break; 
             case "Interested":
@@ -136,7 +143,7 @@ public class PedController : MonoBehaviour
                 animator.SetInteger("socialState", 5);
                 break;
             default:
-                //animator.SetInteger("socialState", -1);
+                animator.SetInteger("socialState", -1);
                 break;
         }
     }
