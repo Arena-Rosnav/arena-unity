@@ -106,7 +106,7 @@ public class ServiceController : MonoBehaviour
         }
         else
         {
-            entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            entity = Instantiate(Cube);
             entity.name = request.model_name;
 
             // sort under obstacles parent
