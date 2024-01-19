@@ -25,7 +25,5 @@ public class CommandLineParser : MonoBehaviour
     void Start()
     {
         arena_sim_setup_path = GetValue("arena_sim_setup_path");
-        Debug.LogError(arena_sim_setup_path);
-        Debug.LogError(Environment.GetCommandLineArgs());
     }
 }
