@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1377783
 Transform:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -1778,7 +1778,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -6471,7 +6471,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -6833,7 +6833,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -7176,7 +7176,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -7921,7 +7921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &594250630
 Transform:
   m_ObjectHideFlags: 0
@@ -8121,7 +8121,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -9475,7 +9475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 0b169a69f4f407145aa55021891e64fa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 0b169a69f4f407145aa55021891e64fa, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -9554,7 +9554,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -9944,7 +9944,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -11339,7 +11339,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 100
@@ -16404,7 +16404,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -17254,7 +17254,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -17885,7 +17885,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -18043,7 +18043,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -18256,7 +18256,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -18499,7 +18499,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -19061,7 +19061,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -19622,7 +19622,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -19672,7 +19672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1491292262
 Transform:
   m_ObjectHideFlags: 0
@@ -19917,7 +19917,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -21344,7 +21344,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 100
@@ -24221,7 +24221,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -24624,7 +24624,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -24977,7 +24977,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -28967,7 +28967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1924871439
 Transform:
   m_ObjectHideFlags: 0
@@ -29053,7 +29053,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -31058,8 +31058,8 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 100000
-  m_Range: 10
+  m_Intensity: 81460.82
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
   m_CookieSize: 10
@@ -31097,7 +31097,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 5
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -31106,7 +31106,7 @@ Light:
   m_BoundingSphereOverride: {x: 1.02e-43, y: 0.000000008658667, z: 4.5904e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
+  m_ShadowRadius: 1
   m_ShadowAngle: 0.53
 --- !u!4 &2035111235
 Transform:
@@ -31116,13 +31116,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035111233}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3628267, y: 0.48663908, z: -0.7076103, w: 0.3616999}
-  m_LocalPosition: {x: 0, y: 10.02, z: 0}
+  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: 0, y: 15, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1377783}
-  m_LocalEulerAnglesHint: {x: 72.021, y: 328.463, z: 210.952}
+  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
 --- !u!114 &2035111237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31130,7 +31130,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035111233}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
@@ -31143,7 +31143,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 100000
+  m_Intensity: 5000
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -31159,7 +31159,7 @@ MonoBehaviour:
   m_ShapeWidth: 0.5
   m_ShapeHeight: 0.5
   m_AspectRatio: 1
-  m_ShapeRadius: 0
+  m_ShapeRadius: 1
   m_SoftnessScale: 1
   m_UseCustomSpotLightShadowCone: 0
   m_CustomSpotLightShadowCone: 30
@@ -31588,7 +31588,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
+    GateFit: 1
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -33390,6 +33390,70 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 880644581}
     m_Modifications:
+    - target: {fileID: 332249190519482645, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 332249190519482645, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 332249190519482645, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 332249190519482645, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 332249190519482645, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 332249190519482645, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 332249190519482645, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_Aperture
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_BladeCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: field of view
+      value: 60.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_Anamorphism
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_FocalLength
+      value: 20.784609
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: m_FocusDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058965981980040930, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2486030551507716375, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6
@@ -33429,6 +33493,10 @@ PrefabInstance:
     - target: {fileID: 2486030551507716375, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348174394349974239, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+      propertyPath: MoveSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7878630502850324129, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
       propertyPath: m_Name
@@ -35254,7 +35322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7258386062516984221
 Transform:
   m_ObjectHideFlags: 0
