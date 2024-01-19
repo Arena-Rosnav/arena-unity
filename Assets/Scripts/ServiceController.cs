@@ -29,11 +29,14 @@ public class ServiceController : MonoBehaviour
     GameObject wallsParent;
     GameObject pedsParent;
     public PedController pedController;
+    CommandLineParser commandLineArgs;
+    public GameObject Cube;
 
     void Start()
     {
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
+        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
 
         // register the services with ROS
         ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
@@ -90,14 +93,29 @@ public class ServiceController : MonoBehaviour
     private SpawnModelResponse HandleSpawn(SpawnModelRequest request)
     {
         GameObject entity;
-        
-        // decide between robots and obstacles (dynamic or static)
+
+        // decide between robots and peds and obstacles
         if (request.model_xml.Contains("<robot>") || request.model_xml.Contains("<robot "))
         {
             entity = SpawnRobot(request);
-        } else 
+        }
+        else if (request.model_xml.Contains("<actor>") || request.model_xml.Contains("<actor "))
         {
-            entity = SpawnObstacleOrPed(request);
+            entity = pedController.SpawnPed(request);
+            entity.transform.SetParent(pedsParent.transform);
+        }
+        else
+        {
+            entity = Instantiate(Cube);
+            entity.name = request.model_name;
+
+            // sort under obstacles parent
+            entity.transform.SetParent(obstaclesParent.transform);
+
+            Utils.SetPose(entity, request.initial_pose);
+
+            Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
+            rb.useGravity = true;
         }
 
         // add to active models to delete later
@@ -106,10 +124,14 @@ public class ServiceController : MonoBehaviour
         return new SpawnModelResponse(true, "Received Spawn Request");
     }
 
-    private static RobotConfig LoadRobotModelYaml(string robotName)
+    private RobotConfig LoadRobotModelYaml(string robotName)
     {
-        // Construct the full path from the relative path
-        string yamlPath = Path.Combine(Application.dataPath, "../../arena-simulation-setup/robot", robotName, robotName + ".model.yaml");
+        // Construct the full path robot yaml path
+        // Take command line arg if executable build is running
+        string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
+        // Use relative path if running in Editor
+        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../arena-simulation-setup");
+        string yamlPath = Path.Combine(arenaSimSetupPath, "robot", robotName, robotName + ".model.yaml");
 
         // Check if the file exists
         if (!File.Exists(yamlPath))
@@ -133,11 +155,12 @@ public class ServiceController : MonoBehaviour
     private static Dictionary<string, object> GetPluginDict(RobotConfig config, string pluginTypeName)
     {
         Dictionary<string, object> targetDict = null;
-        
+
         // Find Laser Scan configuration in list of plugins
-        foreach (Dictionary<string, object> dict in config.plugins) {
+        foreach (Dictionary<string, object> dict in config.plugins)
+        {
             // check if type is actually laser scan
-            if (dict.TryGetValue("type", out object value)) 
+            if (dict.TryGetValue("type", out object value))
             {
                 if (value is string strValue && strValue.Equals(pluginTypeName))
                 {
@@ -150,8 +173,9 @@ public class ServiceController : MonoBehaviour
         return targetDict;
     }
 
-    private static GameObject GetLaserLinkJoint(GameObject robot, Dictionary<string, object> laserDict) {
-        
+    private static GameObject GetLaserLinkJoint(GameObject robot, Dictionary<string, object> laserDict)
+    {
+
         // check if laser configuration has fram/joint specified
         if (!laserDict.TryGetValue("frame", out object frameName))
         {
@@ -162,7 +186,7 @@ public class ServiceController : MonoBehaviour
         // get laser scan frame joint game object
         string laserJointName = frameName as string;
         Transform laserScanFrameTf = Utils.FindChildGameObject(robot.transform, laserJointName);
-        if (laserScanFrameTf == null) 
+        if (laserScanFrameTf == null)
         {
             Debug.LogError("Robot has no joint game object as specified in Model Config for laser scan!");
             return null;
@@ -171,17 +195,17 @@ public class ServiceController : MonoBehaviour
         return laserScanFrameTf.gameObject;
     }
 
-    private static void HandleLaserScan(GameObject robot, RobotConfig config) 
+    private static void HandleLaserScan(GameObject robot, RobotConfig config)
     {
-        if (config == null) 
+        if (config == null)
         {
-            Debug.LogError("Given robot config was null!");
+            Debug.LogError("Given robot config was null (probably incorrect config path). Robot will be spawned without scan");
             return;
         }
 
         // get configuration of laser scan from robot configuration
         Dictionary<string, object> laserDict = GetPluginDict(config, "Laser");
-        if (laserDict == null) 
+        if (laserDict == null)
         {
             Debug.LogError("Robot Model Configuration has no Laser plugin. Robot will be spawned without scan");
             return;
@@ -201,6 +225,7 @@ public class ServiceController : MonoBehaviour
         laserScan.frameId = robot.name + "/" + laserLinkJoint.name;
 
         // TODO: this is missing the necessary configuration of all parameters according to the laser scan config
+        laserScan.ConfigureScan(laserDict);
     }
 
     private GameObject SpawnRobot(SpawnModelRequest request)
@@ -209,9 +234,9 @@ public class ServiceController : MonoBehaviour
         GameObject entity = Utils.CreateGameObjectFromUrdfFile(
             request.model_xml,
             request.model_name,
-            disableJoints:true,
-            disableScripts:true,
-            parent:null
+            disableJoints: true,
+            disableScripts: true,
+            parent: null
         );
 
         // get base link which is the second child after Plugins
@@ -241,37 +266,6 @@ public class ServiceController : MonoBehaviour
         return entity;
     }
 
-    private GameObject SpawnObstacleOrPed(SpawnModelRequest request) 
-    {
-        GameObject entity;
-
-        // check if model name is an ID
-        if (int.TryParse(request.model_name, out _))
-        {
-            // model is a ped
-            // TODO: create a more elegant way to examine the type of model
-            entity = pedController.SpawnPed(request);
-
-            // sort under peds parent
-            entity.transform.SetParent(pedsParent.transform);
-        } else 
-        {
-            entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            entity.name = request.model_name;
-
-            // sort under obstacles parent
-            entity.transform.SetParent(obstaclesParent.transform);
-
-            Utils.SetPose(entity, request.initial_pose);
-
-            Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-            rb.useGravity = true;
-
-        }
-        
-        return entity;
-    }
-
     private void HandleGoal(PoseStampedMsg msg)
     {
         Debug.Log(msg.ToString());
@@ -284,7 +278,6 @@ public class ServiceController : MonoBehaviour
 
         // remove previous walls
         GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
-
         foreach (GameObject obj in allObjects)
         {
             if (obj.tag == WALL_TAG)
@@ -304,14 +297,14 @@ public class ServiceController : MonoBehaviour
             Vector3 corner_end = wall.end.From<FLU>();
 
             // Standard Cube
-            GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject entity = Instantiate(Cube);
             entity.name = "__WALL" + counter;
             entity.tag = WALL_TAG;
 
             entity.transform.position = corner_start;
             entity.transform.localScale = corner_end - corner_start;
-            AdjustPivot(entity.transform);  
-            
+            AdjustPivot(entity.transform);
+
             // organize game object in walls parent game object
             entity.transform.SetParent(wallsParent.transform);
         }

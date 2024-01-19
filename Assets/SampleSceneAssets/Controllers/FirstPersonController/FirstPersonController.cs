@@ -31,8 +31,6 @@ namespace StarterAssets
 		// player
 		private float _speed;
 		private Vector3 _rotationVelocity;
-		private float _verticalVelocity;
-		private float _terminalVelocity = 53.0f;
 	
 		private PlayerInput _playerInput;
 		private CharacterController _controller;
