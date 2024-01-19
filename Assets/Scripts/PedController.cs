@@ -14,6 +14,7 @@ public class PedController : MonoBehaviour
 
     Dictionary<string, GameObject> peds;
     string pedFeedbackTopic = "/pedsim_simulator/simulated_agents";
+    public GameObject Cube;
 
     // Array for the different ped types; specific ped types are added in the PedController Object in the Unity Editor
     public GameObject[] PedTypes;
@@ -27,12 +28,6 @@ public class PedController : MonoBehaviour
         socialStates = new string[] {"Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking"};
 
         ROSConnection.GetOrCreateInstance().Subscribe<AgentStatesMsg>(pedFeedbackTopic, AgentCallback);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public GameObject SpawnPed(SpawnModelRequest request)

@@ -29,11 +29,14 @@ public class ServiceController : MonoBehaviour
     GameObject wallsParent;
     GameObject pedsParent;
     public PedController pedController;
+    CommandLineParser commandLineArgs;
+    public GameObject Cube;
 
     void Start()
     {           
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
+        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
 
         // register the services with ROS
         ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
@@ -121,10 +124,14 @@ public class ServiceController : MonoBehaviour
         return new SpawnModelResponse(true, "Received Spawn Request");
     }
 
-    private static RobotConfig LoadRobotModelYaml(string robotName)
+    private RobotConfig LoadRobotModelYaml(string robotName)
     {
-        // Construct the full path from the relative path
-        string yamlPath = Path.Combine(Application.dataPath, "../../arena-simulation-setup/robot", robotName, robotName + ".model.yaml");
+        // Construct the full path robot yaml path
+        // Take command line arg if executable build is running
+        string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
+        // Use relative path if running in Editor
+        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../arena-simulation-setup");
+        string yamlPath = Path.Combine(arenaSimSetupPath, "robot", robotName, robotName + ".model.yaml");
 
         // Check if the file exists
         if (!File.Exists(yamlPath))
@@ -192,7 +199,7 @@ public class ServiceController : MonoBehaviour
     {
         if (config == null)
         {
-            Debug.LogError("Given robot config was null!");
+            Debug.LogError("Given robot config was null (probably incorrect config path). Robot will be spawned without scan");
             return;
         }
 
@@ -271,7 +278,6 @@ public class ServiceController : MonoBehaviour
 
         // remove previous walls
         GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
-
         foreach (GameObject obj in allObjects)
         {
             if (obj.tag == WALL_TAG)
@@ -291,7 +297,7 @@ public class ServiceController : MonoBehaviour
             Vector3 corner_end = wall.end.From<FLU>();
 
             // Standard Cube
-            GameObject entity = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject entity = Instantiate(Cube);
             entity.name = "__WALL" + counter;
             entity.tag = WALL_TAG;
 
