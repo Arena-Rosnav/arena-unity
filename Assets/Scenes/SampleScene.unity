@@ -16175,6 +16175,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cube: {fileID: 1046918776658512126, guid: bb897bc912ddeef668b7fd3c1b6ceaf0, type: 3}
+  PedTypes:
+  - {fileID: 8711086276371097474, guid: 8a8aff87160e6474b8d6bd069e560c9f, type: 3}
+  - {fileID: 8558710051824975226, guid: 4961b9e07f40228719f68168de61bde0, type: 3}
 --- !u!1 &1189696389
 GameObject:
   m_ObjectHideFlags: 0
