@@ -184,7 +184,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AORemapMax: 1
-    - _AORemapMin: 0.65789473
+    - _AORemapMin: 0.65789455
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
@@ -274,8 +274,8 @@ Material:
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
     - _Smoothness: 0.2
-    - _SmoothnessRemapMax: 0.21929824
-    - _SmoothnessRemapMin: 0.12280702
+    - _SmoothnessRemapMax: 0.315673
+    - _SmoothnessRemapMin: 0.21918172
     - _SmoothnessTextureChannel: 0
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2

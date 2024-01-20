@@ -211,13 +211,13 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.139
     - _GlossyReflections: 1
-    - _HeightAmplitude: 0.0004
+    - _HeightAmplitude: 0.005
     - _HeightCenter: 1
     - _HeightMapParametrization: 0
     - _HeightMax: 1
     - _HeightMin: -1
     - _HeightOffset: 0
-    - _HeightPoMAmplitude: 0.04
+    - _HeightPoMAmplitude: 0.5
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
     - _InvTilingScale: 1
@@ -226,7 +226,7 @@ Material:
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 0
     - _MaterialID: 1
-    - _Metallic: 0.07766
+    - _Metallic: 0.7
     - _MetallicRemapMax: 0.07766
     - _MetallicRemapMin: 0
     - _Mode: 0
@@ -246,7 +246,7 @@ Material:
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
-    - _Smoothness: 0.139
+    - _Smoothness: 0.611
     - _SmoothnessRemapMax: 0.139
     - _SmoothnessRemapMin: 0
     - _SmoothnessTextureChannel: 0

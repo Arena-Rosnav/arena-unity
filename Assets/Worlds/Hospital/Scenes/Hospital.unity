@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1257.3458, g: 1499.7034, b: 1987.1565, a: 1}
+  m_IndirectSpecularColor: {r: 1257.3243, g: 1499.6917, b: 1987.141, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: a78ba79a9777b06488ad50015c8d9c8f, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 0b356abd487edef4fb241bd1e19f9783, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 34dc2fc79d7ffad348b499f33b7a8d61, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -1050,7 +1050,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: e03f35493f2d3334eaee0b7a1faed192, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 448f99d213d76de9caf0cc95f1002b5e, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -1462,7 +1462,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: ceb66b890d1bd074a8d5eda3d986d6e6, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: c146fa418856c3bc8a6b4c0ed2ee5cb1, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -1651,7 +1651,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2045,7 +2045,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 4fde486d8e3df8e4d87de78225d95983, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: a1ee1a0f02480da25a09ae1035122981, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -2457,7 +2457,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 25f4a47ebf5527e45b88405e0ed598d9, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: b516b37f599b27d7e8831533bad1dfaa, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -2602,7 +2602,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2729,7 +2729,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2856,7 +2856,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2983,7 +2983,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -3110,7 +3110,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -3237,7 +3237,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -3339,6 +3339,111 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
+--- !u!1 &453763944
+GameObject:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 453763946}
+  - component: {fileID: 453763945}
+  m_Layer: 0
+  m_Name: SceneIDMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &453763945
+MonoBehaviour:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453763944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 964521841}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Entries:
+  - id: 0
+    category: 0
+    gameObject: {fileID: 1904766659}
+  - id: 1
+    category: 0
+    gameObject: {fileID: 212868358}
+  - id: 2
+    category: 0
+    gameObject: {fileID: 565302249}
+  - id: 3
+    category: 0
+    gameObject: {fileID: 840445642}
+  - id: 4
+    category: 0
+    gameObject: {fileID: 1908050146}
+  - id: 5
+    category: 0
+    gameObject: {fileID: 356026594}
+  - id: 6
+    category: 0
+    gameObject: {fileID: 232801483}
+  - id: 7
+    category: 0
+    gameObject: {fileID: 1641466798}
+  - id: 8
+    category: 0
+    gameObject: {fileID: 1542208645}
+  - id: 9
+    category: 0
+    gameObject: {fileID: 1172488051}
+  - id: 10
+    category: 0
+    gameObject: {fileID: 1640961768}
+  - id: 11
+    category: 0
+    gameObject: {fileID: 1402624360}
+  - id: 12
+    category: 0
+    gameObject: {fileID: 1751731568}
+  - id: 13
+    category: 0
+    gameObject: {fileID: 1241539830}
+  - id: 14
+    category: 0
+    gameObject: {fileID: 1028780638}
+  - id: 15
+    category: 0
+    gameObject: {fileID: 348936848}
+  - id: 16
+    category: 0
+    gameObject: {fileID: 1846104079}
+  - id: 17
+    category: 0
+    gameObject: {fileID: 674772150}
+  - id: 18
+    category: 0
+    gameObject: {fileID: 941650976}
+  - id: 19
+    category: 0
+    gameObject: {fileID: 1313783715}
+--- !u!4 &453763946
+Transform:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453763944}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455935683 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7895590934536155974, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
@@ -3364,7 +3469,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -3491,7 +3596,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -3978,7 +4083,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 4f4ca23982095244ab59221d08dccac7, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: dcf0ffd37bc6eaddc9c94d24d2c12629, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -4123,7 +4228,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -4250,7 +4355,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -4377,7 +4482,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -4504,7 +4609,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 1000
+  m_Intensity: 10000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -4631,7 +4736,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -4743,7 +4848,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 136606672694533217, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 136606672694533217, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4763,7 +4868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 502206004441109879, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 502206004441109879, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4783,7 +4888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 502206004993216577, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 502206004993216577, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4803,7 +4908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 502206005218851573, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 502206005218851573, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4823,7 +4928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1048950633736032442, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 1048950633736032442, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4843,7 +4948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1364137006301889691, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 1364137006301889691, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4863,7 +4968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638464948604796628, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 1638464948604796628, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4883,7 +4988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638464948854100310, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 1638464948854100310, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4903,7 +5008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638464949165751266, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 1638464949165751266, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4923,7 +5028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2468649481724119301, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 2468649481724119301, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4943,7 +5048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3802602659930827458, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 3802602659930827458, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4963,7 +5068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3901449258994104446, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 3901449258994104446, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -4983,7 +5088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3926952360608804169, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 3926952360608804169, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5003,7 +5108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3975330909525803127, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 3975330909525803127, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5023,7 +5128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4006847227882464748, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 4006847227882464748, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5043,7 +5148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4340985305797616881, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 4340985305797616881, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5063,7 +5168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525721910782375990, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 4525721910782375990, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5083,7 +5188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4826612398216015628, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 4826612398216015628, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5103,7 +5208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5589070937951527895, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 5589070937951527895, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5123,7 +5228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5744228872426521300, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 5744228872426521300, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5199,7 +5304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6533182220818753207, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 6533182220818753207, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5219,7 +5324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6535229093131001825, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 6535229093131001825, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5239,7 +5344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603697166771543742, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 6603697166771543742, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5259,7 +5364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714923405231472041, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 6714923405231472041, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5279,7 +5384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6800347379945323698, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 6800347379945323698, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5299,7 +5404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6868027784917238971, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 6868027784917238971, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5319,7 +5424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8162028539390711355, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8162028539390711355, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5339,7 +5444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8605507225823781254, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8605507225823781254, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5363,7 +5468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8923343443721486320, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8923343443721486320, guid: 192be0e132fd3d744a6a98d11b16a33a, type: 3}
       propertyPath: m_AreaSize.x
@@ -5795,7 +5900,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: a4af37b6ca3b6ec499723027d6f61175, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: d66747b1e9d3cb2ce852daac490a2b21, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -5940,7 +6045,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -6067,7 +6172,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -6194,7 +6299,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -6386,6 +6491,111 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2486030551507716375, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
   m_PrefabInstance: {fileID: 751531197}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &774327319
+GameObject:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 774327321}
+  - component: {fileID: 774327320}
+  m_Layer: 0
+  m_Name: SceneIDMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &774327320
+MonoBehaviour:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774327319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2090922949}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Entries:
+  - id: 0
+    category: 0
+    gameObject: {fileID: 212868358}
+  - id: 1
+    category: 0
+    gameObject: {fileID: 232801483}
+  - id: 2
+    category: 0
+    gameObject: {fileID: 348936848}
+  - id: 3
+    category: 0
+    gameObject: {fileID: 356026594}
+  - id: 4
+    category: 0
+    gameObject: {fileID: 565302249}
+  - id: 5
+    category: 0
+    gameObject: {fileID: 674772150}
+  - id: 6
+    category: 0
+    gameObject: {fileID: 840445642}
+  - id: 7
+    category: 0
+    gameObject: {fileID: 941650976}
+  - id: 8
+    category: 0
+    gameObject: {fileID: 1028780638}
+  - id: 9
+    category: 0
+    gameObject: {fileID: 1172488051}
+  - id: 10
+    category: 0
+    gameObject: {fileID: 1241539830}
+  - id: 11
+    category: 0
+    gameObject: {fileID: 1313783715}
+  - id: 12
+    category: 0
+    gameObject: {fileID: 1402624360}
+  - id: 13
+    category: 0
+    gameObject: {fileID: 1542208645}
+  - id: 14
+    category: 0
+    gameObject: {fileID: 1640961768}
+  - id: 15
+    category: 0
+    gameObject: {fileID: 1641466798}
+  - id: 16
+    category: 0
+    gameObject: {fileID: 1751731568}
+  - id: 17
+    category: 0
+    gameObject: {fileID: 1846104079}
+  - id: 18
+    category: 0
+    gameObject: {fileID: 1904766659}
+  - id: 19
+    category: 0
+    gameObject: {fileID: 1908050146}
+--- !u!4 &774327321
+Transform:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774327319}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &778692475
 GameObject:
   m_ObjectHideFlags: 0
@@ -6461,7 +6671,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -6588,7 +6798,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -6982,7 +7192,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 4cb73c32c44747f468032f8ae57e30c7, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 6e9949df582bbdb14bed889a8cca2f69, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -7127,7 +7337,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -7254,7 +7464,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -7381,7 +7591,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -7508,7 +7718,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -7680,7 +7890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139518280230, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139518280230, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7704,7 +7914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139562952385, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139562952385, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7728,7 +7938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139651711042, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139651711042, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7752,7 +7962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139695852102, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139695852102, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7776,7 +7986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139755481444, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537139755481444, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7800,7 +8010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140046795919, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140046795919, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7824,7 +8034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140093159558, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140093159558, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7848,7 +8058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140135727645, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140135727645, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7872,7 +8082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140269891627, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140269891627, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7896,7 +8106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140299084542, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140299084542, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7920,7 +8130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140442797408, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140442797408, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7944,7 +8154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140676744758, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140676744758, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7968,7 +8178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140688410781, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140688410781, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -7992,7 +8202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140699906386, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140699906386, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -8016,7 +8226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140837455276, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537140837455276, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -8040,7 +8250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537141198076892, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537141198076892, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -8064,7 +8274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537141202638435, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537141202638435, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -8088,7 +8298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750537141402137971, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_Intensity
-      value: 104.61037
+      value: 139.48048
       objectReference: {fileID: 0}
     - target: {fileID: 8750537141402137971, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
       propertyPath: m_AreaSize.x
@@ -8208,7 +8418,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -8602,7 +8812,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: b84967785b2473e4bb7a035df0be7572, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 7217e7c6834732217a4c6c9c80b46881, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -8722,6 +8932,21 @@ MonoBehaviour:
   m_ObsoleteBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
   m_ObsoleteBoxSideFadePositive: {x: 1, y: 1, z: 1}
   m_ObsoleteBoxSideFadeNegative: {x: 1, y: 1, z: 1}
+--- !u!115 &964521841
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: SceneObjectIDMapSceneAsset
+  m_Namespace: UnityEngine.Rendering.HighDefinition
+  m_AssemblyName: Unity.RenderPipelines.HighDefinition.Runtime
 --- !u!1 &1001245331 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7895590934036643665, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
@@ -8747,7 +8972,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -8918,7 +9143,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -9312,7 +9537,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 54904b271985bda4f85179a5ef95082f, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: a7204a7e63afc73378393905bcdcd1b6, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -9457,7 +9682,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -9584,7 +9809,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -9711,7 +9936,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -10105,7 +10330,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 0ca1932fc84e12149ab31cef66cc0d90, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 0413df8c73bed26c7bfbd579e2ba2d99, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -10250,7 +10475,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -10644,7 +10869,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: fcfbf7808240f66438348415f30a1825, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 984b60b5cea145f20a4a6f9fa62ce864, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -10789,7 +11014,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -10916,7 +11141,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -11043,7 +11268,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -11187,7 +11412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485227802074923, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 1000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 7902485227802074923, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -11275,7 +11500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485228164137320, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 712.7691
+      value: 950.3588
       objectReference: {fileID: 0}
     - target: {fileID: 7902485228164137320, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -11311,7 +11536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485228182382359, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 712.7691
+      value: 950.3588
       objectReference: {fileID: 0}
     - target: {fileID: 7902485228182382359, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -11371,7 +11596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485228474676096, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 712.7691
+      value: 950.3588
       objectReference: {fileID: 0}
     - target: {fileID: 7902485228474676096, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -11411,7 +11636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485228515644230, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 1000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 7902485228515644230, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -11547,7 +11772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485229075868028, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 712.7691
+      value: 950.3588
       objectReference: {fileID: 0}
     - target: {fileID: 7902485229075868028, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -11611,7 +11836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485229285658392, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 712.7691
+      value: 950.3588
       objectReference: {fileID: 0}
     - target: {fileID: 7902485229285658392, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -11635,7 +11860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485229495295459, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 712.7691
+      value: 950.3588
       objectReference: {fileID: 0}
     - target: {fileID: 7902485229495295459, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -11671,7 +11896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902485229529409677, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_Intensity
-      value: 1000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 7902485229529409677, guid: dee446b3d65625f4681ec8e9dad38d2d, type: 3}
       propertyPath: m_AreaSize.x
@@ -12174,7 +12399,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: a057e7f5862172940a27416ab244f5e0, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: db7122ba63f076b069fc554a74c86c78, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -12354,7 +12579,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12481,7 +12706,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12608,7 +12833,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12783,7 +13008,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12910,7 +13135,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 1000
+  m_Intensity: 10000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -13304,7 +13529,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: b9b50ba44b0a105419528d4e6909f95b, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 621a55c7abbfa6cceb318e830a99c95e, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -13449,7 +13674,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -13576,7 +13801,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -14017,7 +14242,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: e48f89919505e214e8e42244984dcaef, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 2bacd6ddde2eb58078c0ed37b870567c, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -14162,7 +14387,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -14289,7 +14514,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -14416,7 +14641,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -14543,7 +14768,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -14937,7 +15162,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: f30e429d98c331b40a661e4bfc9dd658, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: c9d9ae8f6ddec17228b33b7633bf1411, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -15349,7 +15574,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: f1db2938d453cc94188323f2262e7b17, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 18ef766f45fe72446b864d7a56eae917, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -15494,7 +15719,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -15888,7 +16113,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 7710a034daf93f649be1ac35316a0e0c, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 2d5aa886e1a6369268eee8c765c822ea, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -16315,7 +16540,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 4930287377f8ccd43ae290e7a2a75e48, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: fdc7a149e78bc80cebf42573e5e0e80c, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -16460,7 +16685,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -16854,7 +17079,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: c7a0f2e9382ac9c4aa11b5f88c8db154, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 54904b271985bda4f85179a5ef95082f, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -17266,7 +17491,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: c312339e44f1f474b85a1fe7040542fe, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 69ee1a8aa77c81d6cab4b57c76ec015d, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -17411,7 +17636,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 1000
+  m_Intensity: 10000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -17538,7 +17763,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -17665,7 +17890,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -17792,7 +18017,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -17894,6 +18119,21 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
+--- !u!115 &2090922949
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: SceneObjectIDMapSceneAsset
+  m_Namespace: UnityEngine.Rendering.HighDefinition
+  m_AssemblyName: Unity.RenderPipelines.HighDefinition.Runtime
 --- !u!1 &2104772391 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7895590934982221480, guid: 8b02774a9316b6b4785c62e1c446c682, type: 3}
@@ -17919,7 +18159,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 800
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -18032,3 +18272,5 @@ SceneRoots:
   - {fileID: 1005049309}
   - {fileID: 1369945324}
   - {fileID: 1322652156}
+  - {fileID: 774327321}
+  - {fileID: 453763946}

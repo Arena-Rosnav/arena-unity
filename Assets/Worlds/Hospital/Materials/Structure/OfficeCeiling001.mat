@@ -201,7 +201,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AORemapMax: 1
-    - _AORemapMin: 0.9410631
+    - _AORemapMin: 0.94106317
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
@@ -269,8 +269,8 @@ Material:
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _Metallic: 0
-    - _MetallicRemapMax: 0
-    - _MetallicRemapMin: 0.8639794
+    - _MetallicRemapMax: 1
+    - _MetallicRemapMin: 1
     - _NormalMapSpace: 0
     - _NormalScale: 1
     - _ObjectSpaceUVMapping: 0
@@ -290,8 +290,8 @@ Material:
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
     - _Smoothness: 0.1
-    - _SmoothnessRemapMax: 0.07344636
-    - _SmoothnessRemapMin: 0
+    - _SmoothnessRemapMax: 0.99999994
+    - _SmoothnessRemapMin: 0.99999994
     - _SmoothnessTextureChannel: 1
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
