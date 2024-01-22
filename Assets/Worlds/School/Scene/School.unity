@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1293.886, g: 1534.4143, b: 2023.5706, a: 1}
+  m_IndirectSpecularColor: {r: 1660.0598, g: 1883.4008, b: 2389.141, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -803,7 +803,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -3235,7 +3235,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -3757,7 +3757,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -3879,7 +3879,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -4447,7 +4447,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -5185,7 +5185,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -6535,7 +6535,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -7323,7 +7323,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -7608,7 +7608,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 10000
+  m_Intensity: 34661.02
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -10210,7 +10210,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -10840,7 +10840,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -11362,7 +11362,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12062,7 +12062,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12704,7 +12704,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12826,7 +12826,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -13254,7 +13254,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -13496,7 +13496,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -15993,7 +15993,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -17278,7 +17278,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 10000
+  m_Intensity: 66309.31
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -18016,7 +18016,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -18604,7 +18604,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -19114,7 +19114,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -19430,7 +19430,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -19936,7 +19936,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -21155,7 +21155,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -24544,6 +24544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a02c29a1d8a09fd0969c46abe455fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cube: {fileID: 0}
 --- !u!1001 &1301024193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26493,6 +26494,7 @@ MonoBehaviour:
   MoveServiceName: unity/set_model_state
   GoalServiceName: unity/set_goal
   pedController: {fileID: 1299682201}
+  Cube: {fileID: 0}
 --- !u!1001 &1397219635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26699,7 +26701,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -27965,7 +27967,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -28087,7 +28089,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -28209,7 +28211,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -28331,7 +28333,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -28453,7 +28455,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -30486,7 +30488,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -30782,7 +30784,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -31152,7 +31154,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -31824,7 +31826,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -32340,7 +32342,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -32462,7 +32464,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -32646,7 +32648,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -33215,7 +33217,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -34061,7 +34063,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -34183,7 +34185,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -35199,7 +35201,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 10000
+  m_Intensity: 68684.49
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -35689,7 +35691,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -37682,7 +37684,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -37804,7 +37806,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -39583,7 +39585,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -40213,7 +40215,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -41491,7 +41493,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 800
+  m_Intensity: 1600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -42221,8 +42223,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -42539,8 +42541,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -42884,8 +42886,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -43109,8 +43111,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -43179,8 +43181,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -43341,8 +43343,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -43476,8 +43478,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -43972,8 +43974,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -46345,8 +46347,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -46845,8 +46847,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -47300,8 +47302,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -48093,8 +48095,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -48335,8 +48337,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -48800,8 +48802,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -48928,8 +48930,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -49170,8 +49172,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -49367,8 +49369,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -49616,8 +49618,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -49901,8 +49903,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -50368,8 +50370,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -50448,8 +50450,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -50783,8 +50785,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -51172,8 +51174,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -51408,8 +51410,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -51823,8 +51825,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -52436,8 +52438,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -53218,8 +53220,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -53386,8 +53388,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -53481,8 +53483,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -53960,8 +53962,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -54288,13 +54290,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7144414167385019266}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32869294, y: 0.009872747, z: 0.6260678, w: 0.70703787}
-  m_LocalPosition: {x: 10.06, y: 7.19, z: -44.46}
+  m_LocalRotation: {x: -0.41162312, y: 0.08739945, z: -0.5749491, w: -0.70168465}
+  m_LocalPosition: {x: 9.04, y: 11.32, z: -46.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7144414168349023546}
-  m_LocalEulerAnglesHint: {x: 153.1, y: -151.5, z: -90}
+  m_LocalEulerAnglesHint: {x: -222.7, y: -151.5, z: -90}
 --- !u!108 &7144414167385019265
 Light:
   m_ObjectHideFlags: 0
@@ -54307,7 +54309,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.98039216, b: 0.8235294, a: 1}
-  m_Intensity: 10000
+  m_Intensity: 68684.49
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -54387,7 +54389,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.984, b: 0.95, a: 1}
-  m_Intensity: 10000
+  m_Intensity: 34661.02
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -54445,13 +54447,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7144414167579549678}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.35952666, y: -0.6817905, z: -0.107004546, w: -0.6280544}
+  m_LocalRotation: {x: -0.36047587, y: -0.6812113, z: -0.10569473, w: -0.62836057}
   m_LocalPosition: {x: 8.164, y: 0, z: -15.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7144414168349023546}
-  m_LocalEulerAnglesHint: {x: -197.8, y: -78.6, z: -139}
+  m_LocalEulerAnglesHint: {x: -198, y: -78.6, z: -139}
 --- !u!1 &7144414167579549678
 GameObject:
   m_ObjectHideFlags: 0
@@ -54621,7 +54623,7 @@ Transform:
   m_GameObject: {fileID: 7144414167977083780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.39, y: 1.02, z: -21.04}
+  m_LocalPosition: {x: 8.39, y: 1.22, z: -21.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54657,7 +54659,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10000
+  m_Intensity: 66309.31
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -54715,13 +54717,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7144414168268793932}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.755713, y: 0.53582513, z: -0.37132254, w: 0.06252084}
+  m_LocalRotation: {x: 0.8175787, y: 0.49262205, z: -0.26722705, w: -0.13220592}
   m_LocalPosition: {x: 8.164, y: 3, z: -16.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7144414168349023546}
-  m_LocalEulerAnglesHint: {x: 29.5, y: 214.6, z: 118.7}
+  m_LocalEulerAnglesHint: {x: 2.7, y: 214.6, z: 118.7}
 --- !u!1 &7144414168268793932
 GameObject:
   m_ObjectHideFlags: 0
@@ -54841,8 +54843,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -54987,8 +54989,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -55258,8 +55260,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -55368,8 +55370,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -55662,8 +55664,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -55838,8 +55840,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -56240,8 +56242,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -56302,8 +56304,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -56426,8 +56428,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -56632,8 +56634,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -56883,8 +56885,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -56996,8 +56998,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -57605,8 +57607,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -57866,8 +57868,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10
@@ -58302,8 +58304,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 139.48048
-  m_Range: 10
+  m_Intensity: 278.96097
+  m_Range: 5
   m_SpotAngle: 170
   m_InnerSpotAngle: 120
   m_CookieSize: 10

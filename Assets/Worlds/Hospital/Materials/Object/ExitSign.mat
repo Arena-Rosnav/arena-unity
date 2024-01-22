@@ -301,7 +301,7 @@ Material:
     - _LightmapUV: 0
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _Metallic: 0
+    - _Metallic: 0.448
     - _MetallicRemapMax: 0
     - _MetallicRemapMin: 0
     - _Mode: 0

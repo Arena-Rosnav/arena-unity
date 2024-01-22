@@ -268,8 +268,8 @@ MonoBehaviour:
       reflectionCubemapSize: 256
       maxEnvLightsOnScreen: 32
       reflectionCacheCompressed: 1
-      reflectionProbeFormat: 74
-      reflectionProbeTexCacheSize: 8192
+      reflectionProbeFormat: 48
+      reflectionProbeTexCacheSize: 16384
       reflectionProbeTexLastValidCubeMip: 6
       reflectionProbeTexLastValidPlanarMip: 6
       reflectionProbeDecreaseResToFit: 1
