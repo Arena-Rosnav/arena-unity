@@ -642,7 +642,7 @@ Material:
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
     - _Smoothness3: 0.5
-    - _SmoothnessMax: 0.5
+    - _SmoothnessMax: 0.4
     - _SmoothnessMin: 0.3
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMax0: 1

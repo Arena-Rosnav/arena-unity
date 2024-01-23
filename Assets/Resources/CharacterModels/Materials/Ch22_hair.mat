@@ -253,7 +253,7 @@ Material:
     - _SecondarySpecular: 1
     - _SecondarySpecularShift: 0.9
     - _Smoothness: 0.8822301
-    - _SmoothnessMax: 0.5
+    - _SmoothnessMax: 0.4
     - _SmoothnessMin: 0.3
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0

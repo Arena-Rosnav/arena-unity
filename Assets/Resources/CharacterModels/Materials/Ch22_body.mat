@@ -727,7 +727,7 @@ Material:
     - _RenderQueueType: 1
     - _RequireSplitLighting: 1
     - _Shininess: 0.078125
-    - _Smoothness: 0.4472136
+    - _Smoothness: 0.3
     - _Smoothness0: 0.5
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
