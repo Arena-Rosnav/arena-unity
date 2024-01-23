@@ -85,7 +85,15 @@ public class ServiceController : MonoBehaviour
         PoseMsg pose = request.pose;
         GameObject objectToMove = activeModels[entityName];
 
-        Utils.SetPose(objectToMove, pose);
+        if (objectToMove.transform.parent != null && objectToMove.transform.parent.name == "Obstacles") 
+        {
+            // It's a cube
+            Utils.SetCubePose(objectToMove, pose);
+        } 
+        else 
+        {
+            Utils.SetPose(objectToMove, pose);
+        }
 
         return new SetModelStateResponse(true, "Model moved");
     }
@@ -112,7 +120,7 @@ public class ServiceController : MonoBehaviour
             // sort under obstacles parent
             entity.transform.SetParent(obstaclesParent.transform);
 
-            Utils.SetPose(entity, request.initial_pose);
+            Utils.SetCubePose(entity, request.initial_pose);
 
             Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
             rb.useGravity = true;
