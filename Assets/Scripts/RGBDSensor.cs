@@ -28,7 +28,6 @@ public class DepthCamera : MonoBehaviour
     private RenderTexture colorTexture;
     public int Width = 1280;
     public int Height = 720;
-    public bool saveFrames;
 
     public bool UseDepthCamera = true;
     public bool UseColorCamera = true;
@@ -85,11 +84,14 @@ public class DepthCamera : MonoBehaviour
         colorCamera.targetTexture = colorTexture;
 
         imagePublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>("/rgbd/image", 2);
+
+        HDAdditionalCameraData hdData = colorCameraObject.AddComponent<HDAdditionalCameraData>();
+        hdData.enabled = true;
+        hdData.flipYMode = HDAdditionalCameraData.FlipYMode.ForceFlipY;
     }
 
     void SetUpDepthCamera()
     {
-
         //initialize depth camera
         GameObject depthCameraObject = new GameObject("DepthCamera");
         depthCameraObject.transform.parent = transform;
@@ -97,6 +99,7 @@ public class DepthCamera : MonoBehaviour
         depthCameraObject.transform.localRotation = Quaternion.identity;
         depthCamera = depthCameraObject.AddComponent<Camera>();
         depthCamera.depthTextureMode = DepthTextureMode.Depth;
+        depthCamera.depth = -1;
         depthCamera.nearClipPlane = 0.05f;
         if (DepthFormat == DepthOutputFormat.UINT16)
         {
@@ -118,10 +121,9 @@ public class DepthCamera : MonoBehaviour
         DepthShader = Shader.Find(shaderName);
 
         Material depthMaterial = CoreUtils.CreateEngineMaterial(DepthShader);
-        DrawRenderersCustomPass renderPass = CustomPass.CreateDrawRenderersPass(CustomPass.RenderQueueType.All, LayerMask.GetMask("Default"), depthMaterial);
-        renderPass.overrideShader = DepthShader;
-        renderPass.overrideMode = OverrideMaterialMode.Shader;
-        renderPass.overrideShaderPassName = "DepthOnly";
+
+
+        FullScreenCustomPass renderPass = CustomPass.CreateFullScreenPass(depthMaterial);
         customPassVolume.customPasses.Add(renderPass);
         customPassVolume.enabled = true;
 
@@ -255,17 +257,6 @@ public class DepthCamera : MonoBehaviour
         lastTime = time;
         shouldCaptureDepth = true;
         shouldCaptureColor = true;
-        // var request = new RenderPipeline.StandardRequest();
-
-        // if (UseDepthCamera)
-        // {
-        //     depthCamera.SubmitRenderRequest<RenderPipeline.StandardRequest>(request);
-        // }
-
-        // if (UseColorCamera)
-        // {
-        //     colorCamera.SubmitRenderRequest<RenderPipeline.StandardRequest>(request);
-        // }
     }
 
     private void CaptureColorAsync()
@@ -282,7 +273,6 @@ public class DepthCamera : MonoBehaviour
         else
         {
             AsyncGPUReadback.Request(depthTexture, 0, TextureFormat.RGBAFloat, OnCompleteReadbackDepth);
-            // AsyncGPUReadback.RequestIntoNativeArray<Color>(ref pixelArray, depthTexture, 0, OnCompleteReadbackDepth);
         }
     }
 
@@ -316,8 +306,6 @@ public class DepthCamera : MonoBehaviour
             Task.Run(() =>
             {
                 PublishDepthFrame(pixels);
-                if (saveFrames)
-                    SaveDepth(pixels);
             });
 
         }
@@ -328,8 +316,6 @@ public class DepthCamera : MonoBehaviour
             Task.Run(() =>
             {
                 PublishDepthFrame(pixels, time);
-                if (saveFrames)
-                    SaveDepth(pixels);
             });
         }
         else
@@ -375,50 +361,5 @@ public class DepthCamera : MonoBehaviour
         RosMessageTypes.Std.HeaderMsg header = new RosMessageTypes.Std.HeaderMsg(seq, new TimeStamp(time), frameId);
         RosMessageTypes.Sensor.ImageMsg msg = new(header, (uint)Height, (uint)Width, "32FC1", (byte)(BitConverter.IsLittleEndian ? 0 : 1), (uint)Width * 4, bytePixelBuffer);
         depthPublisher.Publish(msg);
-    }
-
-
-    //for debugging and measurement purposes
-    private void SaveDepth(Color32[] pic)
-    {
-        ushort[] bytes = new UInt16[pic.Length];
-        Parallel.For(0, Height, (y) =>
-        {
-            for (int x = 0; x < Width; x++)
-            {
-                int i = y * Width + x;
-                int reverseY = Height - y - 1;
-                int reverseI = reverseY * Width + x;
-                bytes[i] = (ushort)(pic[reverseI].r << 8);
-                bytes[i] += pic[reverseI].g;
-            }
-        });
-
-        // PortableAnyMap pnm = new(MagicNumber.P5, Width, Height, 65535);
-        // pnm.WideBuffer = bytes;
-        // pnm.ToFile($"../depthImages/depth{seq++}.pgm");
-    }
-
-    private void SaveDepth(Color[] depth)
-    {
-        float[] depthArray = new float[depth.Length];
-        Parallel.For(0, depth.Length, i =>
-        {
-            depthArray[i] = depth[i].r;
-        });
-        StreamWriter writer = File.CreateText($"../depthImages/depth_{seq++}.txt");
-        for (int i = 0; i < depthArray.Length; i++)
-        {
-            writer.Write($"{depthArray[i]:F3}");
-            if ((i + 1) % Width == 0)
-            {
-                writer.Write("\n");
-            }
-            else
-            {
-                writer.Write(" ");
-            }
-        }
-        writer.Close();
     }
 }

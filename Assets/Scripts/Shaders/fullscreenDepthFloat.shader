@@ -9,12 +9,10 @@ Shader "FullScreen/DepthFloat"
 
     #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/RenderPass/CustomPass/CustomPassCommon.hlsl"
 
-    float4 FullScreenPass(Varyings varyings) : SV_Target
+    float4 frag(Varyings varyings) : SV_Target
     {
-        UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(varyings);
         float depth = LoadCameraDepth(varyings.positionCS.xy);
-        PositionInputs posInput = GetPositionInput(varyings.positionCS.xy, _ScreenSize.zw, depth, UNITY_MATRIX_I_VP, UNITY_MATRIX_V);
-        float linearDepthKM = posInput.linearDepth;
+        float linearDepthKM = LinearEyeDepth(depth, _ZBufferParams);
         return float4(linearDepthKM, linearDepthKM, linearDepthKM, 1);
     }
 
@@ -22,18 +20,18 @@ Shader "FullScreen/DepthFloat"
 
     SubShader
     {
-        Tags{ "RenderPipeline" = "HDRenderPipeline" }
+        Tags{ "RenderPipeline" = "HDRenderPipeline"}
         Pass
         {
+            Tags{"LightMode" = "SRPDefaultUnlit"}
             Name "DepthOnly"
 
             ZWrite Off
             ZTest Always
-            Blend SrcAlpha OneMinusSrcAlpha
-            Cull Off
+            Cull Back
 
             HLSLPROGRAM
-                #pragma fragment FullScreenPass
+                #pragma fragment frag
             ENDHLSL
         }
     }
