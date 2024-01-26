@@ -111,6 +111,15 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.recorder": {
+      "version": "4.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "14.0.9",
       "depth": 1,
@@ -155,13 +164,13 @@
       "hash": "c27f00c6cf750d2d0564349b3039d19aa3925e7c"
     },
     "com.unity.robotics.urdf-importer": {
-      "version": "https://github.com/bowski23/URDF-Importer.git?path=/com.unity.robotics.urdf-importer",
+      "version": "https://github.com/Arena-Rosnav/URDF-Importer.git?path=/com.unity.robotics.urdf-importer",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.editorcoroutines": "1.0.0"
       },
-      "hash": "8dcc2fa31b4ef92bf55783071b443d29239cd9a3"
+      "hash": "edd92249ba2d2d4e24f1f9df17f8623f34817e9d"
     },
     "com.unity.searcher": {
       "version": "4.9.2",
