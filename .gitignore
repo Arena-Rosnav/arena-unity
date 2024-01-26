@@ -1021,5 +1021,3 @@ Assets/Samples/ZeroSim/0.1.18/ZeroSim samples/StreamingAssets/zerosimrobots.meta
 .vscode/extensions.json
 .vscode/launch.json
 .vscode/settings.json
-Packages/packages-lock.json
-Packages/manifest.json
