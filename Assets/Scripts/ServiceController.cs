@@ -33,7 +33,7 @@ public class ServiceController : MonoBehaviour
     public GameObject Cube;
 
     void Start()
-    {
+    {           
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
