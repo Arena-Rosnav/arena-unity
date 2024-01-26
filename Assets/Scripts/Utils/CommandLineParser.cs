@@ -6,6 +6,7 @@ using System;
 public class CommandLineParser : MonoBehaviour
 {
     public string arena_sim_setup_path;
+    public string sim_namespace;
 
     private string GetValue(string argName)
     {
@@ -22,8 +23,9 @@ public class CommandLineParser : MonoBehaviour
     }
 
     // Assigns all properties the matching command line argument value
-    void Start()
+    public void Initialize()
     {
         arena_sim_setup_path = GetValue("arena_sim_setup_path");
+        sim_namespace = GetValue("namespace");
     }
 }

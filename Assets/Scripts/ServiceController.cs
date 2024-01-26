@@ -37,13 +37,14 @@ public class ServiceController : MonoBehaviour
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
+        commandLineArgs.Initialize();
 
         // register the services with ROS
         ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
-        ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>(SpawnServiceName, HandleSpawn);
-        ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>(SpawnWallsServiceName, HandleWalls);
-        ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>(DeleteServiceName, HandleDelete);
-        ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>(MoveServiceName, HandleState);
+        ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>("/" + commandLineArgs.sim_namespace + "/" + SpawnServiceName, HandleSpawn);
+        ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>("/" + commandLineArgs.sim_namespace + "/" + SpawnWallsServiceName, HandleWalls);
+        ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>("/" + commandLineArgs.sim_namespace + "/" + DeleteServiceName, HandleDelete);
+        ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>("/" + commandLineArgs.sim_namespace + "/" + MoveServiceName, HandleState);
         ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
 
         // initialize empty parent game object of obstacles (dynamic and static) & walls
