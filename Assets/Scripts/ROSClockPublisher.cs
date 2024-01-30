@@ -19,6 +19,7 @@ public class ROSClockPublisher : MonoBehaviour
     bool ShouldPublishMessage => Clock.FrameStartTimeInSeconds - PublishPeriodSeconds > m_LastPublishTimeSeconds;
 
     CommandLineParser commandLineArgs;
+    string topicName;
 
     void OnValidate()
     {
@@ -50,10 +51,12 @@ public class ROSClockPublisher : MonoBehaviour
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
         commandLineArgs.Initialize();
 
+        topicName = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + "/clock" : "/clock";
+
         SetClockMode(m_ClockMode);
         // Register topic
         m_ROS = ROSConnection.GetOrCreateInstance();
-        m_ROS.RegisterPublisher<ClockMsg>("/" + commandLineArgs.sim_namespace + "/clock");
+        m_ROS.RegisterPublisher<ClockMsg>(topicName);
     }
 
     void PublishMessage()
@@ -65,7 +68,7 @@ public class ROSClockPublisher : MonoBehaviour
             nanosec = (uint)((publishTime - Math.Floor(publishTime)) * Clock.k_NanoSecondsInSeconds)
         };
         m_LastPublishTimeSeconds = publishTime;
-        m_ROS.Publish("clock", clockMsg);
+        m_ROS.Publish(topicName, clockMsg);
     }
 
     void Update()

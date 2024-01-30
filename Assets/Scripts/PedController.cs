@@ -19,6 +19,8 @@ public class PedController : MonoBehaviour
     // Array for the different ped types; specific ped types are added in the PedController Object in the Unity Editor
     public GameObject[] PedTypes;
 
+    CommandLineParser commandLineArgs;
+
     /* RANDOMIZER variables
         string[] SOCIALSTATES = {"Texting", "TalkingOnPhone", "Idle", "Interested"};
         string[] socialStates;
@@ -27,6 +29,12 @@ public class PedController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Init command line args
+        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
+        commandLineArgs.Initialize();
+
+        pedFeedbackTopic = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + pedFeedbackTopic : pedFeedbackTopic;
+
         peds = new Dictionary<string, GameObject>();
         //socialStates = new string[] {"Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking"}; RANDOMIZER
 
