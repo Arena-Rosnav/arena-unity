@@ -7,7 +7,6 @@ using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 public class Drive : MonoBehaviour
 {
-
     public string topicNamespace;
     string topic;
 
@@ -16,7 +15,7 @@ public class Drive : MonoBehaviour
     private Rigidbody rb;
 
     void Start() {
-        topic = "/" + topicNamespace + "/cmd_vel";
+        topic = topicNamespace + "/cmd_vel";
         rb = GetComponent<Rigidbody>();
 
         ROSConnection.GetOrCreateInstance().Subscribe<TwistMsg>(topic, CmdVel);
