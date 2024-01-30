@@ -9,20 +9,16 @@ public class ROSClockPublisher : MonoBehaviour
 {
     [SerializeField]
     Clock.ClockMode m_ClockMode;
-
     [SerializeField, HideInInspector]
     Clock.ClockMode m_LastSetClockMode;
-    
-    [SerializeField] 
+    [SerializeField]
     double m_PublishRateHz = 100f;
-
     double m_LastPublishTimeSeconds;
-
     ROSConnection m_ROS;
-
     double PublishPeriodSeconds => 1.0f / m_PublishRateHz;
-
     bool ShouldPublishMessage => Clock.FrameStartTimeInSeconds - PublishPeriodSeconds > m_LastPublishTimeSeconds;
+
+    CommandLineParser commandLineArgs;
 
     void OnValidate()
     {
@@ -50,9 +46,14 @@ public class ROSClockPublisher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Init command line args
+        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
+        commandLineArgs.Initialize();
+
         SetClockMode(m_ClockMode);
+        // Register topic
         m_ROS = ROSConnection.GetOrCreateInstance();
-        m_ROS.RegisterPublisher<ClockMsg>("clock");
+        m_ROS.RegisterPublisher<ClockMsg>("/" + commandLineArgs.sim_namespace + "/clock");
     }
 
     void PublishMessage()
