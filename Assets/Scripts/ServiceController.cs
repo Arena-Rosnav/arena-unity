@@ -204,7 +204,7 @@ public class ServiceController : MonoBehaviour
         return laserScanFrameTf.gameObject;
     }
 
-    private static void HandleLaserScan(GameObject robot, RobotConfig config)
+    private static void HandleLaserScan(GameObject robot, RobotConfig config, string robotNamespace)
     {
         if (config == null)
         {
@@ -230,7 +230,7 @@ public class ServiceController : MonoBehaviour
 
         // attach LaserScanSensor
         LaserScanSensor laserScan = laserLinkJoint.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
-        laserScan.topic = "/" + robot.name + "/scan";
+        laserScan.topic = robotNamespace + "/scan";
         laserScan.frameId = robot.name + "/" + laserLinkJoint.name;
 
         // TODO: this is missing the necessary configuration of all parameters according to the laser scan config
@@ -271,7 +271,7 @@ public class ServiceController : MonoBehaviour
 
         // try to attach laser scan sensor
         RobotConfig config = LoadRobotModelYaml(request.model_name);
-        HandleLaserScan(entity, config);
+        HandleLaserScan(entity, config, request.robot_namespace);
 
         return entity;
     }
