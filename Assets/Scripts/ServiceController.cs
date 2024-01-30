@@ -45,7 +45,7 @@ public class ServiceController : MonoBehaviour
         ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>("/" + commandLineArgs.sim_namespace + "/" + SpawnWallsServiceName, HandleWalls);
         ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>("/" + commandLineArgs.sim_namespace + "/" + DeleteServiceName, HandleDelete);
         ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>("/" + commandLineArgs.sim_namespace + "/" + MoveServiceName, HandleState);
-        ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
+        // ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
 
         // initialize empty parent game object of obstacles (dynamic and static) & walls
         obstaclesParent = new("Obstacles");
@@ -256,10 +256,11 @@ public class ServiceController : MonoBehaviour
 
         // Set up Drive
         Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
-        drive.topicNamespace = request.model_name;
+        drive.topicNamespace = request.robot_namespace;
 
         // Set up Odom publishing (this relies on the Drive -> must be added after Drive)
-        baseLinkTf.gameObject.AddComponent(typeof(OdomPublisher));
+        OdomPublisher odom = baseLinkTf.gameObject.AddComponent(typeof(OdomPublisher)) as OdomPublisher;
+        odom.topicNamespace = request.robot_namespace;
 
         // transport to starting pose
         Utils.SetPose(entity, request.initial_pose);
