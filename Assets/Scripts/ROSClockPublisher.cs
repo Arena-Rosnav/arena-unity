@@ -55,7 +55,7 @@ public class ROSClockPublisher : MonoBehaviour
 
         SetClockMode(m_ClockMode);
         // Register topic
-        m_ROS = ROSConnection.GetOrCreateInstance();
+        m_ROS = FindObjectOfType<ROSConnection>();
         m_ROS.RegisterPublisher<ClockMsg>(topicName);
     }
 

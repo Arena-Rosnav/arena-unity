@@ -31,7 +31,7 @@ public class OdomPublisher : MonoBehaviour
     void Start()
     {
         robotName = gameObject.transform.parent.name;
-        rosConnection = ROSConnection.GetOrCreateInstance();
+        rosConnection = FindObjectOfType<ROSConnection>();
         rosConnection.RegisterPublisher<OdometryMsg>(PublishTopic);
         lastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
 

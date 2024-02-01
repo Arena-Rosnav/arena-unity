@@ -166,6 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 143939166}
   - component: {fileID: 143939167}
+  - component: {fileID: 143939168}
   m_Layer: 0
   m_Name: ROS Controller
   m_TagString: Untagged
@@ -207,6 +208,28 @@ MonoBehaviour:
   GoalServiceName: unity/set_goal
   pedController: {fileID: 1188366863}
   Cube: {fileID: 1046918776658512126, guid: bb897bc912ddeef668b7fd3c1b6ceaf0, type: 3}
+--- !u!114 &143939168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143939165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acef0b79454c9b4dae3f8139bc4ba77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RosIPAddress: 127.0.0.1
+  m_RosPort: 10000
+  m_ConnectOnStart: 0
+  m_KeepaliveTime: 1
+  m_NetworkTimeoutSeconds: 2
+  m_SleepTimeSeconds: 0.01
+  m_ShowHUD: 1
+  m_TFTopics:
+  - /tf
+  listenForTFMessages: 1
 --- !u!1 &313761473
 GameObject:
   m_ObjectHideFlags: 1

@@ -36,7 +36,7 @@ public class LaserScanSensor : MonoBehaviour
 
     void Start()
     {
-        m_Ros = ROSConnection.GetOrCreateInstance();
+        m_Ros = FindObjectOfType<ROSConnection>();
         m_Ros.RegisterPublisher<LaserScanMsg>(topic);
 
         m_TimeNextScanSeconds = Clock.Now + PublishPeriodSeconds;

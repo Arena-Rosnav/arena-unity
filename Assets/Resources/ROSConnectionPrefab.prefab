@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RosIPAddress: 127.0.0.1
   m_RosPort: 10000
-  m_ConnectOnStart: 1
+  m_ConnectOnStart: 0
   m_KeepaliveTime: 1
   m_NetworkTimeoutSeconds: 2
   m_SleepTimeSeconds: 0.01

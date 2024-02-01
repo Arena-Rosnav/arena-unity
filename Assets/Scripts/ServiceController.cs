@@ -31,6 +31,7 @@ public class ServiceController : MonoBehaviour
     public PedController pedController;
     CommandLineParser commandLineArgs;
     public GameObject Cube;
+    string simNamespace;
 
     void Start()
     {           
@@ -39,13 +40,17 @@ public class ServiceController : MonoBehaviour
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
         commandLineArgs.Initialize();
 
+        simNamespace = commandLineArgs.sim_namespace;
+
+        // configure and connect ROS connection
+        ROSConnection ros_con = SetRosConnection();
         // register the services with ROS
-        ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
         ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>("/" + commandLineArgs.sim_namespace + "/" + SpawnServiceName, HandleSpawn);
         ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>("/" + commandLineArgs.sim_namespace + "/" + SpawnWallsServiceName, HandleWalls);
         ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>("/" + commandLineArgs.sim_namespace + "/" + DeleteServiceName, HandleDelete);
         ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>("/" + commandLineArgs.sim_namespace + "/" + MoveServiceName, HandleState);
         // ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
+        Debug.LogError(simNamespace + " **** All ROS services implemented");
 
         // initialize empty parent game object of obstacles (dynamic and static) & walls
         obstaclesParent = new("Obstacles");
@@ -53,9 +58,29 @@ public class ServiceController : MonoBehaviour
         pedsParent = new("Peds");
     }
 
+    private ROSConnection SetRosConnection()
+    {
+        // get command line IP and port
+        string ip = commandLineArgs.tcp_ip != null ? commandLineArgs.tcp_ip : "127.0.0.1";
+        int port = commandLineArgs.tcp_port != null ? int.Parse(commandLineArgs.tcp_port) : 10000;
+
+        Debug.LogError(simNamespace + " **** IP: " + ip);
+        Debug.LogError(simNamespace + " **** Port: " + port);
+
+        ROSConnection rosConnector = GetComponent<ROSConnection>();
+        // configure IP and port
+        rosConnector.RosIPAddress = ip;
+        rosConnector.RosPort = port;
+        // connect with configured IP and port
+        rosConnector.Connect();
+
+        return rosConnector;
+    }
+
     /// HANDLER SECTION
     private DeleteModelResponse HandleDelete(DeleteModelRequest request)
     {
+        Debug.LogError(simNamespace + " **** HandleDelete");
         // Delete object from active Models if exists
         string entityName = request.model_name;
 
@@ -75,6 +100,7 @@ public class ServiceController : MonoBehaviour
 
     private SetModelStateResponse HandleState(SetModelStateRequest request)
     {
+        Debug.LogError(simNamespace + " **** HandleState");
         Debug.Log(request);
         string entityName = request.model_name;
 
@@ -101,6 +127,7 @@ public class ServiceController : MonoBehaviour
 
     private SpawnModelResponse HandleSpawn(SpawnModelRequest request)
     {
+        Debug.LogError(simNamespace + " **** HandleSpawn");
         GameObject entity;
 
         // decide between robots and peds and obstacles
@@ -283,6 +310,7 @@ public class ServiceController : MonoBehaviour
 
     private SpawnWallsResponse HandleWalls(SpawnWallsRequest request)
     {
+        Debug.LogError(simNamespace + " **** HandleWalls");
         // Constants (move later)
         const string WALL_TAG = "Wall";
 

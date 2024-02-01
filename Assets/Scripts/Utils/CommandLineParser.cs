@@ -7,6 +7,9 @@ public class CommandLineParser : MonoBehaviour
 {
     public string arena_sim_setup_path;
     public string sim_namespace;
+    public string tcp_ip;
+    public string tcp_port;
+
 
     private string GetValue(string argName)
     {
@@ -27,5 +30,7 @@ public class CommandLineParser : MonoBehaviour
     {
         arena_sim_setup_path = GetValue("arena_sim_setup_path");
         sim_namespace = GetValue("namespace");
+        tcp_ip = GetValue("tcp_ip");
+        tcp_port = GetValue("tcp_port");
     }
 }

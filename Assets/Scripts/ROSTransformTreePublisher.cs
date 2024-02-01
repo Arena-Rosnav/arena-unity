@@ -46,7 +46,7 @@ public class ROSTransformTreePublisher : MonoBehaviour
         // k_TfTopic = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + k_TfTopic : k_TfTopic;
 
         m_TopicId = m_RootGameObject.transform.parent.name;
-        m_ROS = ROSConnection.GetOrCreateInstance();
+        m_ROS = FindObjectOfType<ROSConnection>();
         m_TransformRoot = new TransformTreeNode(m_RootGameObject);
         m_ROS.RegisterPublisher<TFMessageMsg>(k_TfTopic);
         m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
