@@ -43,7 +43,7 @@ public class ROSTransformTreePublisher : MonoBehaviour
         // Init command line args
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
         commandLineArgs.Initialize();
-        k_TfTopic = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + k_TfTopic : k_TfTopic;
+        // k_TfTopic = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + k_TfTopic : k_TfTopic;
 
         m_TopicId = m_RootGameObject.transform.parent.name;
         m_ROS = ROSConnection.GetOrCreateInstance();
