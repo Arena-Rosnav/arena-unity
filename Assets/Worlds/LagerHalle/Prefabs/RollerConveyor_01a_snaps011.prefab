@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3875914168919051917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6367824010252795511}
+  m_Layer: 0
+  m_Name: RollerConveyor_01a_snaps011
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6367824010252795511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3875914168919051917}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7041526408536381083}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114365806444830758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041526408535886513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a2853f67931a945aee6e3f5ac92353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114009904211345088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041526408535886515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a2853f67931a945aee6e3f5ac92353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!64 &5696084641903980929
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041526408535886523}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 2ebb0270b53ffa44b956853aab423c24, type: 3}
+--- !u!114 &114419690004902040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041526408535886525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a2853f67931a945aee6e3f5ac92353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114335238804495284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041526408535886527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a2853f67931a945aee6e3f5ac92353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &7041526408535985179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6367824010252795511}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_Name
+      value: RollerConveyor_01a_snaps011
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8be937a94d5428242bcc3667de7de2eb, type: 3}
+--- !u!1 &7041526408535886523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 8be937a94d5428242bcc3667de7de2eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7041526408535985179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7041526408536381083 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 8be937a94d5428242bcc3667de7de2eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7041526408535985179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7041526408535886527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 8be937a94d5428242bcc3667de7de2eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7041526408535985179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7041526408535886525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100006, guid: 8be937a94d5428242bcc3667de7de2eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7041526408535985179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7041526408535886515 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: 8be937a94d5428242bcc3667de7de2eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7041526408535985179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7041526408535886513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100010, guid: 8be937a94d5428242bcc3667de7de2eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7041526408535985179}
+  m_PrefabAsset: {fileID: 0}
