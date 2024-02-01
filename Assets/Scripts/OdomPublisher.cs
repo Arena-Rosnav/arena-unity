@@ -20,7 +20,7 @@ public class OdomPublisher : MonoBehaviour
     // Drive for reading velocity
     Drive robotDrive;
 
-    string topicNamespace = "";
+    public string topicNamespace = "";
 
     string PublishTopic => topicNamespace+ "/" + odomTopicName;
     double PublishPeriodSeconds => 1.0f / publishRateHz;
