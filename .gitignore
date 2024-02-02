@@ -74,3 +74,12 @@ crashlytics-build.properties
 .vscode/launch.json
 .vscode/settings.json
 
+# propietary Character Models
+# * at the end is for .meta files
+Assets/Resources/CharacterModels/Proprietary*
+Assets/Resources/CharacterModels/Prefabs/*
+!Assets/Resources/CharacterModels/Prefabs/Leonard.prefab*
+!Assets/Resources/CharacterModels/Prefabs/Megan.prefab*
+
+# propietary Animations
+Assets/Resources/Animations/Proprietary*
