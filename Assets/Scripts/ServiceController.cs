@@ -99,7 +99,7 @@ public class ServiceController : MonoBehaviour
 
     private SetModelStateResponse HandleState(SetModelStateRequest request)
     {
-        Debug.LogError(simNamespace + " **** HandleState");
+        Debug.LogError(simNamespace + " **** HandleState" + request);
         Debug.Log(request);
         string entityName = request.model_name;
 
@@ -142,7 +142,7 @@ public class ServiceController : MonoBehaviour
         else
         {
             entity = Instantiate(Cube);
-            entity.name = request.model_name;
+            entity.name = request.robot_namespace;
 
             // sort under obstacles parent
             entity.transform.SetParent(obstaclesParent.transform);
@@ -154,7 +154,7 @@ public class ServiceController : MonoBehaviour
         }
 
         // add to active models to delete later
-        activeModels.Add(request.model_name, entity);
+        activeModels.Add(entity.name, entity);
 
         return new SpawnModelResponse(true, "Received Spawn Request");
     }
