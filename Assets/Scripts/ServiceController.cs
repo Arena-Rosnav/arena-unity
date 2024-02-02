@@ -9,7 +9,6 @@ using DataObjects;
 using RosMessageTypes.Gazebo;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Unity;
-using System;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 public class ServiceController : MonoBehaviour
@@ -40,7 +39,7 @@ public class ServiceController : MonoBehaviour
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
         commandLineArgs.Initialize();
 
-        simNamespace = commandLineArgs.sim_namespace;
+        simNamespace = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace : "";
 
         // configure and connect ROS connection
         ROSConnection ros_con = SetRosConnection();
@@ -231,7 +230,7 @@ public class ServiceController : MonoBehaviour
         return laserScanFrameTf.gameObject;
     }
 
-    private static void HandleLaserScan(GameObject robot, RobotConfig config, string robotNamespace)
+    private void HandleLaserScan(GameObject robot, RobotConfig config, string robotNamespace)
     {
         if (config == null)
         {
@@ -257,8 +256,8 @@ public class ServiceController : MonoBehaviour
 
         // attach LaserScanSensor
         LaserScanSensor laserScan = laserLinkJoint.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
-        laserScan.topic = robotNamespace + "/scan";
-        laserScan.frameId = robot.name + "/" + laserLinkJoint.name;
+        laserScan.topicNamespace = simNamespace + "/" + robotNamespace;
+        laserScan.frameId = robotNamespace + "/" + laserLinkJoint.name;
 
         // TODO: this is missing the necessary configuration of all parameters according to the laser scan config
         laserScan.ConfigureScan(laserDict);
@@ -269,7 +268,7 @@ public class ServiceController : MonoBehaviour
         // process spawn request for robot
         GameObject entity = Utils.CreateGameObjectFromUrdfFile(
             request.model_xml,
-            request.model_name,
+            request.robot_namespace,
             disableJoints: true,
             disableScripts: true,
             parent: null
@@ -283,11 +282,12 @@ public class ServiceController : MonoBehaviour
 
         // Set up Drive
         Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
-        drive.topicNamespace = request.robot_namespace;
+        drive.topicNamespace = simNamespace + "/" + request.robot_namespace;
 
         // Set up Odom publishing (this relies on the Drive -> must be added after Drive)
         OdomPublisher odom = baseLinkTf.gameObject.AddComponent(typeof(OdomPublisher)) as OdomPublisher;
-        odom.topicNamespace = request.robot_namespace;
+        odom.topicNamespace = simNamespace + "/" + request.robot_namespace;
+        odom.robotName = request.robot_namespace;
 
         // transport to starting pose
         Utils.SetPose(entity, request.initial_pose);

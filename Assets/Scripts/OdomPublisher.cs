@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
@@ -16,7 +14,7 @@ public class OdomPublisher : MonoBehaviour
     double publishRateHz = 30f;
     double lastPublishTimeSeconds;
     ROSConnection rosConnection;
-    string robotName;
+    public string robotName = "jackal";
     // Drive for reading velocity
     Drive robotDrive;
 
@@ -30,7 +28,6 @@ public class OdomPublisher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        robotName = gameObject.transform.parent.name;
         rosConnection = FindObjectOfType<ROSConnection>();
         rosConnection.RegisterPublisher<OdometryMsg>(PublishTopic);
         lastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;

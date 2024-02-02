@@ -47,7 +47,7 @@ public class PedController : MonoBehaviour
         System.Random r = new();
         int pedType = r.Next(PedTypes.Length);
         GameObject entity = Instantiate(PedTypes[pedType]);
-        entity.name = request.model_name;
+        entity.name = request.robot_namespace;
 
         // add rigidbody to this ped to use unity physics (e.g. physics)
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
@@ -57,7 +57,7 @@ public class PedController : MonoBehaviour
         Utils.SetPose(entity, request.initial_pose);
 
         // register in peds dict
-        peds.Add(request.model_name, entity);
+        peds.Add(entity.name, entity);
 
         return entity;
     }
