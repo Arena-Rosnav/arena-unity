@@ -109,38 +109,68 @@ public class PedController : MonoBehaviour
             */ 
 
             // set social state in the animator component
-            string socialState = agentState.social_state;
-            TriggerAnimation(animator, socialState);            
+            string newSocialState = agentState.social_state;
+            TriggerAnimation(animator, newSocialState);            
         }
     }
 
-    void TriggerAnimation(Animator animator, string socialState){
-        switch(socialState){
+    void TriggerAnimation(Animator animator, string newSocialState){
+        int currentSocialState = animator.GetInteger("socialState");
+        System.Random rnd = new System.Random();
+        int state;
+        switch(newSocialState){
             case "Idle":
-                animator.SetInteger("socialState", 0);
+                if(!(currentSocialState >= -1 && currentSocialState < 10 )){    //if the social state is not already in the idle social state int range
+                    state = 0 + rnd.Next(0,4);
+                    animator.SetInteger("socialState", state);
+                }
                 break;
             case "Walking":
-                animator.SetInteger("socialState", 1);
+                if(!(currentSocialState >= 10 && currentSocialState < 20 )){    //if the social state is not already in the walking social state int range
+                    state = 10 + rnd.Next(0,6);
+                    animator.SetInteger("socialState", state);
+                }
                 break;
             case "Running":
-                animator.SetInteger("socialState", 1);  // Walking Animation already lines up with running velocity
+                if(!(currentSocialState >= 10 && currentSocialState < 20 )){    //if the social state is not already in the walking social state int range
+                    state = 10 + rnd.Next(0,6);
+                    animator.SetInteger("socialState", state);              
+                }                                                                // Walking Animation already lines up with running velocity
                 break;
             case "Talking":
-                animator.SetInteger("socialState", 2);
+                if(!(currentSocialState >= 20 && currentSocialState < 30 )){    //if the social state is not already in the talking social state int range
+                    state = 20 + rnd.Next(0,10);
+                    animator.SetInteger("socialState", state);              
+                }
+
+                /*
                 if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Talking")) // only trigger starting animation if it was not already in the talking animation
                     animator.SetTrigger("startTalking");
+                */
                 break;
             case "Listening":   // currently not a dedicated animation
-                animator.SetInteger("socialState", 2);
+                if(!(currentSocialState >= 20 && currentSocialState < 30 )){    //if the social state is not already in the talking social state int range
+                    state = 20 + rnd.Next(0,10);
+                    animator.SetInteger("socialState", state);              
+                }
                 break; 
             case "Texting":
-                animator.SetInteger("socialState", 3);
+                if(!(currentSocialState >= 30 && currentSocialState < 40 )){    //if the social state is not already in the texting social state int range
+                    state = 30 + rnd.Next(0,2);
+                    animator.SetInteger("socialState", state);              
+                }
                 break;
             case "Interested":
-                animator.SetInteger("socialState", 4);
+                if(!(currentSocialState >= 40 && currentSocialState < 50 )){    //if the social state is not already in the Interested social state int range
+                    state = 40 + rnd.Next(0,4);
+                    animator.SetInteger("socialState", state);              
+                }
                 break;
             case "TalkingOnPhone":
-                animator.SetInteger("socialState", 5);
+                if(!(currentSocialState >= 50 && currentSocialState < 60 )){    //if the social state is not already in the TalkingOnPhone social state int range
+                    state = 50 + rnd.Next(0,2);
+                    animator.SetInteger("socialState", state);              
+                }
                 break;
             default:    // default to walking
                 animator.SetInteger("socialState", -1);
