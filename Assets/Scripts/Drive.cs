@@ -10,9 +10,11 @@ public class Drive : MonoBehaviour
     public string topicNamespace;
     string topic;
 
-    public Vector3 linearVelocity = new Vector3(0, 0, 0);
-    public Vector3 angularVelocity = new Vector3(0, 0, 0); 
+    public Vector3 linearVelocity = new(0, 0, 0);
+    public Vector3 angularVelocity = new(0, 0, 0);
     private Rigidbody rb;
+
+    private Vector3 linearVelocityBodyFrame = new(0, 0, 0);
 
     void Start() {
         topic = topicNamespace + "/cmd_vel";
@@ -22,6 +24,9 @@ public class Drive : MonoBehaviour
     }
 
     void Update() {
+        // convert from local fram to global frame
+        linearVelocity = transform.TransformDirection(linearVelocityBodyFrame);
+
         // invert the rotation since the conversion doesn't work correctly
         Quaternion rotationChange = Quaternion.Euler(Mathf.Rad2Deg * Time.deltaTime * (-1) * angularVelocity);
         transform.rotation *= rotationChange;
@@ -37,9 +42,10 @@ public class Drive : MonoBehaviour
 
     void CmdVel(TwistMsg message) {
         // linear velocity given in the local/body reference frame
-        linearVelocity = message.linear.From<FLU>();
+        linearVelocityBodyFrame = message.linear.From<FLU>();
+
         // convert from local fram to global frame
-        linearVelocity = transform.TransformDirection(linearVelocity);
+        linearVelocity = transform.TransformDirection(linearVelocityBodyFrame);
         
         angularVelocity = message.angular.From<FLU>();
     }
