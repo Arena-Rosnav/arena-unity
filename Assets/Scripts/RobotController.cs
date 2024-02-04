@@ -21,24 +21,36 @@ public class RobotController : MonoBehaviour
         simNamespace = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace : "";
     }
 
-    private RobotConfig LoadRobotModelYaml(string robotName)
+    private string GetConfigFileContent(string relativeArenaSimSetupPath)
     {
         // Construct the full path robot yaml path
         // Take command line arg if executable build is running
         string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
         // Use relative path if running in Editor
         arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../arena-simulation-setup");
-        string yamlPath = Path.Combine(arenaSimSetupPath, "robot", robotName, robotName + ".model.yaml");
+        string configPath = Path.Combine(arenaSimSetupPath, relativeArenaSimSetupPath);
 
         // Check if the file exists
-        if (!File.Exists(yamlPath))
+        if (!File.Exists(configPath))
         {
-            Debug.LogError("Robot Model YAML file for " + robotName + " not found at: " + yamlPath);
+            Debug.LogError("Config file could not be found at: " + configPath);
             return null;
         }
 
-        // Read the YAML file
-        string yamlContent = File.ReadAllText(yamlPath);
+        // Read the config file
+        return File.ReadAllText(configPath);
+    }
+
+    private RobotConfig LoadRobotModelYaml(string robotName)
+    {
+        // Get yaml file content
+        string relativeYamlPath = Path.Combine("robot", robotName, robotName + ".model.yaml");
+        string yamlContent = GetConfigFileContent(relativeYamlPath);
+        if (yamlContent == null)
+        {
+            Debug.LogError("Robot model yaml file could not be found at: " + relativeYamlPath);
+            return null;
+        }
 
         // Initialize the deserializer
         var deserializer = new DeserializerBuilder().Build();
@@ -46,6 +58,26 @@ public class RobotController : MonoBehaviour
         // Deserialize the YAML content into a dynamic object
         RobotConfig config = deserializer.Deserialize<RobotConfig>(yamlContent);
 
+        return config;
+    }
+
+    private RobotUnityConfig LoadRobotUnityParamsYaml(string robotName)
+    {
+        // Get yaml file content
+        string relativeYamlPath = Path.Combine("robot", robotName, "unity", "unity_params.yaml");
+        string yamlContent = GetConfigFileContent(relativeYamlPath);
+        if (yamlContent == null)
+        {
+            Debug.LogError("Unity specific params yaml file could not be found at: " + relativeYamlPath);
+            return null;
+        }
+
+        // Initialize the deserializer
+        var deserializer = new DeserializerBuilder().Build();
+
+        // Deserialize the YAML content into a dynamic object
+        RobotUnityConfig config = deserializer.Deserialize<RobotUnityConfig>(yamlContent);
+        
         return config;
     }
 
@@ -72,7 +104,6 @@ public class RobotController : MonoBehaviour
 
     private static GameObject GetLaserLinkJoint(GameObject robot, Dictionary<string, object> laserDict)
     {
-
         // check if laser configuration has fram/joint specified
         if (!laserDict.TryGetValue("frame", out object frameName))
         {
@@ -125,6 +156,29 @@ public class RobotController : MonoBehaviour
         laserScan.ConfigureScan(laserDict);
     }
 
+    private void HandleCollider(GameObject robot, RobotUnityConfig config, string robotNamespace)
+    {
+        if (config == null)
+        {
+            Debug.LogError("Given Unity-specific config was null (make sure it exists for robot model)");
+            return;
+        }
+        if (!config.components.TryGetValue("collider", out Dictionary<string, object> colliderDict))
+        {
+            Debug.LogWarning("Unity-specific config does not specify collider component.");
+            return;
+        }
+
+        // attach collider 
+        CapsuleCollider collider = robot.AddComponent<CapsuleCollider>();
+        collider.isTrigger = true;
+        
+        // attach collider sensor
+        ColliderSensor colliderSensor = robot.AddComponent<ColliderSensor>();
+        colliderSensor.colliderComponent = collider;
+        colliderSensor.ConfigureCollider(colliderDict);
+    }
+
     public GameObject SpawnRobot(SpawnModelRequest request)
     {
         // process spawn request for robot
@@ -161,6 +215,10 @@ public class RobotController : MonoBehaviour
         // try to attach laser scan sensor
         RobotConfig config = LoadRobotModelYaml(request.model_name);
         HandleLaserScan(entity, config, request.robot_namespace);
+
+        // try to attach collider sensor
+        RobotUnityConfig unityConfig = LoadRobotUnityParamsYaml(request.model_name);
+        HandleCollider(entity, unityConfig, request.robot_namespace);
 
         return entity;
     }
