@@ -42,10 +42,10 @@ public class ServiceController : MonoBehaviour
         // configure and connect ROS connection
         ROSConnection ros_con = SetRosConnection();
         // register the services with ROS
-        ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>("/" + commandLineArgs.sim_namespace + "/" + SpawnServiceName, HandleSpawn);
-        ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>("/" + commandLineArgs.sim_namespace + "/" + SpawnWallsServiceName, HandleWalls);
-        ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>("/" + commandLineArgs.sim_namespace + "/" + DeleteServiceName, HandleDelete);
-        ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>("/" + commandLineArgs.sim_namespace + "/" + MoveServiceName, HandleState);
+        ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>(simNamespace + "/" + SpawnServiceName, HandleSpawn);
+        ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>(simNamespace + "/" + SpawnWallsServiceName, HandleWalls);
+        ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>(simNamespace + "/" + DeleteServiceName, HandleDelete);
+        ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>(simNamespace + "/" + MoveServiceName, HandleState);
         // ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
         Debug.LogError(simNamespace + " **** All ROS services implemented");
 
