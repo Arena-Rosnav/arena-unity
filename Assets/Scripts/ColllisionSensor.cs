@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderSensor : MonoBehaviour
+public class ColllisionSensor : MonoBehaviour
 {
     public CapsuleCollider colliderComponent;
 

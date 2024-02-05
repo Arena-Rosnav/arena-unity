@@ -174,7 +174,7 @@ public class RobotController : MonoBehaviour
         collider.isTrigger = true;
         
         // attach collider sensor
-        ColliderSensor colliderSensor = robot.AddComponent<ColliderSensor>();
+        ColllisionSensor colliderSensor = robot.AddComponent<ColllisionSensor>();
         colliderSensor.colliderComponent = collider;
         colliderSensor.ConfigureCollider(colliderDict);
     }
