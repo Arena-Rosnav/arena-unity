@@ -1,21 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RosMessageTypes.Unity;
+using Unity.Robotics.ROSTCPConnector;
+using Unity.Robotics.Core;
 
 public class ColllisionSensor : MonoBehaviour
 {
+    const string collsionTopicName = "collision";
+    const double publishRateHz = 20f;
     public CapsuleCollider colliderComponent;
+    public string topicNamespace;
+    private bool colliding;
+    private ROSConnection connection;
+    double lastPublishTimeSeconds;
+    private string PublishTopic => topicNamespace + "/" + colliderComponent;
+    double PublishPeriodSeconds => 1.0f / publishRateHz;
+    private bool ShouldPublishMessage => Clock.time - PublishPeriodSeconds > lastPublishTimeSeconds;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        connection = FindObjectOfType<ROSConnection>();
+        connection.RegisterPublisher<CollisionMsg>(PublishTopic);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (ShouldPublishMessage)
+            PublishMessage();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        colliding = true;
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        colliding = false;
+    }
+
+    private void PublishMessage()
+    {
+        CollisionMsg message = new(colliding);
+        lastPublishTimeSeconds = Clock.time;
+        connection.Publish(PublishTopic, message);
     }
 
     public bool ConfigureCollider(Dictionary<string, object> colliderConfig)

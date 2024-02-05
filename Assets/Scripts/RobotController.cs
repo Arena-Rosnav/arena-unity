@@ -174,9 +174,10 @@ public class RobotController : MonoBehaviour
         collider.isTrigger = true;
         
         // attach collider sensor
-        ColllisionSensor colliderSensor = robot.AddComponent<ColllisionSensor>();
-        colliderSensor.colliderComponent = collider;
-        colliderSensor.ConfigureCollider(colliderDict);
+        ColllisionSensor collisionSensor = robot.AddComponent<ColllisionSensor>();
+        collisionSensor.colliderComponent = collider;
+        collisionSensor.topicNamespace = simNamespace + "/" + robotNamespace;
+        collisionSensor.ConfigureCollider(colliderDict);
     }
 
     public GameObject SpawnRobot(SpawnModelRequest request)
