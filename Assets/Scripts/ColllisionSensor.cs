@@ -7,16 +7,17 @@ using Unity.Robotics.Core;
 
 public class ColllisionSensor : MonoBehaviour
 {
+    private int collisionCount = 0;
     const string collsionTopicName = "collision";
     const double publishRateHz = 20f;
     public CapsuleCollider colliderComponent;
     public string topicNamespace;
-    private bool colliding;
     private ROSConnection connection;
     double lastPublishTimeSeconds;
-    private string PublishTopic => topicNamespace + "/" + colliderComponent;
+    private string PublishTopic => topicNamespace + "/" + collsionTopicName;
     double PublishPeriodSeconds => 1.0f / publishRateHz;
     private bool ShouldPublishMessage => Clock.time - PublishPeriodSeconds > lastPublishTimeSeconds;
+    private bool InContact => collisionCount > 0;
 
     // Start is called before the first frame update
     void Start()
@@ -32,19 +33,25 @@ public class ColllisionSensor : MonoBehaviour
             PublishMessage();
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        colliding = true;
+        if (collider.gameObject.CompareTag("Floor"))
+            return;
+
+        collisionCount++;
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnTriggerExit(Collider collider)
     {
-        colliding = false;
+        if (collider.gameObject.CompareTag("Floor"))
+            return;
+
+        collisionCount--;
     }
 
     private void PublishMessage()
     {
-        CollisionMsg message = new(colliding);
+        CollisionMsg message = new(InContact);
         lastPublishTimeSeconds = Clock.time;
         connection.Publish(PublishTopic, message);
     }
