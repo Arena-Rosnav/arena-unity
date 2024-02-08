@@ -151,6 +151,7 @@ public class ServiceController : MonoBehaviour
         {
             entity = pedController.SpawnPed(request);
             entity.transform.SetParent(pedsParent.transform);
+            entity.layer = LayerMask.NameToLayer("Ped");
         }
         else
         {
@@ -164,6 +165,8 @@ public class ServiceController : MonoBehaviour
 
             Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
             rb.useGravity = true;
+
+            entity.layer = LayerMask.NameToLayer("Obs");
         }
 
         // add to active models to delete later
@@ -207,6 +210,7 @@ public class ServiceController : MonoBehaviour
             GameObject entity = Instantiate(Cube);
             entity.name = "__WALL" + counter;
             entity.tag = WALL_TAG;
+            entity.layer = LayerMask.NameToLayer("Obs");
 
             entity.transform.position = corner_start;
             entity.transform.localScale = corner_end - corner_start;
