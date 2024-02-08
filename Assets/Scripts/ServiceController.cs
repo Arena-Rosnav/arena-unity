@@ -20,6 +20,8 @@ public class ServiceController : MonoBehaviour
     string MoveServiceName = "unity/set_model_state";
     [SerializeField]
     string GoalServiceName = "unity/set_goal";
+    [SerializeField]
+    string AttachSafeDistSensorServiceName = "unity/attach_safe_dist_sensor";
     Dictionary<string, GameObject> activeModels;
     GameObject obstaclesParent;
     GameObject wallsParent;
@@ -29,6 +31,8 @@ public class ServiceController : MonoBehaviour
     CommandLineParser commandLineArgs;
     public GameObject Cube;
     string simNamespace;
+    private bool robotSpawned;
+    ROSConnection connection;
 
     void Start()
     {           
@@ -36,17 +40,18 @@ public class ServiceController : MonoBehaviour
         activeModels = new Dictionary<string, GameObject>();
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
         commandLineArgs.Initialize();
+        robotSpawned = false;
 
         simNamespace = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace : "";
 
         // configure and connect ROS connection
-        ROSConnection ros_con = SetRosConnection();
+        connection = SetRosConnection();
         // register the services with ROS
-        ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>(simNamespace + "/" + SpawnServiceName, HandleSpawn);
-        ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>(simNamespace + "/" + SpawnWallsServiceName, HandleWalls);
-        ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>(simNamespace + "/" + DeleteServiceName, HandleDelete);
-        ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>(simNamespace + "/" + MoveServiceName, HandleState);
-        // ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
+        connection.ImplementService<SpawnModelRequest, SpawnModelResponse>(simNamespace + "/" + SpawnServiceName, HandleSpawn);
+        connection.ImplementService<SpawnWallsRequest, SpawnWallsResponse>(simNamespace + "/" + SpawnWallsServiceName, HandleWalls);
+        connection.ImplementService<DeleteModelRequest, DeleteModelResponse>(simNamespace + "/" + DeleteServiceName, HandleDelete);
+        connection.ImplementService<SetModelStateRequest, SetModelStateResponse>(simNamespace + "/" + MoveServiceName, HandleState);
+        // connection.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
         Debug.LogError(simNamespace + " **** All ROS services implemented");
 
         // initialize empty parent game object of obstacles (dynamic and static) & walls
@@ -131,6 +136,16 @@ public class ServiceController : MonoBehaviour
         if (request.model_xml.Contains("<robot>") || request.model_xml.Contains("<robot "))
         {
             entity = robotController.SpawnRobot(request);
+            
+            // expose robot-specific services if robot is spawned for the first time
+            if (!robotSpawned)
+            {
+                connection.ImplementService<AttachSafeDistSensorRequest, AttachSafeDistSensorResponse>(
+                    simNamespace + "/" + AttachSafeDistSensorServiceName, 
+                    HandleAttachSafeDistSensor
+                );
+            }
+            robotSpawned = true;
         }
         else if (request.model_xml.Contains("<actor>") || request.model_xml.Contains("<actor "))
         {
@@ -203,6 +218,20 @@ public class ServiceController : MonoBehaviour
 
 
         return new SpawnWallsResponse(true, "Walls successfully created");
+    }
+
+    private AttachSafeDistSensorResponse HandleAttachSafeDistSensor(
+        AttachSafeDistSensorRequest request)
+    {
+        // Get referenced robot
+        GameObject robot = activeModels.GetValueOrDefault(request.robot_name, null);
+        if (robot == null)
+            return new(false, "Provided robot name does not match an active robot!");
+
+        // Try to configure and attach sensor
+        bool success = robotController.AttachSafeDistSensor(robot, request);        
+
+        return new AttachSafeDistSensorResponse(success, "");
     }
 
     private GameObject FindSubChild(GameObject gameObject, string objName)

@@ -7,11 +7,15 @@ using System.IO;
 
 // Message Types
 using RosMessageTypes.Gazebo;
+using RosMessageTypes.Unity;
+using UnityEngine.InputSystem;
 
 public class RobotController : MonoBehaviour
 {
     private CommandLineParser commandLineArgs;
     private string simNamespace;
+    private readonly string PedSafeDistSensorName = "pedSafeDistSensor";
+    private readonly string ObsSafeDistSensorName = "obsSafeDistSensor";
 
     void Start()
     {
@@ -174,7 +178,7 @@ public class RobotController : MonoBehaviour
         collider.isTrigger = true;
         
         // attach collider sensor
-        ColllisionSensor collisionSensor = robot.AddComponent<ColllisionSensor>();
+        CollisionSensor collisionSensor = robot.AddComponent<CollisionSensor>();
         collisionSensor.colliderComponent = collider;
         collisionSensor.topicNamespace = simNamespace + "/" + robotNamespace;
         collisionSensor.ConfigureCollider(colliderDict);
@@ -222,5 +226,50 @@ public class RobotController : MonoBehaviour
         HandleCollider(entity, unityConfig, request.robot_namespace);
 
         return entity;
+    }
+
+    public bool AttachSafeDistSensor(GameObject robot, AttachSafeDistSensorRequest request)
+    {
+        string sensorName = "";
+        if (request.ped_safe_dist)
+            sensorName = PedSafeDistSensorName;
+        else if (request.obs_safe_dist)
+            sensorName = ObsSafeDistSensorName;
+        else
+            return false;  // invalid request;
+
+        // Get main collision sensor for configurations
+        CollisionSensor collisionSensor = robot.GetComponent<CollisionSensor>();
+        if (collisionSensor == null)
+            return false;
+
+        // Replace old safe dist sensor if existent
+        Transform old = robot.transform.Find(sensorName);
+        if (old != null)
+            Destroy(old.gameObject);
+
+        // Configure Collider
+        GameObject safeDistSensorObject = new(sensorName);
+        CapsuleCollider collider = safeDistSensorObject.AddComponent<CapsuleCollider>();
+        collider.isTrigger = true;
+        // Use main collider configurations
+        collider.height = collisionSensor.colliderComponent.height;
+        collider.center = collisionSensor.colliderComponent.center;
+        collider.radius = collisionSensor.colliderComponent.radius + (float)request.safe_dist;
+
+        // Configure new safe dist sensor
+        CollisionSensor safeDistSensor = safeDistSensorObject.AddComponent<CollisionSensor>();
+        safeDistSensor.colliderComponent = collider;
+        safeDistSensor.topicNamespace = simNamespace + "/" + request.robot_name + "/"
+            + request.safe_dist_topic; 
+
+        safeDistSensorObject.transform.SetParent(robot.transform);
+
+        return true;
+    }
+
+    public bool AttachObsSafeDistSensor(GameObject robot, AttachSafeDistSensorRequest request)
+    {
+        return true;
     }
 }
