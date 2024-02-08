@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 01d721fa329daecf7a9c29ae2ae2d8d1, type: 3}
       propertyPath: m_Name
-      value: LeonardPrefab
+      value: Leonard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85,7 +85,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a0b4bb73f0c16adf79d5cd44f85b49af, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

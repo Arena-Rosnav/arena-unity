@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e5be471f36bd98802a1c2c11b394d193, type: 3}
       propertyPath: m_Name
-      value: MeganPrefab
+      value: Megan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -81,7 +81,7 @@ Animator:
   m_Controller: {fileID: 22100000, guid: 2ab7a84cad3f4ab4bb72e59b258ae59d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
