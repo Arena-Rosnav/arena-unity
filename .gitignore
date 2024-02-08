@@ -80,6 +80,7 @@ Assets/Resources/CharacterModels/Proprietary*
 Assets/Resources/CharacterModels/Prefabs/*
 !Assets/Resources/CharacterModels/Prefabs/Leonard.prefab*
 !Assets/Resources/CharacterModels/Prefabs/Megan.prefab*
+!Assets/Resources/CharacterModels/Prefabs/Cube.prefab*
 
 # propietary Animations
 Assets/Resources/Animations/Proprietary*
