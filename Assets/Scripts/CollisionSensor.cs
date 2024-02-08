@@ -19,6 +19,9 @@ public class CollisionSensor : MonoBehaviour
     private bool ShouldPublishMessage => Clock.time - PublishPeriodSeconds > lastPublishTimeSeconds;
     private bool InContact => collisionCount > 0;
 
+    public bool detectPed = true;
+    public bool detectObs = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,18 +38,16 @@ public class CollisionSensor : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("Floor"))
-            return;
-
-        collisionCount++;
+        if ((detectPed && collider.gameObject.layer == LayerMask.NameToLayer("Ped")) ||
+            (detectObs && collider.gameObject.layer == LayerMask.NameToLayer("Obs")))
+            collisionCount++;
     }
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.gameObject.CompareTag("Floor"))
-            return;
-
-        collisionCount--;
+        if ((detectPed && collider.gameObject.layer == LayerMask.NameToLayer("Ped")) ||
+            (detectObs && collider.gameObject.layer == LayerMask.NameToLayer("Obs")))
+            collisionCount--;
     }
 
     private void PublishMessage()

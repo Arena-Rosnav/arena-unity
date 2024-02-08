@@ -262,6 +262,8 @@ public class RobotController : MonoBehaviour
         safeDistSensor.colliderComponent = collider;
         safeDistSensor.topicNamespace = simNamespace + "/" + request.robot_name;
         safeDistSensor.collsionTopicName = request.safe_dist_topic;
+        safeDistSensor.detectPed = request.ped_safe_dist;
+        safeDistSensor.detectObs = request.obs_safe_dist;
         
 
         safeDistSensorObject.transform.SetParent(robot.transform);
