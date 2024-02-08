@@ -260,16 +260,15 @@ public class RobotController : MonoBehaviour
         // Configure new safe dist sensor
         CollisionSensor safeDistSensor = safeDistSensorObject.AddComponent<CollisionSensor>();
         safeDistSensor.colliderComponent = collider;
-        safeDistSensor.topicNamespace = simNamespace + "/" + request.robot_name + "/"
-            + request.safe_dist_topic; 
+        safeDistSensor.topicNamespace = simNamespace + "/" + request.robot_name;
+        safeDistSensor.collsionTopicName = request.safe_dist_topic;
+        
 
         safeDistSensorObject.transform.SetParent(robot.transform);
-
-        return true;
-    }
-
-    public bool AttachObsSafeDistSensor(GameObject robot, AttachSafeDistSensorRequest request)
-    {
+        safeDistSensorObject.transform.SetPositionAndRotation(
+            robot.transform.position, 
+            robot.transform.rotation
+        );
         return true;
     }
 }
