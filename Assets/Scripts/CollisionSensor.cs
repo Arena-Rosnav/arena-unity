@@ -8,7 +8,7 @@ using Unity.Robotics.Core;
 public class CollisionSensor : MonoBehaviour
 {
     private int collisionCount = 0;
-    const string collsionTopicName = "collision";
+    public string collsionTopicName = "collision";
     const double publishRateHz = 20f;
     public CapsuleCollider colliderComponent;
     public string topicNamespace;
