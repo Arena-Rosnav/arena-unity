@@ -14,8 +14,9 @@ public class RobotController : MonoBehaviour
 {
     private CommandLineParser commandLineArgs;
     private string simNamespace;
-    private readonly string PedSafeDistSensorName = "pedSafeDistSensor";
-    private readonly string ObsSafeDistSensorName = "obsSafeDistSensor";
+    private readonly string CollisionSensorName = "CollisionSensor";
+    private readonly string PedSafeDistSensorName = "PedSafeDistSensor";
+    private readonly string ObsSafeDistSensorName = "ObsSafeDistSensor";
 
     void Start()
     {
@@ -173,15 +174,24 @@ public class RobotController : MonoBehaviour
             return;
         }
 
+        GameObject collisionSensorObject = new(CollisionSensorName);
+
         // attach collider 
-        CapsuleCollider collider = robot.AddComponent<CapsuleCollider>();
+        CapsuleCollider collider = collisionSensorObject.AddComponent<CapsuleCollider>();
         collider.isTrigger = true;
         
         // attach collider sensor
-        CollisionSensor collisionSensor = robot.AddComponent<CollisionSensor>();
+        CollisionSensor collisionSensor = collisionSensorObject.AddComponent<CollisionSensor>();
         collisionSensor.colliderComponent = collider;
         collisionSensor.topicNamespace = simNamespace + "/" + robotNamespace;
         collisionSensor.ConfigureCollider(colliderDict);
+
+        // center child collision sensor
+        collisionSensorObject.transform.SetParent(robot.transform);
+        collisionSensorObject.transform.SetPositionAndRotation(
+            robot.transform.position, 
+            robot.transform.rotation
+        );
     }
 
     public GameObject SpawnRobot(SpawnModelRequest request)
@@ -239,7 +249,8 @@ public class RobotController : MonoBehaviour
             return false;  // invalid request;
 
         // Get main collision sensor for configurations
-        CollisionSensor collisionSensor = robot.GetComponent<CollisionSensor>();
+        GameObject collisionSensorObject = robot.transform.Find(CollisionSensorName).gameObject;
+        CollisionSensor collisionSensor = collisionSensorObject.GetComponent<CollisionSensor>();
         if (collisionSensor == null)
             return false;
 
