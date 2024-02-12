@@ -12,10 +12,12 @@ struct MapYaml
 {
     public string name;
     public string image;
-    public string resolution;
-    public string origin;
-    public string occupied_thresh;
-    public string free_thresh;
+    public double resolution;
+    public double[] origin;
+    public double occupied_thresh;
+    public double free_thresh;
+    public int negate;
+    public string type;
 }
 
 public class OccupancyMapGeneratorWindow : EditorWindow
@@ -27,6 +29,8 @@ public class OccupancyMapGeneratorWindow : EditorWindow
     float testHeight = 0.30f;
     float testOffset = 0.25f;
     float toleranceMargin = 0.01f;
+
+
 
     [MenuItem("Assets/Generate Occupancy Map", true)]
     private static bool GenerateOccupancyMapValidation()
@@ -88,7 +92,7 @@ public class OccupancyMapGeneratorWindow : EditorWindow
                 continue;
             }
             //check if we have already visited this pixel
-            if (occupancyMap[current.x + current.y * pixelWidth] != 0xCD)
+            if (occupancyMap[current.x * pixelHeight + current.y] != 0xCD)
             {
                 continue;
             }
@@ -98,12 +102,12 @@ public class OccupancyMapGeneratorWindow : EditorWindow
             Collider[] colliders = Physics.OverlapBox(center, new Vector3(resolution / 2 - toleranceMargin, testOffset, resolution / 2 - toleranceMargin));
             if (colliders.Length > 0)
             {
-                occupancyMap[current.x + current.y * pixelWidth] = 0x00;
+                occupancyMap[current.x * pixelHeight + current.y] = 0x00;
                 continue;
             }
 
             //if we are here, then the pixel is free
-            occupancyMap[current.x + current.y * pixelWidth] = 0xFE;
+            occupancyMap[current.x * pixelHeight + current.y] = 0xFE;
 
             //enqueue neighbours
             queue.Enqueue((current.x + 1, current.y));
@@ -112,9 +116,9 @@ public class OccupancyMapGeneratorWindow : EditorWindow
             queue.Enqueue((current.x, current.y - 1));
         }
 
-        string path = EditorUtility.SaveFolderPanel("Choose map folder", "", $"{scene.name}_unity");
+        string path = EditorUtility.SaveFolderPanel("Choose map folder", "", $"{scene.name.ToLower()}_unity");
 
-        var pnm = new PortableAnyMap(MagicNumber.P5, pixelWidth, pixelHeight, 255);
+        var pnm = new PortableAnyMap(MagicNumber.P5, pixelHeight, pixelWidth, 255);
         pnm.Bytes = occupancyMap;
         pnm.ToFile($"{path}/map.pgm", $"generated in Unity on {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")} for scene {scene.name}");
 
@@ -122,10 +126,12 @@ public class OccupancyMapGeneratorWindow : EditorWindow
         {
             name = scene.name,
             image = "map.pgm",
-            resolution = resolution.ToString(),
-            origin = $"{origin.x} {origin.y} 0",
-            occupied_thresh = "0.65",
-            free_thresh = "0.196"
+            resolution = resolution,
+            origin = new double[] { start.x, start.y, 0.0 },
+            occupied_thresh = 0.65,
+            free_thresh = 0.196,
+            negate = 0,
+            type = "indoor"
         };
         YamlDotNet.Serialization.Serializer serializer = new YamlDotNet.Serialization.Serializer();
         File.WriteAllText($"{path}/map.yaml", serializer.Serialize(yaml));
