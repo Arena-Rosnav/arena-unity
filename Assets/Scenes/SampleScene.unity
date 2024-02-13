@@ -210,6 +210,7 @@ MonoBehaviour:
   pedController: {fileID: 1188366863}
   robotController: {fileID: 272912755}
   Cube: {fileID: 1046918776658512126, guid: bb897bc912ddeef668b7fd3c1b6ceaf0, type: 3}
+  cameraObject: {fileID: 3882161044121928068}
 --- !u!114 &143939168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,6 +1202,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+--- !u!1 &3882161044121928068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7878630502850324129, guid: 68f2d0725c4a43de7abd9c2dcfe93d0e, type: 3}
+  m_PrefabInstance: {fileID: 3882161044121928067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!220 &7258386062516984218
 LightProbeGroup:
   m_ObjectHideFlags: 0

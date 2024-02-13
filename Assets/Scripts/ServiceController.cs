@@ -33,6 +33,7 @@ public class ServiceController : MonoBehaviour
     string simNamespace;
     private bool robotSpawned;
     ROSConnection connection;
+    public GameObject cameraObject;
 
     void Start()
     {           
@@ -58,6 +59,10 @@ public class ServiceController : MonoBehaviour
         obstaclesParent = new("Obstacles");
         wallsParent = new("Walls");
         pedsParent = new("Peds");
+
+        // remove camera in batch mode
+        if (Application.isBatchMode)
+            Destroy(cameraObject);
     }
 
     private ROSConnection SetRosConnection()
