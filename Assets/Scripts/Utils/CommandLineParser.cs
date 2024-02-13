@@ -9,6 +9,7 @@ public class CommandLineParser : MonoBehaviour
     public string sim_namespace;
     public string tcp_ip;
     public string tcp_port;
+    public string time_scale;
 
 
     private string GetValue(string argName)
@@ -32,5 +33,6 @@ public class CommandLineParser : MonoBehaviour
         sim_namespace = GetValue("namespace");
         tcp_ip = GetValue("tcp_ip");
         tcp_port = GetValue("tcp_port");
+        time_scale = GetValue("time_scale");
     }
 }
