@@ -52,6 +52,7 @@ public class PedController : MonoBehaviour
         // add rigidbody to this ped to use unity physics (e.g. physics)
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         // set initial pose
         Utils.SetPose(entity, request.initial_pose);
