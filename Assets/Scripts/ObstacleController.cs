@@ -22,9 +22,9 @@ public class ObstacleController : MonoBehaviour
 
         Utils.SetPose(obstacle, request.initial_pose);
 
-        Rigidbody rb = obstacle.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        rb.useGravity = true;
-        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        // Rigidbody rb = obstacle.AddComponent(typeof(Rigidbody)) as Rigidbody;
+        // rb.useGravity = true;
+        // rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
         return obstacle;
     }
