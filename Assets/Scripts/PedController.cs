@@ -133,7 +133,7 @@ public class PedController : MonoBehaviour
                     state = 0;
                     animator.SetInteger("socialState", state);
                 } else if( currentSocialState < 10 || 19 < currentSocialState ){    //if the current social state is different than the (incoming) walking social state int range
-                    state = 10 + rnd.Next(0,5);
+                    state = 10 + rnd.Next(0,4);
                     animator.SetInteger("socialState", state);
                 }
                 break;
@@ -142,7 +142,7 @@ public class PedController : MonoBehaviour
                     state = 0;
                     animator.SetInteger("socialState", state);
                 } else if( currentSocialState < 10 || 19 < currentSocialState ){    //if the social state is not already in the walking social state int range
-                    state = 10 + rnd.Next(0,5);
+                    state = 10 + rnd.Next(0,4);
                     animator.SetInteger("socialState", state);              
                 }                                                                // Walking Animation already lines up with running velocity
                 break;
