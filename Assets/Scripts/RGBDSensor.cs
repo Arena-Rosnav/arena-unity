@@ -1,15 +1,11 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
-using static UnityEngine.Rendering.HighDefinition.DrawRenderersCustomPass;
 using Unity.Robotics.Core;
 using Unity.Robotics.ROSTCPConnector;
-using System.Collections.Concurrent;
-using Unity.Collections;
-using UnityEngine.VFX.Utility;
+using System.Collections.Generic;
 
 public enum DepthOutputFormat
 {
@@ -18,7 +14,7 @@ public enum DepthOutputFormat
     POINTCLOUD
 }
 
-public class DepthCamera : MonoBehaviour
+public class RGBDSensor : MonoBehaviour
 {
     private Camera depthCamera;
     private Camera colorCamera;
@@ -45,7 +41,8 @@ public class DepthCamera : MonoBehaviour
     [SerializeField]
     public Shader DepthShader;
 
-    public string frameId = "robo";
+    public string frameId = "rgbd_camera_link";
+    public string topic = "/rgbd";
 
     public double publishRateHz = 30;
     private RosTopicState imagePublisher;
@@ -55,6 +52,63 @@ public class DepthCamera : MonoBehaviour
     private float[] floatPixelBuffer;
     private bool shouldCaptureDepth = true;
     private bool shouldCaptureColor = false;
+
+    public float nearClip = 0.1f;
+    public float farClip = 1000f;
+    public float fov = 70f;
+
+    public void ConfigureRGBDSensor(Dictionary<string, object> configDict, string robotName, string jointName)
+    {
+        if (configDict.ContainsKey("topic"))
+            topic = (string)configDict["topic"];
+        topic = $"/{robotName}/{topic}";
+        frameId = $"{robotName}/{jointName}";
+
+
+        if (configDict.ContainsKey("width"))
+            int.TryParse((string)configDict["width"], out Width);
+        if (configDict.ContainsKey("height"))
+            int.TryParse((string)configDict["height"], out Height);
+        if (configDict.ContainsKey("target_fps"))
+            double.TryParse((string)configDict["target_fps"], out publishRateHz);
+        if (configDict.ContainsKey("use_rgb"))
+            bool.TryParse((string)configDict["use_rgb"], out UseColorCamera);
+        if (configDict.ContainsKey("use_depth"))
+            bool.TryParse((string)configDict["use_depth"], out UseDepthCamera);
+        if (configDict.ContainsKey("depth_output_format"))
+        {
+            string format = (string)configDict["depth_output_format"];
+            switch (format)
+            {
+                case "uint16":
+                    DepthFormat = DepthOutputFormat.UINT16;
+                    break;
+                case "float32":
+                    DepthFormat = DepthOutputFormat.FLOAT32;
+                    break;
+                case "pointcloud":
+                    DepthFormat = DepthOutputFormat.POINTCLOUD;
+                    break;
+                default:
+                    Debug.LogError($"Unknown depth output format: {format}");
+                    break;
+            }
+        }
+
+        if (configDict.ContainsKey("near_clip"))
+            float.TryParse((string)configDict["near_clip"], out nearClip);
+        if (configDict.ContainsKey("far_clip"))
+            float.TryParse((string)configDict["far_clip"], out farClip);
+        if (configDict.ContainsKey("fov"))
+            float.TryParse((string)configDict["fov"], out fov);
+
+    }
+
+    public void ConfigureDefaultRGBDSensor(string robotName, string jointName)
+    {
+        topic = $"/{robotName}/{topic}";
+        frameId = $"{robotName}/{jointName}";
+    }
 
     void Start()
     {
@@ -80,10 +134,13 @@ public class DepthCamera : MonoBehaviour
         colorCameraObject.transform.localPosition = Vector3.zero;
         colorCameraObject.transform.localRotation = Quaternion.identity;
         colorCamera = colorCameraObject.AddComponent<Camera>();
+        colorCamera.nearClipPlane = nearClip;
+        colorCamera.farClipPlane = farClip;
+        colorCamera.fieldOfView = fov;
         colorTexture = new RenderTexture(Width, Height, 32, RenderTextureFormat.ARGBFloat);
         colorCamera.targetTexture = colorTexture;
 
-        imagePublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>("/rgbd/image", 2);
+        imagePublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{topic}/image", 2);
 
         HDAdditionalCameraData hdData = colorCameraObject.AddComponent<HDAdditionalCameraData>();
         hdData.enabled = true;
@@ -100,7 +157,9 @@ public class DepthCamera : MonoBehaviour
         depthCamera = depthCameraObject.AddComponent<Camera>();
         depthCamera.depthTextureMode = DepthTextureMode.Depth;
         depthCamera.depth = -1;
-        depthCamera.nearClipPlane = 0.05f;
+        depthCamera.nearClipPlane = nearClip;
+        depthCamera.farClipPlane = farClip;
+        depthCamera.fieldOfView = fov;
         if (DepthFormat == DepthOutputFormat.UINT16)
         {
             depthCamera.farClipPlane = ushort.MaxValue / 1000f;
@@ -109,7 +168,7 @@ public class DepthCamera : MonoBehaviour
         depthCamera.targetTexture = depthTexture;
 
 
-        depthPublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>("/rgbd/depth", 2);
+        depthPublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{topic}/depth", 2);
 
         //add custom pass
         customPassVolume = gameObject.AddComponent<CustomPassVolume>();
@@ -362,4 +421,6 @@ public class DepthCamera : MonoBehaviour
         RosMessageTypes.Sensor.ImageMsg msg = new(header, (uint)Height, (uint)Width, "32FC1", (byte)(BitConverter.IsLittleEndian ? 0 : 1), (uint)Width * 4, bytePixelBuffer);
         depthPublisher.Publish(msg);
     }
+
+
 }
