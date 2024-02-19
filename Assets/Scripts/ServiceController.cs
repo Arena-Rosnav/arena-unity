@@ -131,8 +131,8 @@ public class ServiceController : MonoBehaviour
         // Take command line arg if executable build is running
         string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
         // Use relative path if running in Editor
-        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../arena-simulation-setup");
-        string yamlPath = Path.Combine(arenaSimSetupPath, "robot", robotName, robotName + ".model.yaml");
+        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../simulation-setup");
+        string yamlPath = Path.Combine(arenaSimSetupPath, "entities", "robots", robotName, robotName + ".model.yaml");
 
         // Check if the file exists
         if (!File.Exists(yamlPath))
