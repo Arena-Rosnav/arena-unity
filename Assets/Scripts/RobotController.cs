@@ -33,7 +33,6 @@ public class RobotController : MonoBehaviour
         string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
         // Use relative path if running in Editor
         arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../simulation-setup");
-        string yamlPath = Path.Combine(arenaSimSetupPath, "entities", "robots", robotName, robotName + ".model.yaml");
         string configPath = Path.Combine(arenaSimSetupPath, relativeArenaSimSetupPath);
 
         // Check if the file exists
