@@ -32,7 +32,8 @@ public class RobotController : MonoBehaviour
         // Take command line arg if executable build is running
         string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
         // Use relative path if running in Editor
-        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../arena-simulation-setup");
+        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../simulation-setup");
+        string yamlPath = Path.Combine(arenaSimSetupPath, "entities", "robots", robotName, robotName + ".model.yaml");
         string configPath = Path.Combine(arenaSimSetupPath, relativeArenaSimSetupPath);
 
         // Check if the file exists
@@ -49,7 +50,7 @@ public class RobotController : MonoBehaviour
     private RobotConfig LoadRobotModelYaml(string robotName)
     {
         // Get yaml file content
-        string relativeYamlPath = Path.Combine("robot", robotName, robotName + ".model.yaml");
+        string relativeYamlPath = Path.Combine("entities", "robots", robotName, robotName + ".model.yaml");
         string yamlContent = GetConfigFileContent(relativeYamlPath);
         if (yamlContent == null)
         {
@@ -69,7 +70,7 @@ public class RobotController : MonoBehaviour
     private RobotUnityConfig LoadRobotUnityParamsYaml(string robotName)
     {
         // Get yaml file content
-        string relativeYamlPath = Path.Combine("robot", robotName, "unity", "unity_params.yaml");
+        string relativeYamlPath = Path.Combine("entities", "robot", robotName, "unity", "unity_params.yaml");
         string yamlContent = GetConfigFileContent(relativeYamlPath);
         if (yamlContent == null)
         {
