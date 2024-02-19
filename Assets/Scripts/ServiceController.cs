@@ -33,10 +33,11 @@ public class ServiceController : MonoBehaviour
     public GameObject Cube;
 
     void Start()
-    {           
+    {
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
-        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
+
+        commandLineArgs = CommandLineParser.Instance;
 
         // register the services with ROS
         ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
