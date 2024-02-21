@@ -279,7 +279,7 @@ public class RobotController : MonoBehaviour
         }
         else
         {
-            HandleRGBDSensor(entity, unityConfig);
+            HandleRGBDSensor(entity, unityConfig, request.robot_namespace);
             HandleCollider(entity, unityConfig, request.robot_namespace);
         }
         return entity;
