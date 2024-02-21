@@ -155,11 +155,10 @@ public class RobotController : MonoBehaviour
         laserScan.topicNamespace = simNamespace + "/" + robotNamespace;
         laserScan.frameId = robotNamespace + "/" + laserLinkJoint.name;
 
-        // TODO: this is missing the necessary configuration of all parameters according to the laser scan config
         laserScan.ConfigureScan(laserDict);
     }
 
-    private void HandleRGBDSensor(GameObject robot, RobotUnityConfig config)
+    private void HandleRGBDSensor(GameObject robot, RobotUnityConfig config, string robotNamespace)
     {
         GameObject cameraLinkJoint;
         if (!config.components.TryGetValue("RGBDCamera", out Dictionary<string, object> dict))
@@ -190,6 +189,9 @@ public class RobotController : MonoBehaviour
 
         // attach LaserScanSensor
         RGBDSensor camera = cameraLinkJoint.AddComponent<RGBDSensor>();
+        camera.topicNamespace = simNamespace + "/" + robotNamespace;
+        camera.frameId = robotNamespace + "/" + cameraLinkJoint.name;
+
         if (!useFallbackRGBD)
             camera.ConfigureRGBDSensor(dict, robot.name, cameraLinkJoint.name);
         else
