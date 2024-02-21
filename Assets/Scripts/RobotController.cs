@@ -161,11 +161,13 @@ public class RobotController : MonoBehaviour
     private void HandleRGBDSensor(GameObject robot, RobotUnityConfig config, string robotNamespace)
     {
         GameObject cameraLinkJoint;
+        bool fallback = false;
         if (!config.components.TryGetValue("RGBDCamera", out Dictionary<string, object> dict))
         {
             Debug.LogWarning("Unity-specific config does not specify RGBDCamera component.");
             if (!useFallbackRGBD)
                 return;
+            fallback = true;
             
             // use laser frame as fallback
             LaserScanSensor laserScan = robot.transform.GetComponentInChildren<LaserScanSensor>();
@@ -192,7 +194,7 @@ public class RobotController : MonoBehaviour
         camera.topicNamespace = simNamespace + "/" + robotNamespace;
         camera.frameId = robotNamespace + "/" + cameraLinkJoint.name;
 
-        if (!useFallbackRGBD)
+        if (!fallback)
             camera.ConfigureRGBDSensor(dict, robot.name, cameraLinkJoint.name);
         else
             camera.ConfigureDefaultRGBDSensor(robot.name, cameraLinkJoint.name);
