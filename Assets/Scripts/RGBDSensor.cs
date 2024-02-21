@@ -140,7 +140,7 @@ public class RGBDSensor : MonoBehaviour
         colorTexture = new RenderTexture(Width, Height, 32, RenderTextureFormat.ARGBFloat);
         colorCamera.targetTexture = colorTexture;
 
-        imagePublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{topic}/image", 2);
+        imagePublisher = FindObjectOfType<ROSConnection>().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{topic}/image", 2);
 
         HDAdditionalCameraData hdData = colorCameraObject.AddComponent<HDAdditionalCameraData>();
         hdData.enabled = true;
@@ -168,7 +168,7 @@ public class RGBDSensor : MonoBehaviour
         depthCamera.targetTexture = depthTexture;
 
 
-        depthPublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{topic}/depth", 2);
+        depthPublisher = FindObjectOfType<ROSConnection>().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{topic}/depth", 2);
 
         //add custom pass
         customPassVolume = gameObject.AddComponent<CustomPassVolume>();
