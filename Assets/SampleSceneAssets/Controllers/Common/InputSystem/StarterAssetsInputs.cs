@@ -19,7 +19,8 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
-		void Update() {
+		void Update()
+		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
 				Cursor.lockState = CursorLockMode.None;
@@ -37,9 +38,13 @@ namespace StarterAssets
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+			if (cursorInputForLook && Cursor.lockState == CursorLockMode.Locked)
 			{
 				LookInput(value.Get<Vector2>());
+			}
+			else
+			{
+				LookInput(Vector2.zero);
 			}
 		}
 
@@ -52,7 +57,7 @@ namespace StarterAssets
 		public void MoveInput(Vector3 newMoveDirection)
 		{
 			move = newMoveDirection;
-		} 
+		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{
@@ -74,5 +79,5 @@ namespace StarterAssets
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 	}
-	
+
 }
