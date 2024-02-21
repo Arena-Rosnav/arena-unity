@@ -17,6 +17,8 @@ public class RobotController : MonoBehaviour
     private readonly string CollisionSensorName = "CollisionSensor";
     private readonly string PedSafeDistSensorName = "PedSafeDistSensor";
     private readonly string ObsSafeDistSensorName = "ObsSafeDistSensor";
+    [Tooltip("If true, the fallback RGBD sensor will be used if no sensor is found in the robot model yaml. If false no RGBD will be used in this case.")]
+    public bool useFallbackRGBD = true;
 
     void Start()
     {
@@ -107,35 +109,31 @@ public class RobotController : MonoBehaviour
         return targetDict;
     }
 
-    private static GameObject GetLaserLinkJoint(GameObject robot, Dictionary<string, object> laserDict)
+    private static GameObject GetLinkJoint(GameObject robot, Dictionary<string, object> dict)
     {
+
         // check if laser configuration has fram/joint specified
-        if (!laserDict.TryGetValue("frame", out object frameName))
+        dict.TryGetValue("type", out object pluginType);
+        if (!dict.TryGetValue("frame", out object frameName))
         {
-            Debug.LogError("Robot Model Config for Laser Scan has no frame specified!");
+            Debug.LogError($"Robot Model Config for {pluginType} has no frame specified!");
             return null;
         }
 
         // get laser scan frame joint game object
-        string laserJointName = frameName as string;
-        Transform laserScanFrameTf = Utils.FindChildGameObject(robot.transform, laserJointName);
-        if (laserScanFrameTf == null)
+        string jointName = frameName as string;
+        Transform frameTf = Utils.FindChildGameObject(robot.transform, jointName);
+        if (frameTf == null)
         {
-            Debug.LogError("Robot has no joint game object as specified in Model Config for laser scan!");
+            Debug.LogError($"Robot has no joint game object as specified in Model Config for {pluginType}!");
             return null;
         }
 
-        return laserScanFrameTf.gameObject;
+        return frameTf.gameObject;
     }
 
     private void HandleLaserScan(GameObject robot, RobotConfig config, string robotNamespace)
     {
-        if (config == null)
-        {
-            Debug.LogError("Given robot config was null (probably incorrect config path). Robot will be spawned without scan");
-            return;
-        }
-
         // get configuration of laser scan from robot configuration
         Dictionary<string, object> laserDict = GetPluginDict(config, "Laser");
         if (laserDict == null)
@@ -145,7 +143,7 @@ public class RobotController : MonoBehaviour
         }
 
         // find frame join game object for laser scan
-        GameObject laserLinkJoint = GetLaserLinkJoint(robot, laserDict);
+        GameObject laserLinkJoint = GetLinkJoint(robot, laserDict);
         if (laserLinkJoint == null)
         {
             Debug.LogError("No laser link joint was found. Robot will be spawned without scan.");
@@ -153,7 +151,7 @@ public class RobotController : MonoBehaviour
         }
 
         // attach LaserScanSensor
-        LaserScanSensor laserScan = laserLinkJoint.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
+        LaserScanSensor laserScan = laserLinkJoint.AddComponent<LaserScanSensor>();
         laserScan.topicNamespace = simNamespace + "/" + robotNamespace;
         laserScan.frameId = robotNamespace + "/" + laserLinkJoint.name;
 
@@ -161,13 +159,45 @@ public class RobotController : MonoBehaviour
         laserScan.ConfigureScan(laserDict);
     }
 
-    private void HandleCollider(GameObject robot, RobotUnityConfig config, string robotNamespace)
+    private void HandleRGBDSensor(GameObject robot, RobotUnityConfig config)
     {
-        if (config == null)
+        GameObject cameraLinkJoint;
+        if (!config.components.TryGetValue("RGBDCamera", out Dictionary<string, object> dict))
         {
-            Debug.LogError("Given Unity-specific config was null (make sure it exists for robot model)");
+            Debug.LogWarning("Unity-specific config does not specify RGBDCamera component.");
+            if (!useFallbackRGBD)
+                return;
+            
+            // use laser frame as fallback
+            LaserScanSensor laserScan = robot.transform.GetComponentInChildren<LaserScanSensor>();
+            if (laserScan == null)
+            {
+                Debug.LogError("Robot has no laser scan. Robot will be spawned without RGBDCamera.");
+                return;
+            }
+            cameraLinkJoint = laserScan.gameObject;
+        }
+        else
+        {
+            cameraLinkJoint = GetLinkJoint(robot, dict);
+        }
+
+        if (cameraLinkJoint == null)
+        {
+            Debug.LogError("No link joint was found. Robot will be spawned without RGBDCamera.");
             return;
         }
+
+        // attach LaserScanSensor
+        RGBDSensor camera = cameraLinkJoint.AddComponent<RGBDSensor>();
+        if (!useFallbackRGBD)
+            camera.ConfigureRGBDSensor(dict, robot.name, cameraLinkJoint.name);
+        else
+            camera.ConfigureDefaultRGBDSensor(robot.name, cameraLinkJoint.name);
+    }
+
+    private void HandleCollider(GameObject robot, RobotUnityConfig config, string robotNamespace)
+    {
         if (!config.components.TryGetValue("collider", out Dictionary<string, object> colliderDict))
         {
             Debug.LogWarning("Unity-specific config does not specify collider component.");
@@ -229,12 +259,27 @@ public class RobotController : MonoBehaviour
 
         // try to attach laser scan sensor
         RobotConfig config = LoadRobotModelYaml(request.model_name);
-        HandleLaserScan(entity, config, request.robot_namespace);
+        if (config == null)
+        {
+            Debug.LogError("Given robot config was null (probably incorrect config path). Robot will be spawned without Sensors!");
+            return entity;
+        }
+        else 
+        {
+            HandleLaserScan(entity, config, request.robot_namespace);
+            HandleRGBDSensor(entity, config);
+        }
 
         // try to attach collider sensor
         RobotUnityConfig unityConfig = LoadRobotUnityParamsYaml(request.model_name);
-        HandleCollider(entity, unityConfig, request.robot_namespace);
-
+        if (unityConfig == null)
+        {
+            Debug.LogError("Given robot unity params config was null (probably incorrect config path). Robot will be spawned without unity-specific sensor!");
+        }
+        else
+        {
+            HandleCollider(entity, unityConfig, request.robot_namespace);
+        }
         return entity;
     }
 
