@@ -267,7 +267,6 @@ public class RobotController : MonoBehaviour
         else 
         {
             HandleLaserScan(entity, config, request.robot_namespace);
-            HandleRGBDSensor(entity, config);
         }
 
         // try to attach collider sensor
@@ -278,6 +277,7 @@ public class RobotController : MonoBehaviour
         }
         else
         {
+            HandleRGBDSensor(entity, unityConfig);
             HandleCollider(entity, unityConfig, request.robot_namespace);
         }
         return entity;
