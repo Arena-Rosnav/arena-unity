@@ -69,7 +69,7 @@ public class RobotController : MonoBehaviour
     private RobotUnityConfig LoadRobotUnityParamsYaml(string robotName)
     {
         // Get yaml file content
-        string relativeYamlPath = Path.Combine("entities", "robot", robotName, "unity", "unity_params.yaml");
+        string relativeYamlPath = Path.Combine("entities", "robots", robotName, "unity", "unity_params.yaml");
         string yamlContent = GetConfigFileContent(relativeYamlPath);
         if (yamlContent == null)
         {
