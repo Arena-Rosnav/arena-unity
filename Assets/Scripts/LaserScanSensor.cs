@@ -135,14 +135,6 @@ public class LaserScanSensor : MonoBehaviour
         // Invert the angle ranges when going from Unity to ROS
         var angleStartRos = -ScanAngleStartDegrees * Mathf.Deg2Rad;
         var angleEndRos = -ScanAngleEndDegrees * Mathf.Deg2Rad;
-        if (angleStartRos > angleEndRos)
-        {
-            Debug.LogWarning("LaserScan was performed in a clockwise direction but ROS expects a counter-clockwise scan, flipping the ranges...");
-            var temp = angleEndRos;
-            angleEndRos = angleStartRos;
-            angleStartRos = temp;
-            ranges.Reverse();
-        }
 
         var msg = new LaserScanMsg
         {
