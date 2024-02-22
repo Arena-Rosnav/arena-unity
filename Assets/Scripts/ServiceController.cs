@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
+using UnityEngine.InputSystem;
 
 // Message Types
 using RosMessageTypes.Gazebo;
@@ -53,16 +54,18 @@ public class ServiceController : MonoBehaviour
         connection.ImplementService<DeleteModelRequest, DeleteModelResponse>(simNamespace + "/" + DeleteServiceName, HandleDelete);
         connection.ImplementService<SetModelStateRequest, SetModelStateResponse>(simNamespace + "/" + MoveServiceName, HandleState);
         // connection.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
-        Debug.LogError(simNamespace + " **** All ROS services implemented");
 
         // initialize empty parent game object of obstacles (dynamic and static) & walls
         obstaclesParent = new("Obstacles");
         wallsParent = new("Walls");
         pedsParent = new("Peds");
 
-        // remove camera in batch mode
-        if (Application.isBatchMode)
+        // remove camera in headless mode
+        if (commandLineArgs.headless != null && commandLineArgs.headless.Equals("True"))
+        {
             Destroy(cameraObject);
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     private ROSConnection SetRosConnection()
@@ -70,10 +73,6 @@ public class ServiceController : MonoBehaviour
         // get command line IP and port
         string ip = commandLineArgs.tcp_ip != null ? commandLineArgs.tcp_ip : "127.0.0.1";
         int port = commandLineArgs.tcp_port != null ? int.Parse(commandLineArgs.tcp_port) : 10000;
-
-        Debug.LogError(simNamespace + " **** IP: " + ip);
-        Debug.LogError(simNamespace + " **** Port: " + port);
-
         ROSConnection rosConnector = GetComponent<ROSConnection>();
         // configure IP and port
         rosConnector.RosIPAddress = ip;
@@ -87,7 +86,6 @@ public class ServiceController : MonoBehaviour
     /// HANDLER SECTION
     private DeleteModelResponse HandleDelete(DeleteModelRequest request)
     {
-        Debug.LogError(simNamespace + " **** HandleDelete");
         // Delete object from active Models if exists
         string entityName = request.model_name;
 
@@ -107,8 +105,6 @@ public class ServiceController : MonoBehaviour
 
     private SetModelStateResponse HandleState(SetModelStateRequest request)
     {
-        Debug.LogError(simNamespace + " **** HandleState" + request);
-        Debug.Log(request);
         string entityName = request.model_name;
 
         // check if the model really exists
@@ -134,7 +130,6 @@ public class ServiceController : MonoBehaviour
 
     private SpawnModelResponse HandleSpawn(SpawnModelRequest request)
     {
-        Debug.LogError(simNamespace + " **** HandleSpawn");
         GameObject entity;
 
         // decide between robots and peds and obstacles
@@ -187,7 +182,6 @@ public class ServiceController : MonoBehaviour
 
     private SpawnWallsResponse HandleWalls(SpawnWallsRequest request)
     {
-        Debug.LogError(simNamespace + " **** HandleWalls");
         // Constants (move later)
         const string WALL_TAG = "Wall";
 

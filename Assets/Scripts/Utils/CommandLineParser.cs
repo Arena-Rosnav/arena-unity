@@ -10,6 +10,7 @@ public class CommandLineParser : MonoBehaviour
     public string tcp_ip;
     public string tcp_port;
     public string time_scale;
+    public string headless;
 
 
     private string GetValue(string argName)
@@ -34,5 +35,6 @@ public class CommandLineParser : MonoBehaviour
         tcp_ip = GetValue("tcp_ip");
         tcp_port = GetValue("tcp_port");
         time_scale = GetValue("time_scale");
+        headless = GetValue("arena_headless");
     }
 }
