@@ -1,11 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
-public class CommandLineParser : MonoBehaviour
+public class CommandLineParser
 {
     public string arena_sim_setup_path;
+    public string unityMap;
+
+    private static CommandLineParser instance;
+
+    public static CommandLineParser Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new CommandLineParser();
+                instance.Initialize();
+            }
+            return instance;
+        }
+    }
+
+    private CommandLineParser()
+    {
+        // Private constructor to prevent instantiation
+    }
+
+    private void Initialize()
+    {
+        string[] args = Environment.GetCommandLineArgs();
+        Debug.Log($"Args: {string.Join(", ", args)}");
+
+        arena_sim_setup_path = GetValue("arena_sim_setup_path");
+        string unityMapFile = GetValue("map");
+        if (unityMapFile != null && unityMapFile != "")
+        {
+            var i = unityMapFile.IndexOf("_unity");
+            if (i != -1)
+            {
+                unityMap = unityMapFile.Substring(0, i);
+            }
+        }
+    }
 
     private string GetValue(string argName)
     {
@@ -19,11 +56,5 @@ public class CommandLineParser : MonoBehaviour
         }
 
         return null;
-    }
-
-    // Assigns all properties the matching command line argument value
-    void Start()
-    {
-        arena_sim_setup_path = GetValue("arena_sim_setup_path");
     }
 }
