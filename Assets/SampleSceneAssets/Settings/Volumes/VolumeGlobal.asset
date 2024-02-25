@@ -195,6 +195,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 2384dbf2c1c420f45a792fbc315fbfb1, type: 2}
     - {fileID: 11400000, guid: 404820c4cf36ad944862fa59c56064f0, type: 2}
     - {fileID: 11400000, guid: 5a9a2dc462c7bde4f86d0615a19c2c72, type: 2}
+    - {fileID: 11400000, guid: ca5d8ffefd09dba48bbc9e53e7a7c931, type: 2}
+    - {fileID: 11400000, guid: 3b45e3f25acad7b4c87941f8902f1b52, type: 2}
 --- !u!114 &-2223948172287066284
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -760,9 +762,6 @@ MonoBehaviour:
   cloudControl:
     m_OverrideState: 0
     m_Value: 0
-  cloudSimpleMode:
-    m_OverrideState: 0
-    m_Value: 0
   m_CloudPreset:
     m_OverrideState: 1
     m_Value: 1
@@ -929,15 +928,6 @@ MonoBehaviour:
   erosionNoiseType:
     m_OverrideState: 1
     m_Value: 1
-  microErosion:
-    m_OverrideState: 0
-    m_Value: 0
-  microErosionFactor:
-    m_OverrideState: 1
-    m_Value: 0.5
-  microErosionScale:
-    m_OverrideState: 1
-    m_Value: 200
   ambientLightProbeDimmer:
     m_OverrideState: 0
     m_Value: 1
