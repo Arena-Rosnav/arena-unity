@@ -76,7 +76,6 @@ public class ServiceController : MonoBehaviour
 
     private SetModelStateResponse HandleState(SetModelStateRequest request)
     {
-        Debug.Log(request);
         string entityName = request.model_name;
 
         // check if the model really exists
@@ -108,16 +107,8 @@ public class ServiceController : MonoBehaviour
         }
         else
         {
-            entity = Instantiate(Cube);
-            entity.name = request.model_name;
-
-            // sort under obstacles parent
+            entity = ObstacleController.SpawnObstacle(request);
             entity.transform.SetParent(obstaclesParent.transform);
-
-            Utils.SetPose(entity, request.initial_pose);
-
-            Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-            rb.useGravity = true;
         }
 
         // add to active models to delete later
