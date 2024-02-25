@@ -5,7 +5,7 @@ file_name="Arena-Unity-Build.tar.gz"
 echo "*** This script installs the latest Arena-Unity release from Arena-Rosnav/arena-unity."
 
 # Check if Arena-Unity-Build.tar.gz exists and delete if it does
-if [ -f file_name ]; then
+if [ -f $file_name ]; then
     echo "*** $file_name file already exists. Deleting it..."
     rm $file_name
 fi
