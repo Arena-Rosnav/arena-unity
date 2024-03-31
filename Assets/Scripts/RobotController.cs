@@ -18,7 +18,7 @@ public class RobotController : MonoBehaviour
     private readonly string PedSafeDistSensorName = "PedSafeDistSensor";
     private readonly string ObsSafeDistSensorName = "ObsSafeDistSensor";
     [Tooltip("If true, the fallback RGBD sensor will be used if no sensor is found in the robot model yaml. If false no RGBD will be used in this case.")]
-    public bool useFallbackRGBD = true;
+    private bool useFallbackRGBD = false;
 
     void Start()
     {
