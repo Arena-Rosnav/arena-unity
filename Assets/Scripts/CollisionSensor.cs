@@ -14,6 +14,8 @@ public class CollisionSensor : MonoBehaviour
     public string topicNamespace;
     private ROSConnection connection;
     double lastPublishTimeSeconds;
+    double continuedContactTime = 0;
+    double checkCollisionThresholdSeconds = 10;
     private string PublishTopic => topicNamespace + "/" + collsionTopicName;
     double PublishPeriodSeconds => 1.0f / publishRateHz;
     private bool ShouldPublishMessage => Clock.time - PublishPeriodSeconds > lastPublishTimeSeconds;
@@ -34,6 +36,7 @@ public class CollisionSensor : MonoBehaviour
     {
         if (ShouldPublishMessage)
             PublishMessage();
+
     }
 
     void OnTriggerEnter(Collider collider)
@@ -55,6 +58,50 @@ public class CollisionSensor : MonoBehaviour
         CollisionMsg message = new(InContact);
         lastPublishTimeSeconds = Clock.time;
         connection.Publish(PublishTopic, message);
+
+        // Increase the continued contact time
+        if (InContact)
+            continuedContactTime += PublishPeriodSeconds;
+        else
+            continuedContactTime = 0;
+        
+        // If there is an unusually long contact time check correctness of counter
+        if (continuedContactTime > checkCollisionThresholdSeconds)
+        {
+            if (!ActuallyInContact())
+                // Reset counter if there is no collision
+                collisionCount = 0;
+            continuedContactTime = 0;
+        }
+    }
+
+    /// <summary>
+    /// Checks whetehr there is currently a valid collision. This can be periodically
+    /// called, to check the correctness of the OnTrigger method counting. You should not call 
+    /// this every update, since it is computationally more complex.
+    /// </summary>
+    /// <returns><Number of current collisions./returns>
+    private bool ActuallyInContact()
+    {
+        // Allocate a Collider array of size 1
+        Collider[] collisionColliders = new Collider[1];
+        // Create appropriate layer mask
+        int layerMask = 0;
+        if (detectObs && detectPed)
+            layerMask = LayerMask.GetMask("Ped", "Obs");
+        else if (detectObs)
+            layerMask = LayerMask.GetMask("Obs");
+        else if (detectPed)
+            layerMask = LayerMask.GetMask("Ped");
+
+        int collision = Physics.OverlapSphereNonAlloc(
+            transform.TransformPoint(colliderComponent.center),
+            colliderComponent.radius,
+            collisionColliders,
+            layerMask:layerMask 
+        );
+    
+        return collision == 1;
     }
 
     public bool ConfigureCollider(Dictionary<string, object> colliderConfig)
