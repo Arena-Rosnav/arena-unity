@@ -31,9 +31,11 @@ public class ServiceController : MonoBehaviour
     public PedController pedController;
     CommandLineParser commandLineArgs;
     public GameObject Cube;
+    [Tooltip("If true, the fallback RGBD sensor will be used if no sensor is found in the robot model yaml. If false no RGBD will be used in this case.")]
+    public bool useFallbackRGBD = false;
 
     void Start()
-    {           
+    {
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
@@ -130,8 +132,8 @@ public class ServiceController : MonoBehaviour
         // Take command line arg if executable build is running
         string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
         // Use relative path if running in Editor
-        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../arena-simulation-setup");
-        string yamlPath = Path.Combine(arenaSimSetupPath, "robot", robotName, robotName + ".model.yaml");
+        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../simulation-setup");
+        string yamlPath = Path.Combine(arenaSimSetupPath, "entities", "robots", robotName, robotName + ".model.yaml");
 
         // Check if the file exists
         if (!File.Exists(yamlPath))
@@ -173,36 +175,31 @@ public class ServiceController : MonoBehaviour
         return targetDict;
     }
 
-    private static GameObject GetLaserLinkJoint(GameObject robot, Dictionary<string, object> laserDict)
+    private static GameObject GetLinkJoint(GameObject robot, Dictionary<string, object> dict)
     {
 
         // check if laser configuration has fram/joint specified
-        if (!laserDict.TryGetValue("frame", out object frameName))
+        dict.TryGetValue("type", out object pluginType);
+        if (!dict.TryGetValue("frame", out object frameName))
         {
-            Debug.LogError("Robot Model Config for Laser Scan has no frame specified!");
+            Debug.LogError($"Robot Model Config for {pluginType} has no frame specified!");
             return null;
         }
 
         // get laser scan frame joint game object
-        string laserJointName = frameName as string;
-        Transform laserScanFrameTf = Utils.FindChildGameObject(robot.transform, laserJointName);
-        if (laserScanFrameTf == null)
+        string jointName = frameName as string;
+        Transform frameTf = Utils.FindChildGameObject(robot.transform, jointName);
+        if (frameTf == null)
         {
-            Debug.LogError("Robot has no joint game object as specified in Model Config for laser scan!");
+            Debug.LogError($"Robot has no joint game object as specified in Model Config for {pluginType}!");
             return null;
         }
 
-        return laserScanFrameTf.gameObject;
+        return frameTf.gameObject;
     }
 
-    private static void HandleLaserScan(GameObject robot, RobotConfig config)
+    private void HandleLaserScan(GameObject robot, RobotConfig config)
     {
-        if (config == null)
-        {
-            Debug.LogError("Given robot config was null (probably incorrect config path). Robot will be spawned without scan");
-            return;
-        }
-
         // get configuration of laser scan from robot configuration
         Dictionary<string, object> laserDict = GetPluginDict(config, "Laser");
         if (laserDict == null)
@@ -212,7 +209,7 @@ public class ServiceController : MonoBehaviour
         }
 
         // find frame join game object for laser scan
-        GameObject laserLinkJoint = GetLaserLinkJoint(robot, laserDict);
+        GameObject laserLinkJoint = GetLinkJoint(robot, laserDict);
         if (laserLinkJoint == null)
         {
             Debug.LogError("No laser link joint was found. Robot will be spawned without scan.");
@@ -220,12 +217,47 @@ public class ServiceController : MonoBehaviour
         }
 
         // attach LaserScanSensor
-        LaserScanSensor laserScan = laserLinkJoint.AddComponent(typeof(LaserScanSensor)) as LaserScanSensor;
+        LaserScanSensor laserScan = laserLinkJoint.AddComponent<LaserScanSensor>();
         laserScan.topic = "/" + robot.name + "/scan";
         laserScan.frameId = robot.name + "/" + laserLinkJoint.name;
 
         // TODO: this is missing the necessary configuration of all parameters according to the laser scan config
         laserScan.ConfigureScan(laserDict);
+    }
+
+    private void HandleRGBDSensor(GameObject robot, RobotConfig config)
+    {
+
+        bool isFallback = false;
+        Dictionary<string, object> dict = GetPluginDict(config, "RGBDCamera");
+        if (dict == null)
+        {
+            Debug.LogError("Robot Model Configuration has no RGBDCamera plugin. Robot will be spawned with" + (useFallbackRGBD ? " default" : "out") + " camera at laser frame");
+            if (!useFallbackRGBD)
+                return;
+            isFallback = true;
+            // use laser frame as fallback
+            dict = GetPluginDict(config, "Laser");
+            if (dict == null)
+            {
+                Debug.LogError("Robot Model Configuration has no Laser plugin. Robot will be spawned without RGBDCamera.");
+                return;
+            }
+        }
+
+        GameObject cameraLinkJoint = GetLinkJoint(robot, dict);
+        if (cameraLinkJoint == null)
+        {
+            Debug.LogError("No link joint was found. Robot will be spawned without RGBDCamera.");
+            return;
+        }
+
+        // attach LaserScanSensor
+        RGBDSensor camera = cameraLinkJoint.AddComponent<RGBDSensor>();
+        if (!isFallback)
+            camera.ConfigureRGBDSensor(dict, robot.name, cameraLinkJoint.name);
+        else
+            camera.ConfigureDefaultRGBDSensor(robot.name, cameraLinkJoint.name);
     }
 
     private GameObject SpawnRobot(SpawnModelRequest request)
@@ -261,7 +293,13 @@ public class ServiceController : MonoBehaviour
 
         // try to attach laser scan sensor
         RobotConfig config = LoadRobotModelYaml(request.model_name);
+        if (config == null)
+        {
+            Debug.LogError("Given robot config was null (probably incorrect config path). Robot will be spawned without Sensors");
+            return entity;
+        }
         HandleLaserScan(entity, config);
+        HandleRGBDSensor(entity, config);
 
         return entity;
     }

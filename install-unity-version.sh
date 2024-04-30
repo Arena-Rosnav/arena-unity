@@ -2,7 +2,7 @@
 
 unity_location="${HOME}/Unity/Hub/Editor/2022.3.11f1"
 
-ehco "*** Make sure you already installed the Unity Hub manually. Otherwise, follow these instructions: https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux"
+echo "*** Make sure you already installed the Unity Hub manually. Otherwise, follow these instructions: https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux"
 
 mkdir -p "$unity_location"
 cd "$unity_location"
