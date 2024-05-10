@@ -10,11 +10,11 @@ Place this folder inside of the ′/src/arena′ folder of that Repository.
 See [the official Docs](https://arena-rosnav.readthedocs.io/en/latest/packages/unity/unity_simulator/).
 
 ## Controls
-When running the simulator in development mode (in the Game Tab) or executing the build, inside of the simulation use following controls:
+When running the simulator in development mode (in the Game Tab) or executing the build, inside of the simulation use following controls:  
 **WASD**: Just like in any other application  
 **Q**: Move Down  
-**E**: Move Up
-**Shift + WASD**: Move even faster
+**E**: Move Up  
+**Shift + WASD**: Move even faster  
 
 ## Note
 It could be necessary to run 
