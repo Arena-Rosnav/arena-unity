@@ -14,6 +14,7 @@ When running the simulator in development mode (in the Game Tab) or executing th
 **WASD**: Just like in any other application  
 **Q**: Move Down  
 **E**: Move Up
+**Shift + WASD**: Move even faster
 
 ## Note
 It could be necessary to run 
