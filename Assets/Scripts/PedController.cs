@@ -77,7 +77,11 @@ public class PedController : MonoBehaviour
         {
             if (!peds.ContainsKey(agentState.id))
             {
-                Debug.LogWarning("Got Agent State for Agent with ID " + agentState.id + " which doesn't exist!");
+                // Debug.LogWarning("Got Agent State for Agent with ID " + agentState.id + " which doesn't exist!");
+                /*
+                 * Removed this log line since arena rosnav is now constantly sending agent states for non-spawned agents.
+                 * The constant logging of this was so much that it caused Arena Unity to completely freeze.
+                 */
                 continue;
             }
 
