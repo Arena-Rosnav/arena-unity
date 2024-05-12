@@ -48,6 +48,7 @@ namespace RosMessageTypes.Pedsim
         public double force_factor_robot;
         public Geometry.PointMsg[] waypoints;
         public short waypoint_mode;
+        public string configuration;
 
         public PedMsg()
         {
@@ -81,9 +82,10 @@ namespace RosMessageTypes.Pedsim
             this.force_factor_robot = 0.0;
             this.waypoints = new Geometry.PointMsg[0];
             this.waypoint_mode = 0;
+            this.configuration = "";
         }
 
-        public PedMsg(string id, Geometry.PointMsg pos, string type, string yaml_file, short number_of_peds, double vmax, string start_up_mode, double wait_time, double trigger_zone_radius, double max_talking_distance, double max_servicing_radius, double chatting_probability, double tell_story_probability, double group_talking_probability, double talking_and_walking_probability, double requesting_service_probability, double requesting_guide_probability, double requesting_follower_probability, double talking_base_time, double tell_story_base_time, double group_talking_base_time, double talking_and_walking_base_time, double receiving_service_base_time, double requesting_service_base_time, double force_factor_desired, double force_factor_obstacle, double force_factor_social, double force_factor_robot, Geometry.PointMsg[] waypoints, short waypoint_mode)
+        public PedMsg(string id, Geometry.PointMsg pos, string type, string yaml_file, short number_of_peds, double vmax, string start_up_mode, double wait_time, double trigger_zone_radius, double max_talking_distance, double max_servicing_radius, double chatting_probability, double tell_story_probability, double group_talking_probability, double talking_and_walking_probability, double requesting_service_probability, double requesting_guide_probability, double requesting_follower_probability, double talking_base_time, double tell_story_base_time, double group_talking_base_time, double talking_and_walking_base_time, double receiving_service_base_time, double requesting_service_base_time, double force_factor_desired, double force_factor_obstacle, double force_factor_social, double force_factor_robot, Geometry.PointMsg[] waypoints, short waypoint_mode, string configuration)
         {
             this.id = id;
             this.pos = pos;
@@ -115,6 +117,7 @@ namespace RosMessageTypes.Pedsim
             this.force_factor_robot = force_factor_robot;
             this.waypoints = waypoints;
             this.waypoint_mode = waypoint_mode;
+            this.configuration = configuration;
         }
 
         public static PedMsg Deserialize(MessageDeserializer deserializer) => new PedMsg(deserializer);
@@ -151,6 +154,7 @@ namespace RosMessageTypes.Pedsim
             deserializer.Read(out this.force_factor_robot);
             deserializer.Read(out this.waypoints, Geometry.PointMsg.Deserialize, deserializer.ReadLength());
             deserializer.Read(out this.waypoint_mode);
+            deserializer.Read(out this.configuration);
         }
 
         public override void SerializeTo(MessageSerializer serializer)
@@ -186,6 +190,7 @@ namespace RosMessageTypes.Pedsim
             serializer.WriteLength(this.waypoints);
             serializer.Write(this.waypoints);
             serializer.Write(this.waypoint_mode);
+            serializer.Write(this.configuration);
         }
 
         public override string ToString()
@@ -220,7 +225,8 @@ namespace RosMessageTypes.Pedsim
             "\nforce_factor_social: " + force_factor_social.ToString() +
             "\nforce_factor_robot: " + force_factor_robot.ToString() +
             "\nwaypoints: " + System.String.Join(", ", waypoints.ToList()) +
-            "\nwaypoint_mode: " + waypoint_mode.ToString();
+            "\nwaypoint_mode: " + waypoint_mode.ToString() +
+            "\nconfiguration: " + configuration.ToString();
         }
 
 #if UNITY_EDITOR

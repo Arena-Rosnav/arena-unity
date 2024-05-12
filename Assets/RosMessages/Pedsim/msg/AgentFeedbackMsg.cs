@@ -15,20 +15,23 @@ namespace RosMessageTypes.Pedsim
 
         public string id;
         public Geometry.Vector3Msg force;
-        public bool unforce;
+        public string social_state;
+        public double vmax;
 
         public AgentFeedbackMsg()
         {
             this.id = "";
             this.force = new Geometry.Vector3Msg();
-            this.unforce = false;
+            this.social_state = "";
+            this.vmax = 0.0;
         }
 
-        public AgentFeedbackMsg(string id, Geometry.Vector3Msg force, bool unforce)
+        public AgentFeedbackMsg(string id, Geometry.Vector3Msg force, string social_state, double vmax)
         {
             this.id = id;
             this.force = force;
-            this.unforce = unforce;
+            this.social_state = social_state;
+            this.vmax = vmax;
         }
 
         public static AgentFeedbackMsg Deserialize(MessageDeserializer deserializer) => new AgentFeedbackMsg(deserializer);
@@ -37,14 +40,16 @@ namespace RosMessageTypes.Pedsim
         {
             deserializer.Read(out this.id);
             this.force = Geometry.Vector3Msg.Deserialize(deserializer);
-            deserializer.Read(out this.unforce);
+            deserializer.Read(out this.social_state);
+            deserializer.Read(out this.vmax);
         }
 
         public override void SerializeTo(MessageSerializer serializer)
         {
             serializer.Write(this.id);
             serializer.Write(this.force);
-            serializer.Write(this.unforce);
+            serializer.Write(this.social_state);
+            serializer.Write(this.vmax);
         }
 
         public override string ToString()
@@ -52,7 +57,8 @@ namespace RosMessageTypes.Pedsim
             return "AgentFeedbackMsg: " +
             "\nid: " + id.ToString() +
             "\nforce: " + force.ToString() +
-            "\nunforce: " + unforce.ToString();
+            "\nsocial_state: " + social_state.ToString() +
+            "\nvmax: " + vmax.ToString();
         }
 
 #if UNITY_EDITOR
