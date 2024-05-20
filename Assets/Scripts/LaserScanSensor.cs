@@ -11,7 +11,8 @@ using System;
 
 public class LaserScanSensor : MonoBehaviour
 {
-    public string topic;
+    const string laserScanTopicName = "scan";
+    public string topicNamespace = "";
     [FormerlySerializedAs("TimeBetweenScansSeconds")]
     public float RangeMetersMin = 0;
 
@@ -34,10 +35,12 @@ public class LaserScanSensor : MonoBehaviour
     bool isScanning = false;
     double m_TimeLastScanBeganSeconds = -1;
 
+    string PublishTopic => topicNamespace+ "/" + laserScanTopicName;
+
     void Start()
     {
-        m_Ros = ROSConnection.GetOrCreateInstance();
-        m_Ros.RegisterPublisher<LaserScanMsg>(topic);
+        m_Ros = FindObjectOfType<ROSConnection>();
+        m_Ros.RegisterPublisher<LaserScanMsg>(PublishTopic);
 
         m_TimeNextScanSeconds = Clock.Now + PublishPeriodSeconds;
     }
@@ -132,14 +135,6 @@ public class LaserScanSensor : MonoBehaviour
         // Invert the angle ranges when going from Unity to ROS
         var angleStartRos = -ScanAngleStartDegrees * Mathf.Deg2Rad;
         var angleEndRos = -ScanAngleEndDegrees * Mathf.Deg2Rad;
-        if (angleStartRos > angleEndRos)
-        {
-            Debug.LogWarning("LaserScan was performed in a clockwise direction but ROS expects a counter-clockwise scan, flipping the ranges...");
-            var temp = angleEndRos;
-            angleEndRos = angleStartRos;
-            angleStartRos = temp;
-            ranges.Reverse();
-        }
 
         var msg = new LaserScanMsg
         {
@@ -163,7 +158,7 @@ public class LaserScanSensor : MonoBehaviour
             ranges = ranges.ToArray(),
         };
 
-        m_Ros.Publish(topic, msg);
+        m_Ros.Publish(PublishTopic, msg);
 
         m_NumMeasurementsTaken = 0;
         ranges.Clear();

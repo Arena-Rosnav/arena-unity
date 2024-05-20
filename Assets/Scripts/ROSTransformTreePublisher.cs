@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class ROSTransformTreePublisher : MonoBehaviour
 {
-    const string k_TfTopic = "/tf";
+    string k_TfTopic = "/tf";
     
     [SerializeField]
     double m_PublishRateHz = 20f;
@@ -30,6 +30,8 @@ public class ROSTransformTreePublisher : MonoBehaviour
 
     bool ShouldPublishMessage => Clock.NowTimeInSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
 
+    CommandLineParser commandLineArgs;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +40,13 @@ public class ROSTransformTreePublisher : MonoBehaviour
             m_RootGameObject = gameObject;
         }
 
+        // Init command line args
+        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
+        commandLineArgs.Initialize();
+        // k_TfTopic = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + k_TfTopic : k_TfTopic;
+
         m_TopicId = m_RootGameObject.transform.parent.name;
-        m_ROS = ROSConnection.GetOrCreateInstance();
+        m_ROS = FindObjectOfType<ROSConnection>();
         m_TransformRoot = new TransformTreeNode(m_RootGameObject);
         m_ROS.RegisterPublisher<TFMessageMsg>(k_TfTopic);
         m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;

@@ -19,6 +19,8 @@ public class PedController : MonoBehaviour
     // Array for the different ped types; specific ped types are added in the PedController Object in the Unity Editor
     public GameObject[] PedTypes;
 
+    CommandLineParser commandLineArgs;
+
     /* RANDOMIZER variables
         string[] SOCIALSTATES = {"Texting", "TalkingOnPhone", "Idle", "Interested"};
         string[] socialStates;
@@ -27,6 +29,12 @@ public class PedController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Init command line args
+        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
+        commandLineArgs.Initialize();
+
+        pedFeedbackTopic = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + pedFeedbackTopic : pedFeedbackTopic;
+
         peds = new Dictionary<string, GameObject>();
         //socialStates = new string[] {"Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking"}; RANDOMIZER
 
@@ -39,17 +47,18 @@ public class PedController : MonoBehaviour
         System.Random r = new();
         int pedType = r.Next(PedTypes.Length);
         GameObject entity = Instantiate(PedTypes[pedType]);
-        entity.name = request.model_name;
+        entity.name = request.robot_namespace;
 
         // add rigidbody to this ped to use unity physics (e.g. physics)
         Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         // set initial pose
         Utils.SetPose(entity, request.initial_pose);
 
         // register in peds dict
-        peds.Add(request.model_name, entity);
+        peds.Add(entity.name, entity);
 
         return entity;
     }
@@ -68,7 +77,11 @@ public class PedController : MonoBehaviour
         {
             if (!peds.ContainsKey(agentState.id))
             {
-                Debug.LogWarning("Got Agent State for Agent with ID " + agentState.id + " which doesn't exist!");
+                // Debug.LogWarning("Got Agent State for Agent with ID " + agentState.id + " which doesn't exist!");
+                /*
+                 * Removed this log line since arena rosnav is now constantly sending agent states for non-spawned agents.
+                 * The constant logging of this was so much that it caused Arena Unity to completely freeze.
+                 */
                 continue;
             }
 

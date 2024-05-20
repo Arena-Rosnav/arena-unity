@@ -9,20 +9,17 @@ public class ROSClockPublisher : MonoBehaviour
 {
     [SerializeField]
     Clock.ClockMode m_ClockMode;
-
     [SerializeField, HideInInspector]
     Clock.ClockMode m_LastSetClockMode;
-    
-    [SerializeField] 
+    [SerializeField]
     double m_PublishRateHz = 100f;
-
     double m_LastPublishTimeSeconds;
-
     ROSConnection m_ROS;
-
     double PublishPeriodSeconds => 1.0f / m_PublishRateHz;
-
     bool ShouldPublishMessage => Clock.FrameStartTimeInSeconds - PublishPeriodSeconds > m_LastPublishTimeSeconds;
+
+    CommandLineParser commandLineArgs;
+    string topicName;
 
     void OnValidate()
     {
@@ -50,9 +47,16 @@ public class ROSClockPublisher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Init command line args
+        commandLineArgs = gameObject.AddComponent<CommandLineParser>();
+        commandLineArgs.Initialize();
+
+        topicName = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + "/clock" : "/clock";
+
         SetClockMode(m_ClockMode);
-        m_ROS = ROSConnection.GetOrCreateInstance();
-        m_ROS.RegisterPublisher<ClockMsg>("clock");
+        // Register topic
+        m_ROS = FindObjectOfType<ROSConnection>();
+        m_ROS.RegisterPublisher<ClockMsg>(topicName);
     }
 
     void PublishMessage()
@@ -64,7 +68,7 @@ public class ROSClockPublisher : MonoBehaviour
             nanosec = (uint)((publishTime - Math.Floor(publishTime)) * Clock.k_NanoSecondsInSeconds)
         };
         m_LastPublishTimeSeconds = publishTime;
-        m_ROS.Publish("clock", clockMsg);
+        m_ROS.Publish(topicName, clockMsg);
     }
 
     void Update()

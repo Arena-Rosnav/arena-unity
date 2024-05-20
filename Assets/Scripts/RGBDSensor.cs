@@ -42,7 +42,8 @@ public class RGBDSensor : MonoBehaviour
     public Shader DepthShader;
 
     public string frameId = "rgbd_camera_link";
-    public string topic = "/rgbd";
+    public string topicName = "rgbd";
+    public string topicNamespace = "";
 
     public double publishRateHz = 30;
     private RosTopicState imagePublisher;
@@ -56,14 +57,12 @@ public class RGBDSensor : MonoBehaviour
     public float nearClip = 0.1f;
     public float farClip = 1000f;
     public float fov = 70f;
+    string PublishTopic => topicNamespace + "/" + topicName;
 
     public void ConfigureRGBDSensor(Dictionary<string, object> configDict, string robotName, string jointName)
     {
         if (configDict.ContainsKey("topic"))
-            topic = (string)configDict["topic"];
-        topic = $"/{robotName}/{topic}";
-        frameId = $"{robotName}/{jointName}";
-
+            topicName = (string)configDict["topic"];
 
         if (configDict.ContainsKey("width"))
             int.TryParse((string)configDict["width"], out Width);
@@ -106,8 +105,6 @@ public class RGBDSensor : MonoBehaviour
 
     public void ConfigureDefaultRGBDSensor(string robotName, string jointName)
     {
-        topic = $"/{robotName}/{topic}";
-        frameId = $"{robotName}/{jointName}";
     }
 
     void Start()
@@ -140,7 +137,7 @@ public class RGBDSensor : MonoBehaviour
         colorTexture = new RenderTexture(Width, Height, 32, RenderTextureFormat.ARGBFloat);
         colorCamera.targetTexture = colorTexture;
 
-        imagePublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{topic}/image", 2);
+        imagePublisher = FindObjectOfType<ROSConnection>().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{PublishTopic}/image", 2);
 
         HDAdditionalCameraData hdData = colorCameraObject.AddComponent<HDAdditionalCameraData>();
         hdData.enabled = true;
@@ -168,7 +165,7 @@ public class RGBDSensor : MonoBehaviour
         depthCamera.targetTexture = depthTexture;
 
 
-        depthPublisher = ROSConnection.GetOrCreateInstance().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{topic}/depth", 2);
+        depthPublisher = FindObjectOfType<ROSConnection>().RegisterPublisher<RosMessageTypes.Sensor.ImageMsg>($"{PublishTopic}/depth", 2);
 
         //add custom pass
         customPassVolume = gameObject.AddComponent<CustomPassVolume>();

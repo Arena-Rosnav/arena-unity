@@ -26,6 +26,13 @@ namespace RosMessageTypes.Pedsim
         public Geometry.Vector3Msg acceleration;
         public Geometry.Vector3Msg destination;
         public double direction;
+        public string configuration;
+        public const byte IDLE = 0;
+        public const byte WALKING = 1;
+        public const byte RUNNING = 2;
+        public const byte INTERACTING = 3;
+        public const byte TALKING = 4;
+        public const byte PHONE = 5;
 
         public AgentStateMsg()
         {
@@ -41,9 +48,10 @@ namespace RosMessageTypes.Pedsim
             this.acceleration = new Geometry.Vector3Msg();
             this.destination = new Geometry.Vector3Msg();
             this.direction = 0.0;
+            this.configuration = "";
         }
 
-        public AgentStateMsg(HeaderMsg header, string id, string type, string social_state, Geometry.PoseMsg pose, Geometry.TwistMsg twist, AgentForceMsg forces, string talking_to_id, string listening_to_id, Geometry.Vector3Msg acceleration, Geometry.Vector3Msg destination, double direction)
+        public AgentStateMsg(HeaderMsg header, string id, string type, string social_state, Geometry.PoseMsg pose, Geometry.TwistMsg twist, AgentForceMsg forces, string talking_to_id, string listening_to_id, Geometry.Vector3Msg acceleration, Geometry.Vector3Msg destination, double direction, string configuration)
         {
             this.header = header;
             this.id = id;
@@ -57,6 +65,7 @@ namespace RosMessageTypes.Pedsim
             this.acceleration = acceleration;
             this.destination = destination;
             this.direction = direction;
+            this.configuration = configuration;
         }
 
         public static AgentStateMsg Deserialize(MessageDeserializer deserializer) => new AgentStateMsg(deserializer);
@@ -75,6 +84,7 @@ namespace RosMessageTypes.Pedsim
             this.acceleration = Geometry.Vector3Msg.Deserialize(deserializer);
             this.destination = Geometry.Vector3Msg.Deserialize(deserializer);
             deserializer.Read(out this.direction);
+            deserializer.Read(out this.configuration);
         }
 
         public override void SerializeTo(MessageSerializer serializer)
@@ -91,6 +101,7 @@ namespace RosMessageTypes.Pedsim
             serializer.Write(this.acceleration);
             serializer.Write(this.destination);
             serializer.Write(this.direction);
+            serializer.Write(this.configuration);
         }
 
         public override string ToString()
@@ -107,7 +118,8 @@ namespace RosMessageTypes.Pedsim
             "\nlistening_to_id: " + listening_to_id.ToString() +
             "\nacceleration: " + acceleration.ToString() +
             "\ndestination: " + destination.ToString() +
-            "\ndirection: " + direction.ToString();
+            "\ndirection: " + direction.ToString() +
+            "\nconfiguration: " + configuration.ToString();
         }
 
 #if UNITY_EDITOR

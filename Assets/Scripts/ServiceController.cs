@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using YamlDotNet.Serialization;
-using System.IO;
-using DataObjects;
+using UnityEngine.InputSystem;
 
 // Message Types
 using RosMessageTypes.Gazebo;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Unity;
-using System;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 public class ServiceController : MonoBehaviour
@@ -24,34 +21,66 @@ public class ServiceController : MonoBehaviour
     string MoveServiceName = "unity/set_model_state";
     [SerializeField]
     string GoalServiceName = "unity/set_goal";
+    [SerializeField]
+    string AttachSafeDistSensorServiceName = "unity/attach_safe_dist_sensor";
     Dictionary<string, GameObject> activeModels;
     GameObject obstaclesParent;
     GameObject wallsParent;
     GameObject pedsParent;
     public PedController pedController;
+    public RobotController robotController;
     CommandLineParser commandLineArgs;
     public GameObject Cube;
-    [Tooltip("If true, the fallback RGBD sensor will be used if no sensor is found in the robot model yaml. If false no RGBD will be used in this case.")]
-    public bool useFallbackRGBD = false;
+    string simNamespace;
+    private bool robotSpawned;
+    ROSConnection connection;
+    public GameObject cameraObject;
 
     void Start()
     {
         // Init variables
         activeModels = new Dictionary<string, GameObject>();
         commandLineArgs = gameObject.AddComponent<CommandLineParser>();
+        commandLineArgs.Initialize();
+        robotSpawned = false;
 
+        simNamespace = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace : "";
+
+        // configure and connect ROS connection
+        connection = SetRosConnection();
         // register the services with ROS
-        ROSConnection ros_con = ROSConnection.GetOrCreateInstance();
-        ros_con.ImplementService<SpawnModelRequest, SpawnModelResponse>(SpawnServiceName, HandleSpawn);
-        ros_con.ImplementService<SpawnWallsRequest, SpawnWallsResponse>(SpawnWallsServiceName, HandleWalls);
-        ros_con.ImplementService<DeleteModelRequest, DeleteModelResponse>(DeleteServiceName, HandleDelete);
-        ros_con.ImplementService<SetModelStateRequest, SetModelStateResponse>(MoveServiceName, HandleState);
-        ros_con.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
+        connection.ImplementService<SpawnModelRequest, SpawnModelResponse>(simNamespace + "/" + SpawnServiceName, HandleSpawn);
+        connection.ImplementService<SpawnWallsRequest, SpawnWallsResponse>(simNamespace + "/" + SpawnWallsServiceName, HandleWalls);
+        connection.ImplementService<DeleteModelRequest, DeleteModelResponse>(simNamespace + "/" + DeleteServiceName, HandleDelete);
+        connection.ImplementService<SetModelStateRequest, SetModelStateResponse>(simNamespace + "/" + MoveServiceName, HandleState);
+        // connection.Subscribe<PoseStampedMsg>(GoalServiceName, HandleGoal);
 
         // initialize empty parent game object of obstacles (dynamic and static) & walls
         obstaclesParent = new("Obstacles");
         wallsParent = new("Walls");
         pedsParent = new("Peds");
+
+        // remove camera in headless mode
+        if (commandLineArgs.headless != null && commandLineArgs.headless.Equals("True"))
+        {
+            Destroy(cameraObject);
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    private ROSConnection SetRosConnection()
+    {
+        // get command line IP and port
+        string ip = commandLineArgs.tcp_ip != null ? commandLineArgs.tcp_ip : "127.0.0.1";
+        int port = commandLineArgs.tcp_port != null ? int.Parse(commandLineArgs.tcp_port) : 10000;
+        ROSConnection rosConnector = GetComponent<ROSConnection>();
+        // configure IP and port
+        rosConnector.RosIPAddress = ip;
+        rosConnector.RosPort = port;
+        // connect with configured IP and port
+        rosConnector.Connect();
+
+        return rosConnector;
     }
 
     /// HANDLER SECTION
@@ -76,7 +105,6 @@ public class ServiceController : MonoBehaviour
 
     private SetModelStateResponse HandleState(SetModelStateRequest request)
     {
-        Debug.Log(request);
         string entityName = request.model_name;
 
         // check if the model really exists
@@ -87,7 +115,15 @@ public class ServiceController : MonoBehaviour
         PoseMsg pose = request.pose;
         GameObject objectToMove = activeModels[entityName];
 
-        Utils.SetPose(objectToMove, pose);
+        if (objectToMove.transform.parent != null && objectToMove.transform.parent.name == "Obstacles") 
+        {
+            // It's a cube
+            Utils.SetCubePose(objectToMove, pose);
+        } 
+        else 
+        {
+            Utils.SetPose(objectToMove, pose);
+        }
 
         return new SetModelStateResponse(true, "Model moved");
     }
@@ -99,209 +135,44 @@ public class ServiceController : MonoBehaviour
         // decide between robots and peds and obstacles
         if (request.model_xml.Contains("<robot>") || request.model_xml.Contains("<robot "))
         {
-            entity = SpawnRobot(request);
+            entity = robotController.SpawnRobot(request);
+            
+            // expose robot-specific services if robot is spawned for the first time
+            if (!robotSpawned)
+            {
+                connection.ImplementService<AttachSafeDistSensorRequest, AttachSafeDistSensorResponse>(
+                    simNamespace + "/" + AttachSafeDistSensorServiceName, 
+                    HandleAttachSafeDistSensor
+                );
+            }
+            robotSpawned = true;
         }
         else if (request.model_xml.Contains("<actor>") || request.model_xml.Contains("<actor "))
         {
             entity = pedController.SpawnPed(request);
             entity.transform.SetParent(pedsParent.transform);
+            entity.layer = LayerMask.NameToLayer("Ped");
         }
         else
         {
             entity = Instantiate(Cube);
-            entity.name = request.model_name;
+            entity.name = request.robot_namespace;
 
             // sort under obstacles parent
             entity.transform.SetParent(obstaclesParent.transform);
 
-            Utils.SetPose(entity, request.initial_pose);
+            Utils.SetCubePose(entity, request.initial_pose);
 
             Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
             rb.useGravity = true;
+
+            entity.layer = LayerMask.NameToLayer("Obs");
         }
 
         // add to active models to delete later
-        activeModels.Add(request.model_name, entity);
+        activeModels.Add(entity.name, entity);
 
         return new SpawnModelResponse(true, "Received Spawn Request");
-    }
-
-    private RobotConfig LoadRobotModelYaml(string robotName)
-    {
-        // Construct the full path robot yaml path
-        // Take command line arg if executable build is running
-        string arenaSimSetupPath = commandLineArgs.arena_sim_setup_path;
-        // Use relative path if running in Editor
-        arenaSimSetupPath ??= Path.Combine(Application.dataPath, "../../simulation-setup");
-        string yamlPath = Path.Combine(arenaSimSetupPath, "entities", "robots", robotName, robotName + ".model.yaml");
-
-        // Check if the file exists
-        if (!File.Exists(yamlPath))
-        {
-            Debug.LogError("Robot Model YAML file for " + robotName + " not found at: " + yamlPath);
-            return null;
-        }
-
-        // Read the YAML file
-        string yamlContent = File.ReadAllText(yamlPath);
-
-        // Initialize the deserializer
-        var deserializer = new DeserializerBuilder().Build();
-
-        // Deserialize the YAML content into a dynamic object
-        RobotConfig config = deserializer.Deserialize<RobotConfig>(yamlContent);
-
-        return config;
-    }
-
-    private static Dictionary<string, object> GetPluginDict(RobotConfig config, string pluginTypeName)
-    {
-        Dictionary<string, object> targetDict = null;
-
-        // Find Laser Scan configuration in list of plugins
-        foreach (Dictionary<string, object> dict in config.plugins)
-        {
-            // check if type is actually laser scan
-            if (dict.TryGetValue("type", out object value))
-            {
-                if (value is string strValue && strValue.Equals(pluginTypeName))
-                {
-                    targetDict = dict;
-                    break;
-                }
-            }
-        }
-
-        return targetDict;
-    }
-
-    private static GameObject GetLinkJoint(GameObject robot, Dictionary<string, object> dict)
-    {
-
-        // check if laser configuration has fram/joint specified
-        dict.TryGetValue("type", out object pluginType);
-        if (!dict.TryGetValue("frame", out object frameName))
-        {
-            Debug.LogError($"Robot Model Config for {pluginType} has no frame specified!");
-            return null;
-        }
-
-        // get laser scan frame joint game object
-        string jointName = frameName as string;
-        Transform frameTf = Utils.FindChildGameObject(robot.transform, jointName);
-        if (frameTf == null)
-        {
-            Debug.LogError($"Robot has no joint game object as specified in Model Config for {pluginType}!");
-            return null;
-        }
-
-        return frameTf.gameObject;
-    }
-
-    private void HandleLaserScan(GameObject robot, RobotConfig config)
-    {
-        // get configuration of laser scan from robot configuration
-        Dictionary<string, object> laserDict = GetPluginDict(config, "Laser");
-        if (laserDict == null)
-        {
-            Debug.LogError("Robot Model Configuration has no Laser plugin. Robot will be spawned without scan");
-            return;
-        }
-
-        // find frame join game object for laser scan
-        GameObject laserLinkJoint = GetLinkJoint(robot, laserDict);
-        if (laserLinkJoint == null)
-        {
-            Debug.LogError("No laser link joint was found. Robot will be spawned without scan.");
-            return;
-        }
-
-        // attach LaserScanSensor
-        LaserScanSensor laserScan = laserLinkJoint.AddComponent<LaserScanSensor>();
-        laserScan.topic = "/" + robot.name + "/scan";
-        laserScan.frameId = robot.name + "/" + laserLinkJoint.name;
-
-        // TODO: this is missing the necessary configuration of all parameters according to the laser scan config
-        laserScan.ConfigureScan(laserDict);
-    }
-
-    private void HandleRGBDSensor(GameObject robot, RobotConfig config)
-    {
-
-        bool isFallback = false;
-        Dictionary<string, object> dict = GetPluginDict(config, "RGBDCamera");
-        if (dict == null)
-        {
-            Debug.LogError("Robot Model Configuration has no RGBDCamera plugin. Robot will be spawned with" + (useFallbackRGBD ? " default" : "out") + " camera at laser frame");
-            if (!useFallbackRGBD)
-                return;
-            isFallback = true;
-            // use laser frame as fallback
-            dict = GetPluginDict(config, "Laser");
-            if (dict == null)
-            {
-                Debug.LogError("Robot Model Configuration has no Laser plugin. Robot will be spawned without RGBDCamera.");
-                return;
-            }
-        }
-
-        GameObject cameraLinkJoint = GetLinkJoint(robot, dict);
-        if (cameraLinkJoint == null)
-        {
-            Debug.LogError("No link joint was found. Robot will be spawned without RGBDCamera.");
-            return;
-        }
-
-        // attach LaserScanSensor
-        RGBDSensor camera = cameraLinkJoint.AddComponent<RGBDSensor>();
-        if (!isFallback)
-            camera.ConfigureRGBDSensor(dict, robot.name, cameraLinkJoint.name);
-        else
-            camera.ConfigureDefaultRGBDSensor(robot.name, cameraLinkJoint.name);
-    }
-
-    private GameObject SpawnRobot(SpawnModelRequest request)
-    {
-        // process spawn request for robot
-        GameObject entity = Utils.CreateGameObjectFromUrdfFile(
-            request.model_xml,
-            request.model_name,
-            disableJoints: true,
-            disableScripts: true,
-            parent: null
-        );
-
-        // get base link which is the second child after Plugins
-        Transform baseLinkTf = entity.transform.GetChild(1);
-
-        // Set up TF by adding TF publisher to the base_footprint game object
-        baseLinkTf.gameObject.AddComponent(typeof(ROSTransformTreePublisher));
-
-        // Set up Drive
-        Drive drive = entity.AddComponent(typeof(Drive)) as Drive;
-        drive.topicNamespace = request.model_name;
-
-        // Set up Odom publishing (this relies on the Drive -> must be added after Drive)
-        baseLinkTf.gameObject.AddComponent(typeof(OdomPublisher));
-
-        // transport to starting pose
-        Utils.SetPose(entity, request.initial_pose);
-
-        // add gravity to robot
-        Rigidbody rb = entity.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        rb.useGravity = true;
-
-        // try to attach laser scan sensor
-        RobotConfig config = LoadRobotModelYaml(request.model_name);
-        if (config == null)
-        {
-            Debug.LogError("Given robot config was null (probably incorrect config path). Robot will be spawned without Sensors");
-            return entity;
-        }
-        HandleLaserScan(entity, config);
-        HandleRGBDSensor(entity, config);
-
-        return entity;
     }
 
     private void HandleGoal(PoseStampedMsg msg)
@@ -338,6 +209,7 @@ public class ServiceController : MonoBehaviour
             GameObject entity = Instantiate(Cube);
             entity.name = "__WALL" + counter;
             entity.tag = WALL_TAG;
+            entity.layer = LayerMask.NameToLayer("Obs");
 
             entity.transform.position = corner_start;
             entity.transform.localScale = corner_end - corner_start;
@@ -349,6 +221,20 @@ public class ServiceController : MonoBehaviour
 
 
         return new SpawnWallsResponse(true, "Walls successfully created");
+    }
+
+    private AttachSafeDistSensorResponse HandleAttachSafeDistSensor(
+        AttachSafeDistSensorRequest request)
+    {
+        // Get referenced robot
+        GameObject robot = activeModels.GetValueOrDefault(request.robot_name, null);
+        if (robot == null)
+            return new(false, "Provided robot name does not match an active robot!");
+
+        // Try to configure and attach sensor
+        bool success = robotController.AttachSafeDistSensor(robot, request);        
+
+        return new AttachSafeDistSensorResponse(success, "");
     }
 
     private GameObject FindSubChild(GameObject gameObject, string objName)

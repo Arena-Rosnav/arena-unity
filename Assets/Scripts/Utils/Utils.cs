@@ -96,6 +96,19 @@ public class Utils : MonoBehaviour
     }
 
     /// <summary>
+    /// Sets the pose for Cubes because there transform position is measured
+    /// in the middle at height 0.5 and not at the Cube's base.
+    /// </summary>
+    /// <param name="obj">Cube</param>
+    /// <param name="pose">Target pose</param>
+    public static void SetCubePose(GameObject obj, PoseMsg pose)
+    {
+        Vector3 position = pose.position.From<FLU>();
+        position.y = 0.5F;
+        obj.transform.SetPositionAndRotation(position, pose.orientation.From<FLU>());
+    }
+
+    /// <summary>
     /// Searches recursively through the children of given transform for 
     /// a GameObject with the given name.
     /// </summary>

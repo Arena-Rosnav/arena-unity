@@ -27,7 +27,7 @@ mkdir -p "$project_path/Build"
 
 # Check if build was successful
 if [ $? -ne 0 ]; then
-    echo "*** Build failed. Look into Buil/build_log.txt for more information."
+    echo "*** Build failed. Look into Build/build_log.txt for more information."
     exit 1
 fi
 echo "*** Build executed successfully."
