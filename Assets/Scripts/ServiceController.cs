@@ -157,6 +157,7 @@ public class ServiceController : MonoBehaviour
         {
             entity = ObstacleController.SpawnObstacle(request);
             entity.transform.SetParent(obstaclesParent.transform);
+            entity.layer = LayerMask.NameToLayer("Obs");
         }
 
         // add to active models to delete later
