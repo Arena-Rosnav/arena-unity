@@ -76,5 +76,4 @@ crashlytics-build.properties
 .fake
 
 # downloaded and created asset bundles
-/[Aa]ssets/AssetBundles/
-/[Aa]ssets/AssetBundles*
+/[Aa]ssets/AssetBundles/*
