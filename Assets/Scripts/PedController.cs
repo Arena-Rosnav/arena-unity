@@ -14,17 +14,11 @@ public class PedController : MonoBehaviour
 
     Dictionary<string, GameObject> peds;
     string pedFeedbackTopic = "/pedsim_simulator/simulated_agents";
-    public GameObject Cube;
 
     // Array for the different ped types; specific ped types are added in the PedController Object in the Unity Editor
     public GameObject[] PedTypes;
 
     CommandLineParser commandLineArgs;
-
-    /* RANDOMIZER variables
-        string[] SOCIALSTATES = {"Texting", "TalkingOnPhone", "Idle", "Interested"};
-        string[] socialStates;
-    */
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +30,6 @@ public class PedController : MonoBehaviour
         pedFeedbackTopic = commandLineArgs.sim_namespace != null ? "/" + commandLineArgs.sim_namespace + pedFeedbackTopic : pedFeedbackTopic;
 
         peds = new Dictionary<string, GameObject>();
-        //socialStates = new string[] {"Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking", "Walking"}; RANDOMIZER
 
         ROSConnection.GetOrCreateInstance().Subscribe<AgentStatesMsg>(pedFeedbackTopic, AgentCallback);
     }
@@ -102,24 +95,6 @@ public class PedController : MonoBehaviour
             // set velocity in the animator component for animations
             Animator animator = agent.GetComponent<Animator>();
             animator.SetFloat("velocity", rb.velocity.magnitude);
-
-            /* RANDOMIZER
-                string socialStateIn = agentState.social_state; // get pedsim social state
-                string animationOverwrite = socialStateIn; // var that shows which fake animation is played
-                int id = int.Parse(agentState.id);
-                System.Random rnd = new System.Random();
-                int proc = rnd.Next(0,2);
-                if (socialStateIn.Equals("Talking") || socialStateIn.Equals("Listening")){
-                    // Debug.Log("Animation State for ped: "+id+" is Blend Tree? "+animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree")); DEBUG
-                    if(animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree") || animator.GetCurrentAnimatorStateInfo(0).IsName("WalkingMale") || animator.GetCurrentAnimatorStateInfo(0).IsName("WalkingFemale")){
-                        if (proc == 0)    // 50/50 chance that incoming "Talking" social state is overwritten by a random non-moving animation
-                            animationOverwrite = SOCIALSTATES[rnd.Next(0,SOCIALSTATES.Length)];
-                        TriggerAnimation(animator, animationOverwrite);
-                    }
-                } else{
-                    TriggerAnimation(animator, socialStateIn);
-                }
-            */ 
 
             // set social state in the animator component
             string socialState = agentState.social_state;
