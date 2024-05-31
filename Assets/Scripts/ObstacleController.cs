@@ -8,19 +8,26 @@ using RosMessageTypes.Gazebo;
 
 public class ObstacleController : MonoBehaviour
 {
-    public static GameObject SpawnObstacle(SpawnModelRequest request)
+    public GameObject Cube;
+
+    public GameObject SpawnObstacle(SpawnModelRequest request)
     {
         string obstPath = GetObstaclePath(request.model_xml);
         GameObject obstacle;
         GameObject prefab = Resources.Load<GameObject>(obstPath);
         if (prefab != null){
             obstacle = Instantiate(prefab);
+
+            Utils.SetPose(obstacle, request.initial_pose);
         }else{
-            obstacle = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            obstacle = Instantiate(Cube);
+            obstacle.tag = "Cube";
+
+            Utils.SetCubePose(obstacle, request.initial_pose);
         }
         obstacle.name = request.robot_namespace;
 
-        Utils.SetPose(obstacle, request.initial_pose);
+        
 
         // Rigidbody rb = obstacle.AddComponent(typeof(Rigidbody)) as Rigidbody;
         // rb.useGravity = true;
