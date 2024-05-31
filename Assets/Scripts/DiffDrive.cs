@@ -51,7 +51,6 @@ public class DiffDrive : MonoBehaviour
     /// <summary> Update move direction after receiving /cmd_vel request </summary>
     void CmdVel(TwistMsg message)
     {
-        Debug.Log("received cmd_vel: " + message);
         Vector3Msg linear = message.linear;
         Vector3Msg angular = message.angular;
 
@@ -111,7 +110,6 @@ public class DiffDrive : MonoBehaviour
         {
             drive.targetVelocity = wheelSpeed;
         }
-        Debug.Log("Set Rotation Speed: " + drive.targetVelocity);
         joint.xDrive = drive;
     }
 }
