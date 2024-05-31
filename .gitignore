@@ -74,3 +74,5 @@ crashlytics-build.properties
 .vscode/launch.json
 .vscode/settings.json
 
+
+.fake
