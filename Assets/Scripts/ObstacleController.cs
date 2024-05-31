@@ -18,7 +18,7 @@ public class ObstacleController : MonoBehaviour
         }else{
             obstacle = GameObject.CreatePrimitive(PrimitiveType.Cube);
         }
-        obstacle.name = request.model_name;
+        obstacle.name = request.robot_namespace;
 
         Utils.SetPose(obstacle, request.initial_pose);
 
