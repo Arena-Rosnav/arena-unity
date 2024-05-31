@@ -29,6 +29,7 @@ public class ServiceController : MonoBehaviour
     GameObject pedsParent;
     public PedController pedController;
     public RobotController robotController;
+    public ObstacleController obsController;
     CommandLineParser commandLineArgs;
     public GameObject Cube;
     string simNamespace;
@@ -115,7 +116,7 @@ public class ServiceController : MonoBehaviour
         PoseMsg pose = request.pose;
         GameObject objectToMove = activeModels[entityName];
 
-        if (objectToMove.transform.parent != null && objectToMove.transform.parent.name == "Obstacles") 
+        if (objectToMove.CompareTag("Cube")) 
         {
             // It's a cube
             Utils.SetCubePose(objectToMove, pose);
@@ -155,7 +156,7 @@ public class ServiceController : MonoBehaviour
         }
         else
         {
-            entity = ObstacleController.SpawnObstacle(request);
+            entity = obsController.SpawnObstacle(request);
             entity.transform.SetParent(obstaclesParent.transform);
             entity.layer = LayerMask.NameToLayer("Obs");
         }
