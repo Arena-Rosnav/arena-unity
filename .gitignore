@@ -70,9 +70,11 @@ crashlytics-build.properties
 # Packed Addressables
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
-.vscode/extensions.json
-.vscode/launch.json
-.vscode/settings.json
-
+# vscode editor settings
+.vscode/
 
 .fake
+
+# downloaded and created asset bundles
+/[Aa]ssets/AssetBundles/
+/[Aa]ssets/AssetBundles*
