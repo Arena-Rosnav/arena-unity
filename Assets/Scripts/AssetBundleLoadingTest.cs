@@ -59,7 +59,7 @@ public class AddressableSpawn : MonoBehaviour
             assetPaths,
             asset =>
             {
-                GameObject instance = Instantiate(asset, new Vector3((3 * x++) - 20, 0, (3 * z) - 20), Quaternion.identity);
+                Instantiate(asset, new Vector3((3 * x++) - 20, 0, (3 * z) - 20), Quaternion.identity);
                 if (x > 15)
                 {
                     x = 0;

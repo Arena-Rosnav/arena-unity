@@ -1,5 +1,4 @@
 #!/bin/bash -i
-
 unity_location="${HOME}/Unity/Hub/Editor/2022.3.11f1/Editor/Unity"
 
 project_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -17,11 +16,11 @@ else
     exit 1
 fi
 
-echo "*** Building custom asset bundle..."
-
+echo "*** Creating folder..."
 # Create build dir
 mkdir -p "$project_path/Assets/StreamingAssets/AssetBundles"
 
+echo "*** Building custom asset bundle..."
 # Build Unity
 "$unity_location" -quit -batchmode -projectpath "$project_path" -executeMethod "$build_method" -logFile "$build_log"
 
